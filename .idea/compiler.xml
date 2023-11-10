@@ -10,5 +10,9 @@
         <module name="bluecar.bluecar.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bluecar.bluecar.main~1" target="11" />
+      <module name="bluecar.bluecar.test~1" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
