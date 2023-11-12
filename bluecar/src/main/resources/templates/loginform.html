@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<style>
+
+    * {
+        box-sizing: border-box;
+        margin: 0px;
+    }
+
+    .wrapper {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .wrapper_body {
+        width: 700px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .menubar {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 139px;
+        border: 1px solid #e9ebee;
+    }
+
+    .HomeIcon {
+        display: flex;
+        flex-direction: row;
+        font-size: 50px;
+        font-weight: bold;
+        padding-left: 50px;
+        color: blue;
+    }
+
+    .sidemenu {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+    }
+
+    .sidemenu2 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #374553;
+        cursor: pointer;
+        font-size: 18px;
+        padding-right: 40px;
+    }
+
+    .sidemenu2:hover {
+        font-weight: bold;
+
+
+    }
+
+
+    .wrapper_body_main {
+        width: 400px;
+        height: 30vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid black;
+        border-radius: 50px;
+
+    }
+
+    .join_container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    h2 {
+        font-style: normal;
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 700;
+        letter-spacing: -2px;
+        color: #374553;
+        width: 400px;
+        margin-top: 30px;
+
+    }
+
+
+    .regtext1, .regtext2 {
+        font-size: 12px;
+        visibility: hidden;
+    }
+
+    .join_container input {
+
+        width: 300px;
+        height: 45px;
+        font-size: 15px;
+    }
+
+    .join_container:nth-child(1) {
+        margin-top: 30px;
+    }
+
+    .join_container2 input {
+        width: 200px;
+    }
+
+
+    .join_container3 input {
+
+        width: 96px;
+    }
+
+    .regbtn {
+        margin-top: 50px;
+        width: 300px;
+        height: 50px;
+        border-radius: 30px;
+        border: 1px solid white;
+        background-color: #3CB4FF;
+    }
+
+
+    input:focus {
+        outline: none;
+    }
+
+    .hidden{
+        padding-left: 10px;
+        font-size: 15px;
+        color: red;
+    }
+
+
+</style>
+<body>
+<div class="wrapper">
+    <div class="menubar">
+        <div class="HomeIcon">blueCar</div>
+        <div class="sidemenu">
+            <div class="sidemenu2">공지사항</div>
+            <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
+        </div>
+
+    </div>
+    <div class="wrapper_body">
+        <h2>로그인 <span class="hidden" id="hidden"></span></h2>
+        <div class="wrapper_body_main">
+
+            <div class="join_container">
+                <input class="input" id="id" name="id" oninput="Idcheck()" placeholder="아이디를 입력해주세요" th:maxlength="10"
+                       type="text">
+                <div class="regtext1">4~10자의 영문,숫자만 사용해주세요</div>
+                <input class="input" id="pw" name="pw" oninput="Pwcheck()" placeholder="패스워드를 입력해주세요" th:maxlength="10"
+                       type="password">
+                <div class="regtext2">6~12자의 영문,숫자만 사용해주세요</div>
+            </div>
+
+            <button class="regbtn" id="submitBtn" onclick="submit()">로그인</button>
+        </div>
+
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+
+
+    const submit = () => {
+        const id = document.querySelector("#id").value;
+        const pw = document.querySelector("#pw").value;
+
+        const memberData = {
+            "id": id,
+            "pw": pw
+        }
+
+        $.ajax({
+            type: "post",
+            url: "/member/login",
+            data: memberData,
+            success: function (res) {
+                    location.href="/"
+            },
+            error: function (res) {
+                document.getElementById("hidden").innerText = res;
+            }
+
+        })
+
+    }
+
+</script>
+</html>

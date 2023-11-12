@@ -24,6 +24,9 @@
                         </label>
                         <div class="sidebar">
                             <ul>
+                                <div th:if="${session.userId}">
+                                <li class="sideMenu"><a th:href="@{|/member/mypage/${session.userId}|}">마이페이지</a></li>
+                                </div>
                                 <li class="sideMenu">공지사항</li>
                                 <li class="sideMenu">요금 안내</li>
                                 <li class="sideMenu">사고접수</li>
@@ -43,7 +46,12 @@
         <div class="wrapper_footer">
 
             <div class="floating">
-                <div class="floating_content" th:href="@{/}"> 블루카 로그인</div>
+                <div th:if="${session.userId}">
+                    <div class="floating_content"><a th:href="@{/member/logout}">로그아웃</a></div>
+                </div>
+                <div th:unless="${session.userId}">
+                    <div class="floating_content"><a th:href="@{/member/loginform}">로그인</a></div>
+                </div>
             </div>
 
         </div>
@@ -54,7 +62,7 @@
                     <div class="body1_content">한밤중이나 주말에도 스마트폰으로</div>
                     <div class="body1_content">시간에 구애받지 않고</div>
                     <div class="body1_content">블루카와 함께 이동하세요</div>
-                    <div><img src="/image/useImage1.jpg" alt=""></div>
+                    <div><img alt="" src="/image/useImage1.jpg"></div>
                 </div>
             </div>
             <div class="wrapper_main2_body1">
@@ -63,7 +71,7 @@
                     <div class="body1_content">내 주변 3분 거리 블루존에서</div>
                     <div class="body1_content">혹은 내가 있는 곳으로 블루카를 불러</div>
                     <div class="body1_content">어디서나 편하게 출발하세요</div>
-                    <div><img src="/image/useImage2.jpg" alt="이미지"></div>
+                    <div><img alt="이미지" src="/image/useImage2.jpg"></div>
                 </div>
             </div>
             <div class="wrapper_main2_body1">
@@ -72,7 +80,7 @@
                     <div class="body1_content">연인과의 드라이브부터 가족 캠핑까지</div>
                     <div class="body1_content">상황에 맞게 다양한 차량을</div>
                     <div class="body1_content">선택해서 이용하세요</div>
-                    <div><img src="/image/useImage3.jpg" alt=""></div>
+                    <div><img alt="" src="/image/useImage3.jpg"></div>
                 </div>
             </div>
 

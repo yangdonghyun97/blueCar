@@ -4,6 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- SQL Mapping -->
-<mapper namespace="dao.MemberDao">
+<mapper namespace="com.bluecar.bluecar.repository.MemberReopository">
+
+    <insert id="save" parameterType="com.bluecar.bluecar.dto.MemberDTO">
+        INSERT INTO member_tbl(id,name,phone,yeardate) values (#{id},#{name},#{phone},#{yeardate})
+    </insert>
+
+    <select id="findId"   resultType="com.bluecar.bluecar.dto.MemberDTO">
+    select * from member_tbl where id = #{id}
+    </select>
+
+    <update id="update" parameterType="com.bluecar.bluecar.dto.MemberDTO">
+        update member_tbl set id = #{id}, pw = #{pw} where fid = #{fid}
+    </update>
 
 </mapper>

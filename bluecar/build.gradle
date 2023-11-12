@@ -25,10 +25,13 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+	implementation group: 'org.webjars', name: 'jquery', version: '3.6.4'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

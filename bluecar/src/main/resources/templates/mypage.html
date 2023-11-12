@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0px;
+    }
+
+    .wrapper {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menubar {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 139px;
+        border: 1px solid #e9ebee;
+    }
+
+    .HomeIcon {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 50px;
+        font-weight: bold;
+        padding-left: 50px;
+        color: blue;
+    }
+
+    .sidemenu {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+    }
+
+    .sidemenu2 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #374553;
+        cursor: pointer;
+        font-size: 18px;
+        padding-right: 40px;
+    }
+
+    .sidemenu2:hover {
+        font-weight: bold;
+
+
+    }
+
+    .wrapper_body {
+        width: 700px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .wrapper_body_main {
+        width: 600px;
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 50px;
+
+    }
+
+    .main_table {
+        display: flex;
+
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+
+
+    }
+
+
+    th, td {
+        padding: 20px;
+
+    }
+
+    .regtext2 {
+        font-size: 12px;
+        visibility: hidden;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+
+    .edit-btn {
+        padding: 10px;
+        width: 100%;
+        font-weight: bold;
+        max-width: 50px;
+        border-radius: 5px;
+        border: 1px solid white;
+        background-color: #aaaaaa;
+    }
+
+    input {
+        border: 1px solid white;
+        padding: 10px;
+    }
+    .regbtn {
+        margin-top: 50px;
+        font-weight: bold;
+        width: 400px;
+        height: 50px;
+        border-radius: 30px;
+        border: 1px solid white;
+        background-color: #aaaaaa;
+    }
+
+
+</style>
+<body>
+<div class="wrapper">
+    <div class="menubar">
+        <div class="HomeIcon">blueCar</div>
+        <div class="sidemenu">
+            <div class="sidemenu2">공지사항</div>
+            <div class="sidemenu2"><a th:href="@{/}">홈으로</a></div>
+        </div>
+
+    </div>
+    <div class="wrapper_body">
+        <h2>MyPage <span class="hidden" id="hidden"></span></h2>
+        <div class="wrapper_body_main">
+            <div class="main_table">
+                <form action="/member/update" method="post">
+                    <table>
+                        <tr>
+                            <th>아이디</th>
+                            <td><input id="id" name="id" readonly th:value="${user.id}" type="text"></td>
+                        </tr>
+                        <tr>
+                            <th>비밀번호</th>
+                            <td><input id="pw" name="pw" oninput="Pwcheck()" readonly
+                                       th:maxlength="12" th:placeholder="${user.pw}" th:value="${user.pw}"
+                                       type="text">
+                                <div class="regtext2">6~12자의 영문,숫자만 사용해주세요</div>
+                            </td>
+
+                            <td>
+                                <button class="edit-btn" onclick="upPw()" type="button">수정</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>휴대전화</th>
+                            <td>
+                                <input id="phonenum" name="phone" oninput="p1()" readonly
+                                       th:maxlength="12" th:placeholder="${user.phone}"
+                                       th:value="${user.phone}" type="text">
+
+                            </td>
+                            <td>
+                                <button class="edit-btn" onclick="upPhone()" type="button">수정</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>이름</th>
+                            <td><input id="name" name="name" readonly th:value="${user.name}" type="text"></td>
+
+                        </tr>
+                        <tr>
+                            <th>생년월일</th>
+                            <td><input id="yeardate" name="yeardate" readonly th:value="${user.yeardate}" type="text">
+                            </td>
+                        </tr>
+
+                        <input name="fid" th:value="${user.fid}" type="hidden">
+                    </table>
+                    <input class="regbtn" disabled id="submitBtn" type="submit" value="수정 완료">
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    let isPwValid = true;
+    let isPhoneValid = true;
+    const upPw = () => {
+        document.getElementById("pw").readOnly = false;
+        document.getElementById("pw").value = "";
+        document.getElementById("pw").focus();
+
+    }
+
+    const upPhone = () => {
+        document.getElementById("phonenum").readOnly = false;
+        document.getElementById("phonenum").value = "";
+        document.getElementById("phonenum").focus();
+    }
+
+    const Pwcheck = () => {
+        const pw = document.getElementById("pw").value;
+        isPwValid = false;
+        let regex = /^[a-zA-Z0-9]{6,12}$/;
+        if (5 < pw.length && regex.test(pw)) {
+            console.log("맞음");
+            document.querySelector(".regtext2").style.color = "blue"
+            document.querySelector("#pw").style.border = "1px solid blue"
+            document.querySelector(".regtext2").style.visibility = "visible";
+            isPwValid = true;
+
+        } else {
+            document.querySelector(".regtext2").style.color = "red"
+            document.querySelector("#pw").style.border = "1px solid red"
+            document.querySelector(".regtext2").style.visibility = "visible";
+        }
+        updateSubmitButtonState()
+    }
+
+    const p1 = () => {
+        isPhoneValid = false;
+        let phoneNum = document.querySelector("#phonenum").value;
+        phoneNum1 = phoneNum.replace(/\D/g, "");
+        let phonevalue = phoneNum1.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+        document.querySelector("#phonenum").value = phonevalue;
+        document.querySelector("#phonenum").style.border = "1px solid red"
+
+        if (phoneNum1.length === 11) {
+            isPhoneValid = true;
+            document.querySelector("#phonenum").style.border = "1px solid blue"
+        }
+        updateSubmitButtonState();
+    }
+
+    function updateSubmitButtonState() {
+        const submitButton = document.getElementById("submitBtn");
+        submitButton.disabled = !(isPwValid && isPhoneValid);
+    }
+
+
+</script>
+</html>

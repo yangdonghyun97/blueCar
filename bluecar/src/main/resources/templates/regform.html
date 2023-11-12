@@ -5,11 +5,12 @@
     <title>회원가입</title>
 </head>
 <style>
-    *{
+    * {
         box-sizing: border-box;
         margin: 0px;
     }
-    .wrapper{
+
+    .wrapper {
         width: 100%;
         height: 100vh;
         display: flex;
@@ -17,16 +18,59 @@
         align-items: center;
         justify-content: center;
     }
-    .wrapper_body{
+
+    .menubar {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 139px;
+        border: 1px solid #e9ebee;
+    }
+
+    .HomeIcon {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 50px;
+        font-weight: bold;
+        padding-left: 50px;
+        color: blue;
+    }
+
+    .sidemenu {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+    }
+
+    .sidemenu2 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #374553;
+        cursor: pointer;
+        font-size: 18px;
+        padding-right: 40px;
+    }
+
+    .sidemenu2:hover {
+        font-weight: bold;
+
+
+    }
+
+    .wrapper_body {
         width: 700px;
         height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-      border: 1px solid red;
+
     }
-    .wrapper_body_main{
+
+    .wrapper_body_main {
         width: 400px;
         height: 70vh;
         display: flex;
@@ -36,23 +80,33 @@
         border-radius: 50px;
 
     }
-    .join_container{
+
+    .join_container {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
 
     }
-    .join_container input{
-    margin-bottom: 20px;
-        width: 300px;
-        height:30px;
-        font-size:15px;
+
+    .regtext1, .regtext2, .regtext3 {
+        font-size: 12px;
+        visibility: hidden;
     }
-    .join_container:nth-child(1){
+
+    .join_container input {
+
+        width: 300px;
+        height: 30px;
+        font-size: 15px;
+        padding: 16px 10px;
+    }
+
+    .join_container:nth-child(1) {
         margin-top: 30px;
     }
-    .join_container2{
+
+    .join_container2 {
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -61,10 +115,12 @@
     }
 
     .join_container2 input {
-        width: 96px;
+        width: 300px;
+        padding: 16px 10px;
+        height: 30px;
     }
 
-    .join_container3{
+    .join_container3 {
         margin-top: 20px;
         display: flex;
         flex-direction: column;
@@ -72,49 +128,190 @@
     }
 
     .join_container3 input {
-
-        width: 150px;
+        padding: 16px 10px;
+        width: 120px;
     }
 
-    .regbtn{
+    .regbtn {
         margin-top: 50px;
+        font-weight: bold;
         width: 300px;
         height: 50px;
         border-radius: 30px;
         border: 1px solid white;
+        background-color: #aaaaaa;
+    }
+
+
+    input:focus {
+        outline: none;
     }
 
 </style>
 <body>
 <div class="wrapper">
+    <div class="menubar">
+        <div class="HomeIcon">blueCar</div>
+        <div class="sidemenu">
+            <div class="sidemenu2">공지사항</div>
+            <div class="sidemenu2"><a th:href="@{/}">홈으로</a></div>
+        </div>
+
+    </div>
     <div class="wrapper_body">
         <h2>블루카로 언제 어디서든 편하게 !</h2>
         <div class="wrapper_body_main">
-            <div class="join_container">
-                <input type="text" id="id" name="id" placeholder="아이디를 입력해주세요">
-                <input type="password" id="pw" name="pw" placeholder="패스워드를 입력해주세요">
-                <input type="password" id="rpw" name="rpw" placeholder="패스워드를 다시 입력해주세요">
-                <h4>이름 *</h4>
-                <input type="text" id="name" name="name" placeholder="이름을 입력해주세요">
-                <h4>휴대폰 번호 *</h4>
-            </div>
-            <div class="join_container2">
-                <input type="text" name="phone1"> -
-                <input type="text" name="phone2"> -
-                <input type="text" name="phone3">
-            </div>
+            <form action="/member/save" method="post">
+                <div class="join_container">
+                    <input id="id" name="id" oninput="Idcheck()" placeholder="아이디를 입력해주세요" th:maxlength="10"
+                           type="text">
+                    <div class="regtext1">4~10자의 영문,숫자만 사용해주세요</div>
+                    <input id="pw" name="pw" oninput="Pwcheck()" placeholder="패스워드를 입력해주세요" th:maxlength="12"
+                           type="password">
+                    <div class="regtext2">6~12자의 영문,숫자만 사용해주세요</div>
+                    <input id="rpw" name="rpw" oninput="Pwcheck2()" placeholder="패스워드를 다시 입력해주세요" th:maxlength="12"
+                           type="password">
+                    <div class="regtext3">다시 확인해주세요</div>
+                    <h4>이름 *</h4>
+                    <input id="name" name="name" oninput="namecheck()" placeholder="이름을 입력해주세요" th:maxlength="11"
+                           type="text">
+                    <h4>휴대폰 번호 *</h4>
+                </div>
+                <div class="join_container2">
+                    <input id="phonenum" name="phone" oninput="p1()" placeholder=" - 없이 입력해주세요" th:maxlength="12"
+                           type="text">
+                </div>
 
-            <div class="join_container3">
-                <h4>생년월일</h4>
-                <input type="text" name="date" placeholder="YYYY/MM/DD">
-            </div>
-            <button class="regbtn" onclick="">회원가입 완료</button>
+                <div class="join_container3">
+                    <h4>생년월일</h4>
+                    <input id="date" name="yeardate" oninput="datecheck()" placeholder="YYYY/MM/DD" th:maxlength="8"
+                           type="text">
+                </div>
 
-
-
+                <input class="regbtn" disabled id="submitBtn" type="submit" value="회원가입 완료">
+            </form>
 
         </div>
     </div>
 </div>
+<script th:inline="javascript">
+    let isIdValid = false;
+    let isPwValid = false;
+    let isPw2Valid = false;
+    let isPhoneValid = false;
+    let isDateValid = false;
+    let isNameValid = false;
+
+    // ID 대소문자, 숫자만 유효성 검사
+    const Idcheck = () => {
+        const id = document.getElementById("id").value;
+        let regex = /^[a-zA-Z0-9]{4,10}$/;
+        if (3 < id.length && regex.test(id)) {
+            console.log("맞음");
+            document.querySelector(".regtext1").style.color = "blue"
+            document.querySelector("#id").style.border = "1px solid blue"
+            document.querySelector(".regtext1").style.visibility = "visible";
+            isIdValid = true;
+
+        } else {
+            document.querySelector(".regtext1").style.color = "red"
+            document.querySelector("#id").style.border = "1px solid red"
+            document.querySelector(".regtext1").style.visibility = "visible";
+            isIdValid = false;
+        }
+        updateSubmitButtonState();
+    }
+    // pw 대소문자, 숫자만 유효성검사
+    const Pwcheck = () => {
+        const pw = document.getElementById("pw").value;
+        let regex = /^[a-zA-Z0-9]{6,12}$/;
+        if (5 < pw.length && regex.test(pw)) {
+            console.log("맞음");
+            document.querySelector(".regtext2").style.color = "blue"
+            document.querySelector("#pw").style.border = "1px solid blue"
+            document.querySelector(".regtext2").style.visibility = "visible";
+            isPwValid = true;
+
+        } else {
+            document.querySelector(".regtext2").style.color = "red"
+            document.querySelector("#pw").style.border = "1px solid red"
+            document.querySelector(".regtext2").style.visibility = "visible";
+            isPwValid = false;
+        }
+        updateSubmitButtonState();
+    }
+
+    const Pwcheck2 = () => {
+        const pw = document.querySelector("#pw").value;
+        const rpw = document.querySelector("#rpw").value;
+
+        if (pw == rpw) {
+            document.querySelector(".regtext3").style.color = "blue"
+            document.querySelector("#rpw").style.border = "1px solid blue"
+            document.querySelector(".regtext3").style.visibility = "visible";
+            isPw2Valid = true;
+        } else {
+            document.querySelector(".regtext3").style.visibility = "visible";
+            document.querySelector(".regtext3").style.color = "red"
+            document.querySelector("#rpw").style.border = "1px solid red"
+            isPw2Valid = false;
+        }
+        updateSubmitButtonState();
+    }
+
+    const p1 = () => {
+        let phoneNum = document.querySelector("#phonenum").value;
+        phoneNum1 = phoneNum.replace(/\D/g, "");
+        let phonevalue = phoneNum1.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+        document.querySelector("#phonenum").value = phonevalue;
+        isPhoneValid = false;
+
+        if (phoneNum.length == 11) {
+            isPhoneValid = true;
+        }
+        updateSubmitButtonState();
+
+    }
+
+    const namecheck = () => {
+        let inputName = document.querySelector("#name").value;
+
+        if (inputName.trim() !== "" && inputName.trim().length >= 2) {
+            document.querySelector("#name").style.border = "1px solid blue"
+            isNameValid = true;
+        } else {
+            document.querySelector("#name").style.border = "1px solid red"
+            isNameValid = false;
+
+        }
+        updateSubmitButtonState()
+    }
+
+    const datecheck = () => {
+        const inputDate = document.querySelector("#date").value;
+        const formattedDate = inputDate.replace(/(\d{4})(\d{2})(\d{2})/, "$1/$2/$3");
+
+        if (inputDate.length == 8) {
+            document.querySelector("#date").value = formattedDate;
+            document.querySelector("#date").style.border = "1px solid blue"
+            isDateValid = true;
+        } else {
+            document.querySelector("#date").style.border = "1px solid red"
+            isDateValid = false;
+        }
+        updateSubmitButtonState()
+    }
+
+    function updateSubmitButtonState() {
+        const submitButton = document.getElementById("submitBtn");
+        if (isIdValid && isPwValid && isPw2Valid && isPhoneValid && isPhoneValid && isDateValid && isNameValid) {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
+    }
+
+
+</script>
 </body>
 </html>
