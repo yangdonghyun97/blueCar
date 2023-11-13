@@ -187,17 +187,22 @@
         const id = document.querySelector("#id").value;
         const pw = document.querySelector("#pw").value;
 
+
         const memberData = {
             "id": id,
             "pw": pw
         }
+
 
         $.ajax({
             type: "post",
             url: "/member/login",
             data: memberData,
             success: function (res) {
+                if(res == "성공"){
                     location.href="/"
+                }
+                document.getElementById("hidden").innerText = res;
             },
             error: function (res) {
                 document.getElementById("hidden").innerText = res;

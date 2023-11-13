@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0px;
+    }
+
+    .wrapper {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid blue;
+    }
+
+    .wrapper_body {
+        width: 900px;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    border: 1px solid red;
+    }
+
+    .menubar {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 20vh;
+        border: 1px solid #e9ebee;
+    }
+
+    .HomeIcon {
+        display: flex;
+        flex-direction: row;
+        font-size: 50px;
+        font-weight: bold;
+        padding-left: 50px;
+        color: blue;
+    }
+
+    .sidemenu {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+    }
+
+    .sidemenu2 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #374553;
+        cursor: pointer;
+        font-size: 18px;
+        padding-right: 40px;
+    }
+
+    .sidemenu2:hover {
+        font-weight: bold;
+
+
+    }
+
+
+    .wrapper_body_main {
+        width: 800px;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid black;
+
+
+    }
+
+
+
+    h2 {
+        font-style: normal;
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 700;
+        letter-spacing: -2px;
+        color: #374553;
+        width: 400px;
+        margin-top: 30px;
+
+    }
+
+
+
+
+
+
+</style>
+<body>
+<div class="wrapper">
+    <div class="menubar">
+        <div class="HomeIcon">blueCar</div>
+        <div class="sidemenu">
+            <div class="sidemenu2">공지사항</div>
+            <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
+        </div>
+
+    </div>
+    <div class="wrapper_body">
+        <div class="wrapper_body_main">
+
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

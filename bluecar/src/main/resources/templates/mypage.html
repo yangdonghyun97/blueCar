@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>마이페이지</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <style>
     * {
@@ -125,7 +126,7 @@
     .regbtn {
         margin-top: 50px;
         font-weight: bold;
-        width: 400px;
+        width: 200px;
         height: 50px;
         border-radius: 30px;
         border: 1px solid white;
@@ -193,6 +194,7 @@
                         <input name="fid" th:value="${user.fid}" type="hidden">
                     </table>
                     <input class="regbtn" disabled id="submitBtn" type="submit" value="수정 완료">
+                    <input type="button" onclick="memberDelte()" value="회원탈퇴">
                 </form>
             </div>
 
@@ -254,6 +256,30 @@
     function updateSubmitButtonState() {
         const submitButton = document.getElementById("submitBtn");
         submitButton.disabled = !(isPwValid && isPhoneValid);
+    }
+
+    const memberDelte = ()=>{
+
+
+        $.ajax({
+            type: "get",
+            url: "/member/delete",
+            data: { fid: [[${user.fid}]] },
+            success: function (res) {
+                console.log(res);
+                if(res == "1"){
+                    alert("이용해 주셔서 감사했습니다.");
+                    location.href="/"
+                }else {
+
+                }
+
+            },
+            error: function () {
+
+            }
+
+        })
     }
 
 

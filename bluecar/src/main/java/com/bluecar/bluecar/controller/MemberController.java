@@ -2,6 +2,7 @@ package com.bluecar.bluecar.controller;
 
 import com.bluecar.bluecar.dto.MemberDTO;
 import com.bluecar.bluecar.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
 
-    @Autowired
-    private MemberService memberService;
+
+    private final MemberService memberService;
 
     ////////Veiw
     @GetMapping("/regform")
@@ -46,15 +48,21 @@ public class MemberController {
     public @ResponseBody String login(MemberDTO memberdto , HttpSession session) {
         MemberDTO memberDTO = memberService.findId(memberdto);
 
-        if(memberDTO ==null){
+        if (memberDTO == null || memberDTO.getPw() == null) {
             return "계정 정보를 다시 확인해주세요";
-        }else {
+        }
+
+        String inputPw = memberdto.getPw();
+        String storedPw = memberDTO.getPw();
+
+
+        if (inputPw.equals(storedPw)) {
             session.setAttribute("userId", memberDTO.getId());
             return "성공";
         }
 
+        return "계정 정보를 다시 확인해주세요";
     }
-
     @GetMapping("/logout")
     public String  logout(HttpSession session){
         session.removeAttribute("userId");
@@ -86,5 +94,13 @@ public class MemberController {
            return "mypage";
        }
 
+    }
+
+    @GetMapping("/delete")
+    public @ResponseBody String  memberDelete(MemberDTO memberDTO, HttpSession session){
+        int result = memberService.delte(memberDTO);
+        session.removeAttribute("userId");
+
+      return String.valueOf(result);
     }
 }

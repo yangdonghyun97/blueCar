@@ -4,10 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- SQL Mapping -->
-<mapper namespace="com.bluecar.bluecar.repository.MemberReopository">
+<mapper namespace="com.bluecar.bluecar.repository.MemberRepository">
 
     <insert id="save" parameterType="com.bluecar.bluecar.dto.MemberDTO">
-        INSERT INTO member_tbl(id,name,phone,yeardate) values (#{id},#{name},#{phone},#{yeardate})
+        INSERT INTO member_tbl(id,pw,name,phone,yeardate) values (#{id},#{pw},#{name},#{phone},#{yeardate})
     </insert>
 
     <select id="findId"   resultType="com.bluecar.bluecar.dto.MemberDTO">
@@ -17,5 +17,9 @@
     <update id="update" parameterType="com.bluecar.bluecar.dto.MemberDTO">
         update member_tbl set id = #{id}, pw = #{pw} where fid = #{fid}
     </update>
+    
+    <delete id="delete" parameterType="com.bluecar.bluecar.dto.MemberDTO">
+        delete from member_tbl where fid=#{fid}
+    </delete>
 
 </mapper>
