@@ -22,18 +22,17 @@
 
     .wrapper_body {
         width: 900px;
-        height: 80vh;
+        height: 85vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        border: 1px solid red;
     }
 
     .menubar {
         display: flex;
         flex-direction: row;
         width: 100%;
-        height: 20vh;
+        height: 15vh;
         border: 1px solid #e9ebee;
     }
 
@@ -76,26 +75,48 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        border: 1px solid black;
+        border: 1px solid red;
+    }
+    .wrapper_body_main_header{
 
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding-top: 30px;
+    }
+    .wrapper_body_main_title{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
 
+        font-size: 30px;
+    }
+    .main_title{
+        width: 300px;
+        padding: 10px;
+        border: none;
+        border-bottom: 0.1rem;
+        border-bottom-style: solid;
     }
 
 
-
-    h2 {
-        font-style: normal;
-        font-size: 32px;
-        line-height: 40px;
-        font-weight: 700;
-        letter-spacing: -2px;
-        color: #374553;
-        width: 400px;
-        margin-top: 30px;
-
+    .wrapper_body_main_contents{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 700px;
+        height: 55vh;
+        border: 1px solid red;
     }
 
-
+    .contentBox{
+        margin-top: 20px;
+        width: 100%;
+        height: 50vh;
+    }
 
 
 
@@ -114,18 +135,22 @@
 
     </div>
     <div class="wrapper_body">
-        <h2>QnA게시판</h2>
         <div class="wrapper_body_main">
             <form action="/board/save" method="post">
-                <input type="text" name="boardWriter" placeholder="작성자">
-                <input type="text" name="boardPass" placeholder="비밀번호">
-                <input type="text" name="boardTitle" placeholder="제목">
-                <textarea name="boardContents" cols="30" rows="10" placeholder="내용을 입력하세요"></textarea>
-                <input type="submit" value="작성">
+            <div class="wrapper_body_main_title">
+                <p >제목  <input class="main_title" type="text" name="boardTitle" ></p>
+            </div>
+            <div class="wrapper_body_main_header">
+                <p>작성자  <input type="text" name="userId"  th:value="${session.userId}" readonly></p>
+            </div>
+
+            <div class="wrapper_body_main_contents">
+                <textarea  name="boardContents" class="contentBox"></textarea>
+                <input type="hidden" th:value="${session.id}">
+            </div>
+                <input type="submit" value="작성완료">
             </form>
-
         </div>
-
     </div>
 </div>
 </body>

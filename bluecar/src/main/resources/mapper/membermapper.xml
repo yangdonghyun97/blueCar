@@ -7,19 +7,19 @@
 <mapper namespace="com.bluecar.bluecar.repository.MemberRepository">
 
     <insert id="save" parameterType="com.bluecar.bluecar.dto.MemberDTO">
-        INSERT INTO member_tbl(id,pw,name,phone,yeardate) values (#{id},#{pw},#{name},#{phone},#{yeardate})
+        INSERT INTO member_tbl(userId,pw,name,phone,yeardate) values (#{userId},#{pw},#{name},#{phone},#{yeardate})
     </insert>
 
     <select id="findId"   resultType="com.bluecar.bluecar.dto.MemberDTO">
-    select * from member_tbl where id = #{id}
+    select * from member_tbl where userId = #{userId}
     </select>
 
     <update id="update" parameterType="com.bluecar.bluecar.dto.MemberDTO">
-        update member_tbl set id = #{id}, pw = #{pw} where fid = #{fid}
+        update member_tbl set userId = #{userId}, pw = #{pw} where id = #{id}
     </update>
     
     <delete id="delete" parameterType="com.bluecar.bluecar.dto.MemberDTO">
-        delete from member_tbl where fid=#{fid}
+        delete from member_tbl where id=#{id}
     </delete>
 
 </mapper>

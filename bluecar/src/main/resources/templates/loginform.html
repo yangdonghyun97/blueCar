@@ -166,7 +166,7 @@
         <div class="wrapper_body_main">
 
             <div class="join_container">
-                <input class="input" id="id" name="id" oninput="Idcheck()" placeholder="아이디를 입력해주세요" th:maxlength="10"
+                <input class="input" id="userId" name="userId" oninput="Idcheck()" placeholder="아이디를 입력해주세요" th:maxlength="10"
                        type="text">
                 <div class="regtext1">4~10자의 영문,숫자만 사용해주세요</div>
                 <input class="input" id="pw" name="pw" oninput="Pwcheck()" placeholder="패스워드를 입력해주세요" th:maxlength="10"
@@ -184,12 +184,12 @@
 
 
     const submit = () => {
-        const id = document.querySelector("#id").value;
+        const id = document.querySelector("#userId").value;
         const pw = document.querySelector("#pw").value;
 
 
         const memberData = {
-            "id": id,
+            "userId": id,
             "pw": pw
         }
 

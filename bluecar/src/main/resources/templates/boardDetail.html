@@ -22,18 +22,17 @@
 
     .wrapper_body {
         width: 900px;
-        height: 80vh;
+        height: 85vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-    border: 1px solid red;
     }
 
     .menubar {
         display: flex;
         flex-direction: row;
         width: 100%;
-        height: 20vh;
+        height: 15vh;
         border: 1px solid #e9ebee;
     }
 
@@ -76,24 +75,40 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        border: 1px solid black;
-
-
     }
+.wrapper_body_main_header{
 
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 30px;
+}
+.wrapper_body_main_title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 30px;
+}
+.wrapper_body_main_title p:nth-child(2){
+    font-size: 15px;
+}
 
+.wrapper_body_main_contents{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+    height: 55vh;
+}
 
-    h2 {
-        font-style: normal;
-        font-size: 32px;
-        line-height: 40px;
-        font-weight: 700;
-        letter-spacing: -2px;
-        color: #374553;
-        width: 400px;
-        margin-top: 30px;
-
-    }
+.contentBox{
+    margin-top: 20px;
+    width: 100%;
+    height: 50vh;
+}
 
 
 
@@ -113,8 +128,19 @@
     </div>
     <div class="wrapper_body">
         <div class="wrapper_body_main">
+            <h2>게시글 상세 화면</h2>
+            <div class="wrapper_body_main_title">
+                <p>제목  <span th:text="${board.boardTitle}"></span></p>
+                <p>작성시간  <span th:text="${board.boardCreatedTime}"></span></p>
+            </div>
+            <div class="wrapper_body_main_header">
+                <p>작성자  <span th:text="${board.boardWriter}"></span></p>
+                <p>조회수  <span th:text="${board.boardHits}"></span></p>
+            </div>
 
-
+            <div class="wrapper_body_main_contents">
+                <textarea class="contentBox" th:text="${board.boardContents}"></textarea>
+            </div>
         </div>
 
     </div>

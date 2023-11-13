@@ -57,7 +57,8 @@ public class MemberController {
 
 
         if (inputPw.equals(storedPw)) {
-            session.setAttribute("userId", memberDTO.getId());
+            session.setAttribute("userId", memberDTO.getUserId());
+            session.setAttribute("id", memberDTO.getId());
             return "성공";
         }
 
