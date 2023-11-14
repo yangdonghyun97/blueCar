@@ -51,4 +51,14 @@ public class BoardController {
        model.addAttribute("board",boardDTO);
         return "boardDetail";
     }
+
+    @PostMapping("/update")
+    public String boardUpdate(BoardDTO boardDTO){
+       int result = boardService.update(boardDTO);
+       if(result ==1){
+           return "redirect: /board/";
+       }
+
+        return "error";
+    }
 }

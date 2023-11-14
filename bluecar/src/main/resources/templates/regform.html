@@ -163,7 +163,7 @@
         <div class="wrapper_body_main">
             <form action="/member/save" method="post">
                 <div class="join_container">
-                    <input id="id" name="id" oninput="Idcheck()" placeholder="아이디를 입력해주세요" th:maxlength="10"
+                    <input id="userId" name="userId" oninput="Idcheck()" placeholder="아이디를 입력해주세요" th:maxlength="10"
                            type="text">
                     <div class="regtext1">4~10자의 영문,숫자만 사용해주세요</div>
                     <input id="pw" name="pw" oninput="Pwcheck()" placeholder="패스워드를 입력해주세요" th:maxlength="12"
@@ -204,18 +204,18 @@
 
     // ID 대소문자, 숫자만 유효성 검사
     const Idcheck = () => {
-        const id = document.getElementById("id").value;
+        const id = document.getElementById("userId").value;
         let regex = /^[a-zA-Z0-9]{4,10}$/;
         if (3 < id.length && regex.test(id)) {
             console.log("맞음");
             document.querySelector(".regtext1").style.color = "blue"
-            document.querySelector("#id").style.border = "1px solid blue"
+            document.querySelector("#userId").style.border = "1px solid blue"
             document.querySelector(".regtext1").style.visibility = "visible";
             isIdValid = true;
 
         } else {
             document.querySelector(".regtext1").style.color = "red"
-            document.querySelector("#id").style.border = "1px solid red"
+            document.querySelector("#userId").style.border = "1px solid red"
             document.querySelector(".regtext1").style.visibility = "visible";
             isIdValid = false;
         }

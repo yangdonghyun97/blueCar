@@ -33,7 +33,7 @@ public class MemberController {
         return "loginform";
     }
 
-    @GetMapping("/mypage/{id}")
+    @GetMapping("/mypage/{userId}")
     public String myPage(MemberDTO memberDTO, Model model){
        MemberDTO member= memberService.findId(memberDTO);
        model.addAttribute("user", member);

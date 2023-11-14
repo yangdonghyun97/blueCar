@@ -16,4 +16,6 @@ public interface BoardRepository {
    BoardDTO findById(Long id);
 
     void updateHits(Long id);
+
+    int update(BoardDTO boardDTO);
 }

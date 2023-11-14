@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
     * {
         box-sizing: border-box;
@@ -102,12 +103,29 @@
     justify-content: center;
     width: 80%;
     height: 55vh;
+
 }
 
 .contentBox{
     margin-top: 20px;
     width: 100%;
     height: 50vh;
+    border: 1px solid grey;
+    border-width: 0.2rem;
+    outline: none;
+}
+
+.wrapper_body_main_title input{
+    padding: 14px;
+    width: 300px;
+    border-style: none;
+}
+
+.btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 80%;
 }
 
 
@@ -130,7 +148,7 @@
         <div class="wrapper_body_main">
             <h2>게시글 상세 화면</h2>
             <div class="wrapper_body_main_title">
-                <p>제목  <span th:text="${board.boardTitle}"></span></p>
+               <p>제목<input type="text" id="boardTitle" name="boardTitle" th:value="${board.boardTitle}" readonly></p>
                 <p>작성시간  <span th:text="${board.boardCreatedTime}"></span></p>
             </div>
             <div class="wrapper_body_main_header">
@@ -139,11 +157,54 @@
             </div>
 
             <div class="wrapper_body_main_contents">
-                <textarea class="contentBox" th:text="${board.boardContents}"></textarea>
+                <textarea class="contentBox" id="boardContents" name="boardContents" th:text="${board.boardContents}" readonly></textarea>
+            </div>
+            <div class="btn">
+            <button class="firstUpdateBtn" onclick="firstUpdateBtn()">수정</button>
+                <button class="updateBtn" onclick="boardUpdate()" style="display: none">수정완료</button>
+            <button onclick="boardDelete()">삭제</button>
             </div>
         </div>
-
     </div>
 </div>
 </body>
+<script th:inline="javascript">
+
+    const firstUpdateBtn = ()=>{
+        document.querySelector(".updateBtn").style.display = 'block';
+        document.querySelector("#boardContents").readOnly =false;
+        document.querySelector("#boardContents").style.border = "1px solid blue";
+        document.querySelector("#boardContents").focus();
+        document.querySelector("#boardTitle").readOnly =false;
+        document.querySelector("#boardTitle").style.borderBottom = "1px solid blue";
+
+        document.querySelector(".firstUpdateBtn").style.display = 'none';
+
+    }
+
+    const boardUpdate = ()=>{
+
+    }
+
+    const boardDelete = ()=>{
+
+    }
+
+    const titleCheck = ()=>{
+        const boardTitleValue = document.querySelector("#boardTitle").value;
+        if (!boardTitleValue.trim()) {
+            alert("제목을 입력해주세요");
+        }
+
+    }
+
+    const contetnsCheck = ()=>{
+        const boardContentsValue = document.querySelector("#boardContents").value;
+        if (!boardContentsValue.trim()) {
+            alert("내용을 입력해주세요");
+            // You might want to add additional logic here, e.g., preventing the update or handling the situation
+        }
+    }
+
+</script>
 </html>

@@ -25,4 +25,9 @@
     <update id="updateHits" parameterType="Long">
         update board_tbl set boardHits = boardHits + 1 where id = #{id}
     </update>
+
+    <update id="update" parameterType="com.bluecar.bluecar.dto.BoardDTO">
+
+        update board_tbl set boardTitle = #{boardTitle} , boardContents = #{boardContents} where id = #{id}
+    </update>
 </mapper>
