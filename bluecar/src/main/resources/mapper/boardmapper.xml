@@ -30,4 +30,8 @@
 
         update board_tbl set boardTitle = #{boardTitle} , boardContents = #{boardContents} where id = #{id}
     </update>
+
+    <delete id="delete" parameterType="com.bluecar.bluecar.dto.BoardDTO">
+        delete from board_tbl where id = #{id}
+    </delete>
 </mapper>

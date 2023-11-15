@@ -5,10 +5,7 @@ import com.bluecar.bluecar.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,10 +24,10 @@ public class BoardController {
       return "boardlist";
     }
 
-    @GetMapping("/saveform")
+    @GetMapping("/boardQnAWriteForm")
     public String saveForm(){
 
-        return "boardQnASave";
+        return "boardQnAWriteForm";
     }
 
     @PostMapping("/save")
@@ -39,7 +36,7 @@ public class BoardController {
         if (saveResult > 0){
             return "redirect:/board/";
         }else{
-            return "boardQnASave";
+            return "boardQnAWriteForm";
         }
 
     }
@@ -53,12 +50,23 @@ public class BoardController {
     }
 
     @PostMapping("/update")
-    public String boardUpdate(BoardDTO boardDTO){
+    public @ResponseBody  String boardUpdate(BoardDTO boardDTO){
        int result = boardService.update(boardDTO);
+        System.out.println("result = " + result);
        if(result ==1){
-           return "redirect: /board/";
+           return "성공";
        }
-
         return "error";
     }
+
+    @PostMapping("/delete")
+    public @ResponseBody String boardDelete(BoardDTO boardDTO){
+       int result = boardService.delete(boardDTO);
+        if(result ==1){
+            return "성공";
+        }
+        return "error";
+
+    }
+
 }

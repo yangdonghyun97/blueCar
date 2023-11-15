@@ -100,6 +100,7 @@ public class MemberController {
     @GetMapping("/delete")
     public @ResponseBody String  memberDelete(MemberDTO memberDTO, HttpSession session){
         int result = memberService.delte(memberDTO);
+        System.out.println("memberDTO = " + memberDTO);
         session.removeAttribute("userId");
 
       return String.valueOf(result);

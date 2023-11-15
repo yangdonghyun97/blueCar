@@ -194,7 +194,7 @@
                         <input name="id" th:value="${user.id}" type="hidden">
                     </table>
                     <input class="regbtn" disabled id="submitBtn" type="submit" value="수정 완료">
-                    <input onclick="memberDelte()" type="button" value="회원탈퇴">
+                    <input id="memberDelte" type="button" value="회원탈퇴">
                 </form>
             </div>
 
@@ -257,29 +257,27 @@
         submitButton.disabled = !(isPwValid && isPhoneValid);
     }
 
-    const memberDelte = () => {
 
-
-        $.ajax({
-            type: "get",
-            url: "/member/delete",
-            data: {fid: [[${user.id}]]},
-            success: function (res) {
-                console.log(res);
-                if (res == "1") {
-                    alert("이용해 주셔서 감사했습니다.");
-                    location.href = "/"
-                } else {
-
+    $(document).ready(function () {
+        $("#memberDelte").click(function () {
+            $.ajax({
+                url: "/member/delete",
+                method: "get",
+                data: {
+                    id: [[${user.id}]]
+                },
+                success: function (data) {
+                    if(data == 1){
+                        alert("이용해 주셔서 감사했습니다.");
+                        location.href ="/";
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX 오류: ", xhr.responseText);
                 }
-
-            },
-            error: function () {
-
-            }
-
-        })
-    }
+            });
+        });
+    });
 
 
 </script>

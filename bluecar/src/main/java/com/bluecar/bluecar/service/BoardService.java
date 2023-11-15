@@ -32,4 +32,8 @@ public class BoardService {
     public int update(BoardDTO boardDTO) {
         return boardRepository.update(boardDTO);
     }
+
+    public int delete(BoardDTO boardDTO) {
+       return boardRepository.delete(boardDTO);
+    }
 }

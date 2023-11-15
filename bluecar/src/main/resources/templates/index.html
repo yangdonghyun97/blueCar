@@ -28,6 +28,10 @@
                                     <li class="sideMenu"><a th:href="@{|/member/mypage/${session.userId}|}">마이페이지</a>
                                     </li>
                                 </div>
+                                <div th:unless="${session.userId}">
+                                    <li class="sideMenu"><a th:href="@{/member/regform}">회원가입</a></li>
+                                </div>
+
                                 <li class="sideMenu">공지사항</li>
                                 <li class="sideMenu">요금 안내</li>
                                 <li class="sideMenu">사고접수</li>
@@ -226,6 +230,7 @@
 
     input[id="menuicon"]:checked + label + div {
         right: 0;
+
     }
 
 
@@ -239,6 +244,10 @@
         font-size: 14pt;
         cursor: pointer;
         font-weight: bold;
+        color: white;
+    }
+
+    .sideMenu a {
         color: white;
     }
 
@@ -293,6 +302,11 @@
         z-index: 2;
     }
 
+    .floating a {
+        text-decoration: none;
+        color: #E1E2E2;
+    }
+
     .floating img {
         max-width: 100px;
         max-height: 70px;
@@ -305,13 +319,12 @@
         height: 7vh;
         font-size: 30px;
         font-weight: 150;
-        border-radius: 80px 0px 0px 5px;
+        border-radius: 100px 0 0 0;
 
 
     }
 
     .floating_content:hover {
-        color: white;
         cursor: pointer;
 
     }
@@ -374,5 +387,13 @@
         max-width: 90%;
     }
 
+    li {
+        border: 1px solid #28323c;
+    }
+
+    a {
+        text-decoration: none;
+        font-weight: bold;
+    }
 
 </style>

@@ -118,6 +118,12 @@
         height: 50vh;
     }
 
+    a {
+        text-decoration: none;
+        color: #374553;
+        font-weight: bold;
+    }
+
 
 
 
@@ -130,7 +136,7 @@
         <div class="HomeIcon">blueCar</div>
         <div class="sidemenu">
             <div class="sidemenu2">공지사항</div>
-            <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
+            <div class="sidemenu2"><a th:href="@{/}">홈으로</a></div>
         </div>
 
     </div>
@@ -154,4 +160,31 @@
     </div>
 </div>
 </body>
+
+<script>
+
+
+
+
+
+
+    const titleCheck = ()=>{
+        const boardTitleValue = document.querySelector("#boardTitle").value;
+        if (!boardTitleValue.trim()) {
+            alert("제목을 입력해주세요");
+            return false;
+        }
+        return true;
+    }
+
+    const contetnsCheck = ()=>{
+        const boardContentsValue = document.querySelector("#boardContents").value;
+        if (!boardContentsValue.trim()) {
+            alert("내용을 입력해주세요");
+            return false;
+            // You might want to add additional logic here, e.g., preventing the update or handling the situation
+        }
+        return true;
+    }
+</script>
 </html>

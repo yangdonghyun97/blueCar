@@ -18,4 +18,6 @@ public interface BoardRepository {
     void updateHits(Long id);
 
     int update(BoardDTO boardDTO);
+
+    int delete(BoardDTO boardDTO);
 }

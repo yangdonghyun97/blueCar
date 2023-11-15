@@ -128,6 +128,11 @@
     width: 80%;
 }
 
+    a {
+        text-decoration: none;
+        color: #374553;
+        font-weight: bold;
+    }
 
 
 
@@ -140,7 +145,7 @@
         <div class="HomeIcon">blueCar</div>
         <div class="sidemenu">
             <div class="sidemenu2">공지사항</div>
-            <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
+            <div class="sidemenu2"><a th:href="@{/}">Home</a></div>
         </div>
 
     </div>
@@ -159,10 +164,11 @@
             <div class="wrapper_body_main_contents">
                 <textarea class="contentBox" id="boardContents" name="boardContents" th:text="${board.boardContents}" readonly></textarea>
             </div>
+            <input type="hidden" id="id" th:value="${board.id}">
             <div class="btn">
             <button class="firstUpdateBtn" onclick="firstUpdateBtn()">수정</button>
-                <button class="updateBtn" onclick="boardUpdate()" style="display: none">수정완료</button>
-            <button onclick="boardDelete()">삭제</button>
+                <button class="updateBtn" id="boardUpdate" style="display: none">수정완료</button>
+            <button id="boardDelete">삭제</button>
             </div>
         </div>
     </div>
@@ -171,40 +177,97 @@
 <script th:inline="javascript">
 
     const firstUpdateBtn = ()=>{
-        document.querySelector(".updateBtn").style.display = 'block';
+
         document.querySelector("#boardContents").readOnly =false;
         document.querySelector("#boardContents").style.border = "1px solid blue";
         document.querySelector("#boardContents").focus();
         document.querySelector("#boardTitle").readOnly =false;
         document.querySelector("#boardTitle").style.borderBottom = "1px solid blue";
 
+        document.querySelector(".updateBtn").style.display = 'block';
         document.querySelector(".firstUpdateBtn").style.display = 'none';
 
     }
 
-    const boardUpdate = ()=>{
+    $(document).ready(function () {
+        // 이 부분에는 문서가 준비되었을 때 실행되어야 할 코드를 작성합니다.
+        $("#boardUpdate").click(function () {
+            // 이 부분에는 myButton(ID)이 클릭되었을 때 실행되어야 할 코드를 작성합니다.
+            if (!titleCheck() || !contetnsCheck()) {
+                return;
+            }
 
-    }
+            $.ajax({
+                url: "/board/update",  // 요청을 보낼 서버의 URL
+                method: "post",                        // HTTP 메서드 (GET, POST 등)
+                // dataType: "json", // 응답 데이터 형식
+                data: {
+                    boardTitle: $("#boardTitle").val(),
+                    boardContents: $("#boardContents").val(),
+                    id: $("#id").val()
+                },
 
-    const boardDelete = ()=>{
+                // AJAX 요청 전에 실행될 함수
+                beforeSend: function () {
 
-    }
+                    // 여기에서 다른 함수를 호출하거나 다른 작업을 수행할 수 있음
 
+                },
+                success: function (data) {            // 성공 시 처리할 콜백 함수
+                        console.log(data);
+                        location.href ="/";
+                },
+                error: function (xhr, status, error) {  // 실패 시 처리할 콜백 함수
+                    console.error("AJAX 오류: ", xhr.responseText);
+
+                }
+            });
+
+        });
+    });
     const titleCheck = ()=>{
         const boardTitleValue = document.querySelector("#boardTitle").value;
         if (!boardTitleValue.trim()) {
             alert("제목을 입력해주세요");
+            return false;
         }
-
+return true;
     }
 
     const contetnsCheck = ()=>{
         const boardContentsValue = document.querySelector("#boardContents").value;
         if (!boardContentsValue.trim()) {
             alert("내용을 입력해주세요");
+            return false;
             // You might want to add additional logic here, e.g., preventing the update or handling the situation
         }
+        return true;
     }
+
+
+    $(document).ready(function () {
+        // 이 부분에는 문서가 준비되었을 때 실행되어야 할 코드를 작성합니다.
+        $("#boardDelete").click(function () {
+            // 이 부분에는 myButton(ID)이 클릭되었을 때 실행되어야 할 코드를 작성합니다.
+            $.ajax({
+                url: "/board/delete",  // 요청을 보낼 서버의 URL
+                method: "post",                        // HTTP 메서드 (GET, POST 등)
+                // dataType: "json", // 응답 데이터 형식
+                data: {
+                    id: $("#id").val()
+                },
+                // AJAX 요청 전에 실행될 함수
+                success: function (data) {            // 성공 시 처리할 콜백 함수
+                    console.log(data);
+                    location.href ="/";
+                },
+                error: function (xhr, status, error) {  // 실패 시 처리할 콜백 함수
+                    console.error("AJAX 오류: ", xhr.responseText);
+                }
+            });
+        });
+    });
+
 
 </script>
 </html>
