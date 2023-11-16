@@ -147,24 +147,21 @@
                 <p >제목  <input class="main_title" type="text" name="boardTitle" ></p>
             </div>
             <div class="wrapper_body_main_header">
-                <p>작성자  <input type="text" name="userId"  th:value="${session.userId}" readonly></p>
+                <p>작성자  <input type="text" name="boardWriter"  th:value="${session.userId}" readonly></p>
             </div>
 
             <div class="wrapper_body_main_contents">
                 <textarea  name="boardContents" class="contentBox"></textarea>
                 <input type="hidden" th:value="${session.id}">
             </div>
-                <input type="submit" value="작성완료">
+                <input  type="submit"  value="작성완료">
             </form>
         </div>
     </div>
 </div>
 </body>
 
-<script>
-
-
-
+<script >
 
 
 

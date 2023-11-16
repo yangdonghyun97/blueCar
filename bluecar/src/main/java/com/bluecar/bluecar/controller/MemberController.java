@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -48,7 +45,7 @@ public class MemberController {
     public @ResponseBody String login(MemberDTO memberdto , HttpSession session) {
         MemberDTO memberDTO = memberService.findId(memberdto);
 
-        if (memberDTO == null || memberDTO.getPw() == null) {
+        if (memberDTO == null || memberDTO.getPw() == null ) {
             return "계정 정보를 다시 확인해주세요";
         }
 
@@ -83,6 +80,26 @@ public class MemberController {
             return "regform";
 
         }
+    }
+
+    @PostMapping("/duplicateCheck")
+    public @ResponseBody String idCheck(MemberDTO memberDTO){
+       MemberDTO userId = memberService.findId(memberDTO);
+        System.out.println("userId = " + userId);
+
+        // 0 이면 사용가능
+        // 1 이면 불가능
+       if(userId == null){
+           return "0";
+       }
+
+        if(!userId.getUserId().isEmpty()){
+            return "1";
+        }else {
+            // 아이디 사용가능
+            return "0";
+        }
+
     }
 
     //////업데이트

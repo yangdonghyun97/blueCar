@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
     * {
         box-sizing: border-box;
@@ -26,12 +21,26 @@
     }
 
     .wrapper_body {
-        width: 900px;
+        width: 90%;
         height: 85vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         border: 1px solid red;
+    }
+
+    .carBox_container {
+        width: 90%;
+        height: 70vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border: 1px solid black;
+    }
+    .carBox{
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
     }
 
     .menubar {
@@ -72,14 +81,8 @@
         font-weight: bold;
     }
 
-    .wrapper_body_main {
-        width: 800px;
-        height: 70vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border: 1px solid black;
-    }
+
+
 
     h2 {
         font-style: normal;
@@ -91,24 +94,6 @@
         width: 400px;
         margin-top: 30px;
     }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    th, td {
-
-        padding: 10px;
-        text-align: center;
-
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
     a {
         text-decoration: none;
         color: #374553;
@@ -128,44 +113,18 @@
 
     </div>
     <div class="wrapper_body">
-        <h2>QnA게시판</h2>
-        <div class="wrapper_body_main">
-            <table>
-                <tr>
-                    <th>id</th>
-                    <th>title</th>
-                    <th>writer</th>
-                    <th>date</th>
-                    <th>hits</th>
-                </tr>
-                <tr th:each="board : ${boards}">
-                    <td th:text="${board.id}"></td>
-                    <td>
-                        <a th:href="@{/board/boardDetail(id=${board.id})}" th:text="${board.boardTitle}"></a>
-                    </td>
-                    <td th:text="${board.boardWriter}"></td>
-                    <td th:text="${board.boardCreatedTime}"></td>
-                    <td th:text="${board.boardHits}"></td>
-                </tr>
-            </table>
-        </div>
+        <h2>인증 및 진단매물</h2>
+
+            <div class="carBox_container">
+                <div class="carBox">zz</div>
+                <div class="carBox">zz</div>
+                <div class="carBox">zz</div>
+                <div class="carBox">zz</div>
+            </div>
+
         <input type="hidden" id="userId" th:value="${session.userId}">
-        <button id="writeBtn">게시글 작성</button>
+
     </div>
 </div>
 </body>
-
-<script>
-
-    $(document).ready(function () {
-        $("#writeBtn").click(function () {
-            if ($("#userId").val() !== "") {
-                location.href = "/board/boardQnAWriteForm";
-            } else {
-                alert("회원만 작성 가능합니다");
-            }
-        });
-    });
-
-</script>
 </html>

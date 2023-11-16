@@ -34,4 +34,13 @@
     <delete id="delete" parameterType="com.bluecar.bluecar.dto.BoardDTO">
         delete from board_tbl where id = #{id}
     </delete>
+    
+    <select id="pagingList" parameterType="java.util.HashMap" resultType="com.bluecar.bluecar.dto.BoardDTO">
+        SELECT * FROM board_tbl ORDER BY id DESC LIMIT #{start}, #{limit}
+
+    </select>
+
+    <select id="boardCount" resultType="Integer">
+        select count(id) from board_tbl
+    </select>
 </mapper>

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Mapper
@@ -20,4 +21,8 @@ public interface BoardRepository {
     int update(BoardDTO boardDTO);
 
     int delete(BoardDTO boardDTO);
+
+    List<BoardDTO> pagingList(Map<String, Integer> pagingParms);
+
+    int boardCount();
 }

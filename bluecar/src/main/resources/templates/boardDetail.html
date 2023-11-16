@@ -166,9 +166,11 @@
             </div>
             <input type="hidden" id="id" th:value="${board.id}">
             <div class="btn">
+                <div th:if="${session.userId} == ${board.boardWriter}">
             <button class="firstUpdateBtn" onclick="firstUpdateBtn()">수정</button>
                 <button class="updateBtn" id="boardUpdate" style="display: none">수정완료</button>
             <button id="boardDelete">삭제</button>
+                </div>
             </div>
         </div>
     </div>
