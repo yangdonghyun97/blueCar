@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bluecar.bluecar.repository.CommentRepository">
+
+    <insert id="save" parameterType="com.bluecar.bluecar.dto.CommentDTO">
+        insert into comment_tbl(commentWriter, commentContents, boardId)
+        values(#{commentWriter}, #{commentContents}, #{boardId})
+    </insert>
+
+
+    <select id="findAll" parameterType="Long" resultType="com.bluecar.bluecar.dto.CommentDTO">
+        select * from comment_tbl where boardId=#{boardId} order by id desc
+    </select>
+</mapper>

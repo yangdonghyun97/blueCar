@@ -77,56 +77,59 @@
         flex-direction: column;
         align-items: center;
     }
-.wrapper_body_main_header{
 
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding-top: 30px;
-}
-.wrapper_body_main_title{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    font-size: 30px;
-}
-.wrapper_body_main_title p:nth-child(2){
-    font-size: 15px;
-}
+    .wrapper_body_main_header {
 
-.wrapper_body_main_contents{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 80%;
-    height: 55vh;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-top: 30px;
+    }
 
-}
+    .wrapper_body_main_title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        font-size: 30px;
+    }
 
-.contentBox{
-    margin-top: 20px;
-    width: 100%;
-    height: 50vh;
-    border: 1px solid grey;
-    border-width: 0.2rem;
-    outline: none;
-}
+    .wrapper_body_main_title p:nth-child(2) {
+        font-size: 15px;
+    }
 
-.wrapper_body_main_title input{
-    padding: 14px;
-    width: 300px;
-    border-style: none;
-}
+    .wrapper_body_main_contents {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 80%;
+        height: 55vh;
 
-.btn{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 80%;
-}
+    }
+
+    .contentBox {
+        margin-top: 20px;
+        width: 100%;
+        height: 50vh;
+        border: 1px solid grey;
+        border-width: 0.2rem;
+        outline: none;
+    }
+
+    .wrapper_body_main_title input {
+        padding: 14px;
+        width: 300px;
+        border-style: none;
+    }
+
+    .btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 80%;
+    }
 
     a {
         text-decoration: none;
@@ -134,9 +137,18 @@
         font-weight: bold;
     }
 
+    .comment_domain {
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+.comment_btn{
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
 
-
-
+}
 
 </style>
 <body>
@@ -153,37 +165,43 @@
         <div class="wrapper_body_main">
             <h2>게시글 상세 화면</h2>
             <div class="wrapper_body_main_title">
-               <p>제목<input type="text" id="boardTitle" name="boardTitle" th:value="${board.boardTitle}" readonly></p>
-                <p>작성시간  <span th:text="${board.boardCreatedTime}"></span></p>
+                <p>제목<input id="boardTitle" name="boardTitle" readonly th:value="${board.boardTitle}" type="text"></p>
+                <p>작성시간 <span th:text="${board.boardCreatedTime}"></span></p>
             </div>
             <div class="wrapper_body_main_header">
-                <p>작성자  <span th:text="${board.boardWriter}"></span></p>
-                <p>조회수  <span th:text="${board.boardHits}"></span></p>
+                <p>작성자 <span th:text="${board.boardWriter}"></span></p>
+                <p>조회수 <span th:text="${board.boardHits}"></span></p>
             </div>
 
             <div class="wrapper_body_main_contents">
-                <textarea class="contentBox" id="boardContents" name="boardContents" th:text="${board.boardContents}" readonly></textarea>
+                <textarea class="contentBox" id="boardContents" name="boardContents" readonly
+                          th:text="${board.boardContents}"></textarea>
             </div>
-            <input type="hidden" id="id" th:value="${board.id}">
+            <input id="id" th:value="${board.id}" type="hidden">
             <div class="btn">
                 <div th:if="${session.userId} == ${board.boardWriter}">
-            <button class="firstUpdateBtn" onclick="firstUpdateBtn()">수정</button>
-                <button class="updateBtn" id="boardUpdate" style="display: none">수정완료</button>
-            <button id="boardDelete">삭제</button>
+                    <button class="firstUpdateBtn" onclick="firstUpdateBtn()">수정</button>
+                    <button class="updateBtn" id="boardUpdate" style="display: none">수정완료</button>
+                    <button id="boardDelete">삭제</button>
                 </div>
             </div>
+            <div class="comment_domain">
+                <input id="commentWriter" readonly th:value="${session.userId}" type="text">
+                <textarea id="commentContents"></textarea>
+            </div>
+            <div class="comment_btn"><button id="comment-write-btn">댓글작성</button></div>
         </div>
     </div>
 </div>
 </body>
 <script th:inline="javascript">
 
-    const firstUpdateBtn = ()=>{
+    const firstUpdateBtn = () => {
 
-        document.querySelector("#boardContents").readOnly =false;
+        document.querySelector("#boardContents").readOnly = false;
         document.querySelector("#boardContents").style.border = "1px solid blue";
         document.querySelector("#boardContents").focus();
-        document.querySelector("#boardTitle").readOnly =false;
+        document.querySelector("#boardTitle").readOnly = false;
         document.querySelector("#boardTitle").style.borderBottom = "1px solid blue";
 
         document.querySelector(".updateBtn").style.display = 'block';
@@ -198,7 +216,6 @@
             if (!titleCheck() || !contetnsCheck()) {
                 return;
             }
-
             $.ajax({
                 url: "/board/update",  // 요청을 보낼 서버의 URL
                 method: "post",                        // HTTP 메서드 (GET, POST 등)
@@ -208,40 +225,63 @@
                     boardContents: $("#boardContents").val(),
                     id: $("#id").val()
                 },
-
                 // AJAX 요청 전에 실행될 함수
                 beforeSend: function () {
 
                     // 여기에서 다른 함수를 호출하거나 다른 작업을 수행할 수 있음
-
                 },
                 success: function (data) {            // 성공 시 처리할 콜백 함수
-                        console.log(data);
-                        location.href ="/";
+                    console.log(data);
+                    location.href = "/";
                 },
                 error: function (xhr, status, error) {  // 실패 시 처리할 콜백 함수
                     console.error("AJAX 오류: ", xhr.responseText);
-
                 }
             });
 
         });
     });
-    const titleCheck = ()=>{
+
+
+    $(document).ready(function () {
+        // 이 부분에는 문서가 준비되었을 때 실행되어야 할 코드를 작성합니다.
+        $("#comment-write-btn").click(function () {
+            // 이 부분에는 myButton(ID)이 클릭되었을 때 실행되어야 할 코드를 작성합니다.
+            $.ajax({
+                url: "/comment/save",  // 요청을 보낼 서버의 URL
+                method: "post",                        // HTTP 메서드 (GET, POST 등)
+                // dataType: "json", // 응답 데이터 형식
+                data: {
+                    commentWriter: $("#commentWriter").val(),
+                    commentContents: $("#commentContents").val(),
+                    boardId: $("#id").val()
+                },
+               dataType: "json",
+                success: function (data) {            // 성공 시 처리할 콜백 함수
+                    console.log(data);
+                },
+                error: function (xhr, status, error) {  // 실패 시 처리할 콜백 함수
+                    console.error("AJAX 오류: ", xhr.responseText);
+                }
+            });
+
+        });
+    });
+    const titleCheck = () => {
         const boardTitleValue = document.querySelector("#boardTitle").value;
         if (!boardTitleValue.trim()) {
             alert("제목을 입력해주세요");
             return false;
         }
-return true;
+        return true;
     }
 
-    const contetnsCheck = ()=>{
+    const contetnsCheck = () => {
         const boardContentsValue = document.querySelector("#boardContents").value;
         if (!boardContentsValue.trim()) {
             alert("내용을 입력해주세요");
             return false;
-            // You might want to add additional logic here, e.g., preventing the update or handling the situation
+
         }
         return true;
     }
@@ -261,7 +301,7 @@ return true;
                 // AJAX 요청 전에 실행될 함수
                 success: function (data) {            // 성공 시 처리할 콜백 함수
                     console.log(data);
-                    location.href ="/";
+                    location.href = "/";
                 },
                 error: function (xhr, status, error) {  // 실패 시 처리할 콜백 함수
                     console.error("AJAX 오류: ", xhr.responseText);

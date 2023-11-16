@@ -82,6 +82,6 @@ public class BoardController {
         model.addAttribute("pagingList", pagingList);
         model.addAttribute("paging", pageDTO);
 
-        return "paging";
+        return "boardlist";
     }
 }
