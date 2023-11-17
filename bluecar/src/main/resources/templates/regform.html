@@ -133,15 +133,35 @@
         width: 120px;
     }
 
-    .regbtn {
-        margin-top: 50px;
-        font-weight: bold;
+    .btn {
         width: 300px;
-        height: 50px;
-        border-radius: 30px;
-        border: 1px solid white;
-        background-color: #aaaaaa;
+        height: 46px;
+        margin-top: 50px;
+
+        /* 상자 디자인 큰틀 */
+        margin-bottom: 30px;
+        border: 0px;
+        background-color: #E4EBF5;
+
+        /* 그림자 */
+        border-radius: 10px;
+        box-shadow:.4rem .3rem 0.7rem #BEC5D0,
+        -.2rem -.2rem .4rem #FBFBFB;
+
+        /* 글씨 */
+        color: #333333;
+        font-size: 15px;
+        font-weight: bold;
     }
+
+    .btn:active {
+        /*버튼 눌리는 효과*/
+        box-shadow: inset -.3rem -.1rem 1.4rem  #FBFBFB,
+        inset .3rem .4rem .8rem #BEC5D0;
+        cursor: pointer;
+    }
+
+
 
 
     input:focus {
@@ -195,7 +215,7 @@
                            type="text">
                 </div>
 
-                <input class="regbtn" disabled id="submitBtn" type="submit" value="회원가입 완료">
+                <input class="btn" disabled id="submitBtn" type="submit" value="회원가입 완료">
             </form>
 
         </div>

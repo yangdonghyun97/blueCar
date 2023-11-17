@@ -12,6 +12,6 @@
 
 
     <select id="findAll" parameterType="Long" resultType="com.bluecar.bluecar.dto.CommentDTO">
-        select * from comment_tbl where boardId=#{boardId} order by id desc
+        select * from comment_tbl where boardId=#{boardId}
     </select>
 </mapper>

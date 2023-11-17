@@ -6,19 +6,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-@Service
 @RequiredArgsConstructor
+@Service
 public class CommentService {
+    private final CommentRepository commentRepository;
 
-   private final CommentRepository commentRepository;
-
-    public void save(CommentDTO commentDTO) {
-        commentRepository.save(commentDTO);
+    public int save(CommentDTO commentDTO) {
+      return  commentRepository.save(commentDTO);
     }
 
     public List<CommentDTO> findAll(Long boardId) {
-        System.out.println("boardId ser = " + boardId);
-       return commentRepository.findAll(boardId);
+        return commentRepository.findAll(boardId);
     }
 }
+

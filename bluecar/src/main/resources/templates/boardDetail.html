@@ -18,7 +18,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        border: 1px solid blue;
     }
 
     .wrapper_body {
@@ -84,7 +83,6 @@
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        padding-top: 30px;
     }
 
     .wrapper_body_main_title {
@@ -110,7 +108,6 @@
     }
 
     .contentBox {
-        margin-top: 20px;
         width: 100%;
         height: 50vh;
         border: 1px solid grey;
@@ -124,12 +121,6 @@
         border-style: none;
     }
 
-    .btn {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        width: 80%;
-    }
 
     a {
         text-decoration: none;
@@ -138,17 +129,82 @@
     }
 
     .comment_domain {
-    display: flex;
+        display: flex;
         flex-direction: column;
         align-items: center;
     }
-.comment_btn{
-    width: 40%;
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
 
-}
+    .comment_btn {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+    }
+
+    .commentList {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .comment{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 1px solid grey;
+        padding: 5px;
+    }
+    .comment:nth-child(1){
+        margin-top: 10px;
+    }
+
+    .commentInput {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+
+
+    }
+
+    .buttonArea {
+        width: 80%;
+        height: 35px;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+
+    }
+
+    #commentWriter {
+        width: 100px;
+        outline: none;
+      border: 1px solid white;
+    }
+
+    #commentContents {
+    width: 400px;
+        height: 100px;
+    }
+
+    .btn {
+        width: 45px;
+        height: 30px;
+        border: 0px;
+        background-color: #E4EBF5;
+        border-radius: 10px;
+        box-shadow: .4rem .3rem 0.7rem #BEC5D0,
+        -.2rem -.2rem .4rem #FBFBFB;
+        color: #333333;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .btn:active {
+        box-shadow: inset -.3rem -.1rem 1.4rem #FBFBFB,
+        inset .3rem .4rem .8rem #BEC5D0;
+        cursor: pointer;
+    }
+
 
 </style>
 <body>
@@ -172,29 +228,37 @@
                 <p>작성자 <span th:text="${board.boardWriter}"></span></p>
                 <p>조회수 <span th:text="${board.boardHits}"></span></p>
             </div>
-
+            <div class="buttonArea">
+                <div th:if="${session.userId} == ${board.boardWriter}">
+                    <button class="btn" id="firstUpdateBtn" onclick="firstUpdateBtn()">수정</button>
+                    <button class="btn" id="boardUpdate" style="display: none">완료</button>
+                    <button class="btn" id="boardDelete">삭제</button>
+                </div>
+            </div>
             <div class="wrapper_body_main_contents">
                 <textarea class="contentBox" id="boardContents" name="boardContents" readonly
                           th:text="${board.boardContents}"></textarea>
             </div>
             <input id="id" th:value="${board.id}" type="hidden">
-            <div class="btn">
-                <div th:if="${session.userId} == ${board.boardWriter}">
-                    <button class="firstUpdateBtn" onclick="firstUpdateBtn()">수정</button>
-                    <button class="updateBtn" id="boardUpdate" style="display: none">수정완료</button>
-                    <button id="boardDelete">삭제</button>
-                </div>
-            </div>
             <div class="comment_domain">
-                <input id="commentWriter" readonly th:value="${session.userId}" type="text">
-                <textarea id="commentContents"></textarea>
+
+                <div class="commentList"></div>
+                <div th:if="${session.userId}">
+                <div class="commentInput">
+                    <input id="commentWriter" readonly th:value="${session.userId}" type="text">
+                    <textarea id="commentContents"></textarea>
+                    <div class="comment_btn">
+                    <button class="btn" id="comment-write-btn">작성</button>
+                    </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="comment_btn"><button id="comment-write-btn">댓글작성</button></div>
         </div>
     </div>
 </div>
 </body>
-<script th:inline="javascript">
+<script>
 
     const firstUpdateBtn = () => {
 
@@ -204,11 +268,35 @@
         document.querySelector("#boardTitle").readOnly = false;
         document.querySelector("#boardTitle").style.borderBottom = "1px solid blue";
 
-        document.querySelector(".updateBtn").style.display = 'block';
-        document.querySelector(".firstUpdateBtn").style.display = 'none';
+        document.querySelector("#boardUpdate").style.display = 'block';
+        document.querySelector("#firstUpdateBtn").style.display = 'none';
 
     }
+    const commentList = () => {
 
+        $.ajax({
+            url: "/comment/list",
+            method: "post",
+            data: {
+                boardId: $("#id").val()
+            },
+            success: function (data) {
+                console.log(data);
+                data.sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime));
+                data.forEach(function (comment) {
+                    let commentHtml = `<div class="comment">
+                  ${comment.commentWriter} :  ${comment.commentContents}
+                    </div>`
+
+                    // .commentList에 생성한 HTML 추가
+                    $(".commentList").append(commentHtml);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX 오류: ", xhr.responseText);
+            }
+        });
+    }
     $(document).ready(function () {
         // 이 부분에는 문서가 준비되었을 때 실행되어야 할 코드를 작성합니다.
         $("#boardUpdate").click(function () {
@@ -232,7 +320,7 @@
                 },
                 success: function (data) {            // 성공 시 처리할 콜백 함수
                     console.log(data);
-                    location.href = "/";
+                    location.href = "/board/";
                 },
                 error: function (xhr, status, error) {  // 실패 시 처리할 콜백 함수
                     console.error("AJAX 오류: ", xhr.responseText);
@@ -242,9 +330,9 @@
         });
     });
 
-
     $(document).ready(function () {
         // 이 부분에는 문서가 준비되었을 때 실행되어야 할 코드를 작성합니다.
+        commentList()
         $("#comment-write-btn").click(function () {
             // 이 부분에는 myButton(ID)이 클릭되었을 때 실행되어야 할 코드를 작성합니다.
             $.ajax({
@@ -256,9 +344,14 @@
                     commentContents: $("#commentContents").val(),
                     boardId: $("#id").val()
                 },
-               dataType: "json",
+                dataType: "json",
                 success: function (data) {            // 성공 시 처리할 콜백 함수
-                    console.log(data);
+                    if (data == 1) {
+                        $("#commentContents").val("");
+                        $(".commentList").empty();
+                        commentList()
+
+                    }
                 },
                 error: function (xhr, status, error) {  // 실패 시 처리할 콜백 함수
                     console.error("AJAX 오류: ", xhr.responseText);
@@ -301,7 +394,7 @@
                 // AJAX 요청 전에 실행될 함수
                 success: function (data) {            // 성공 시 처리할 콜백 함수
                     console.log(data);
-                    location.href = "/";
+                    location.href = "/board/";
                 },
                 error: function (xhr, status, error) {  // 실패 시 처리할 콜백 함수
                     console.error("AJAX 오류: ", xhr.responseText);
