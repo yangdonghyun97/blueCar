@@ -22,4 +22,6 @@
         delete from member_tbl where id=#{id}
     </delete>
 
+
+
 </mapper>

@@ -33,6 +33,11 @@ public class CommentController {
 
     }
 
+    @PostMapping("/delete")
+    public @ResponseBody String delete(CommentDTO commentDTO){
+       int result = commentService.delete(commentDTO);
+       return String.valueOf(result);
+    }
 
 
 }

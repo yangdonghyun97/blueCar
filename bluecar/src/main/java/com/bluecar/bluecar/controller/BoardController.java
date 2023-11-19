@@ -3,6 +3,7 @@ package com.bluecar.bluecar.controller;
 import com.bluecar.bluecar.dto.BoardDTO;
 import com.bluecar.bluecar.dto.PageDTO;
 import com.bluecar.bluecar.service.BoardService;
+import com.bluecar.bluecar.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +19,17 @@ public class BoardController {
     private final BoardService boardService;
 
 
+
     @GetMapping("/")
     public String findAll(Model model){
       List<BoardDTO> boardDTOList = boardService.findAll();
       model.addAttribute("boards", boardDTOList);
       return "boardlist";
+    }
+
+    @GetMapping("/informationUse")
+    public String informationUse(){
+        return "informationUse";
     }
 
     @GetMapping("/boardQnAWriteForm")
@@ -32,12 +39,15 @@ public class BoardController {
     }
 
     @PostMapping("/save")
-    public String save(BoardDTO boardDTO){
+    public @ResponseBody String save(BoardDTO boardDTO){
+
+        System.out.println("boardDTO = " + boardDTO);
         int saveResult = boardService.save(boardDTO);
+      
         if (saveResult > 0){
-            return "redirect:/board/";
+            return "성공";
         }else{
-            return "boardQnAWriteForm";
+            return "error";
         }
 
     }

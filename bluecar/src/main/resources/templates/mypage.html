@@ -11,6 +11,11 @@
         margin: 0px;
     }
 
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+    }
+
     .wrapper {
         width: 100%;
         height: 100vh;
@@ -22,27 +27,28 @@
 
     .menubar {
         display: flex;
-        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
-        height: 139px;
-        border: 1px solid #e9ebee;
+        height: 80px;
+        border-bottom: 1px solid #e9ebee;
+        background-color: #3498db;
+        color: white;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .HomeIcon {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        font-size: 50px;
+        font-size: 24px;
         font-weight: bold;
-        padding-left: 50px;
-        color: blue;
+        padding: 0 20px;
+        color: white;
     }
 
     .sidemenu {
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: end;
+        justify-content: flex-end;
     }
 
     .sidemenu2 {
@@ -51,14 +57,14 @@
         align-items: center;
         color: #374553;
         cursor: pointer;
-        font-size: 18px;
-        padding-right: 40px;
+        font-size: 14px;
+        padding-right: 20px;
+        text-decoration: none;
+        color: #374553;
     }
 
     .sidemenu2:hover {
         font-weight: bold;
-
-
     }
 
     .wrapper_body {
@@ -68,71 +74,162 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: #ffffff;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
 
+    .wrapper_body h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
     }
 
     .wrapper_body_main {
         width: 600px;
-        height: 70vh;
+        height: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
-        border-radius: 50px;
-
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #ffffff;
     }
 
     .main_table {
         display: flex;
-
+        flex-direction: column;
     }
 
     table {
-        border-collapse: collapse;
         width: 100%;
-
-
+        border-collapse: collapse;
     }
 
-
     th, td {
-        padding: 20px;
+        padding: 15px;
+        border-bottom: 1px solid #e9ebee;
+    }
 
+    input {
+        padding: 7px;
+        border: 1px solid #e9ebee;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        outline: none;
     }
 
     .regtext2 {
         font-size: 12px;
+        color: red;
         visibility: hidden;
-    }
 
-    input:focus {
-        outline: none;
+        height: 1px;
     }
 
     .edit-btn {
         padding: 10px;
-        width: 100%;
         font-weight: bold;
-        max-width: 50px;
         border-radius: 5px;
-        border: 1px solid white;
+        border: 1px solid #ffffff;
         background-color: #aaaaaa;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .btn {
+        margin-top: 20px;
+        font-weight: bold;
+        width: 100%;
+        height: 50px;
+        border-radius: 5px;
+        border: 1px solid #ffffff;
+        background-color: #aaaaaa;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    #memberDelte {
+        margin-top: 20px;
+        font-weight: bold;
+        width: 100%;
+        height: 50px;
+        border-radius: 5px;
+        border: 1px solid #ffffff;
+        background-color: #3CB4FF;
+        color: #ffffff;
+        cursor: pointer;
     }
 
     input {
         border: 1px solid white;
-        padding: 10px;
+
     }
 
-    .regbtn {
-        margin-top: 50px;
+    .modalBtn {
+        margin-top: 5px;
+        width: 100px;
         font-weight: bold;
-        width: 200px;
         height: 50px;
-        border-radius: 30px;
-        border: 1px solid white;
-        background-color: #aaaaaa;
+        border-radius: 5px;
+        border: 1px solid #ffffff;
+        background-color: #3CB4FF;
+        color: #ffffff;
+        cursor: pointer;
     }
 
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #f8f9fa;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 10px;
+        width: 60%;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #333;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .modal-content div {
+        margin-bottom: 10px;
+    }
+
+    .modal-content span {
+        font-weight: bold;
+    }
+    a {
+        text-decoration: none;
+        color: #374553;
+        font-weight: bold;
+    }
+    a:hover {
+        color: #00b8ff;
+    }
 
 </style>
 <body>
@@ -140,7 +237,7 @@
     <div class="menubar">
         <div class="HomeIcon">blueCar</div>
         <div class="sidemenu">
-            <div class="sidemenu2">공지사항</div>
+            <div class="sidemenu2"><a th:href="@{/board/informationUse}">이용 약관</a></div>
             <div class="sidemenu2"><a th:href="@{/}">홈으로</a></div>
         </div>
 
@@ -191,21 +288,129 @@
                             </td>
                         </tr>
 
-                        <input name="id" th:value="${user.id}" type="hidden">
+
+                        <input id="member_id" th:value="${user.id}" type="hidden">
                     </table>
-                    <input class="regbtn" disabled id="submitBtn" type="submit" value="수정 완료">
+                    <input class="btn" disabled id="submitBtn" type="submit" value="수정 완료">
                     <input id="memberDelte" type="button" value="회원탈퇴">
                 </form>
+                <button class="modalBtn" onclick="openModal()">예약 내역</button>
             </div>
 
         </div>
-
+        <div class="modal" id="myModal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>주문번호</th>
+                        <th>차종</th>
+                        <th>대여 시작일</th>
+                        <th>대여 종료일</th>
+                        <th>가격</th>
+                    </tr>
+                    </thead>
+                    <tbody id="paymentTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-</body>
 <script th:inline="javascript">
+
     let isPwValid = true;
     let isPhoneValid = true;
+
+    $(document).ready(function () {
+
+        $("#cancelReservation").click(function () {
+
+            $.ajax({
+                url: "/payment/delete",
+                method: "post",
+                data: {
+                    id: $("#member_id").val()
+                },
+                success: function (data) {
+                    console.log(data)
+                    alert("예약이 취소되었습니다.")
+                    let elements = document.querySelectorAll("div > span");
+                    elements.forEach(function (element) {
+                        element.remove();
+                    });
+
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX 오류: ", xhr.responseText);
+
+                }
+            });
+
+        });
+    });
+
+    function openModal() {
+        const id = $("#member_id").val();
+        $.ajax({
+            url: "/payment/list",
+            method: "post",
+            data: {
+                id: id
+            },
+            success: function (data) {
+                $("#paymentTableBody").empty();
+                data.forEach(function (payment) {
+                    let row = "<tr>" +
+                        "<td>" + payment.orderId + "</td>" +
+                        "<td>" + payment.orderName + "</td>" +
+                        "<td>" + payment.startRentalDate + "</td>" +
+                        "<td>" + payment.endRentalDate + "</td>" +
+                        "<td>" + payment.amount + "</td>" +
+                        "<td><button class='delete-btn' onclick='deletePayment(" + payment.orderId + ")'>삭제</button></td>" +
+                        "</tr>";
+
+                    $("#paymentTableBody").append(row);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX 오류: ", xhr.responseText);
+
+            }
+        });
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    function deletePayment(orderId) {
+        $.ajax({
+            url: "/payment/delete",
+            method: "post",
+            data: {
+                orderId: orderId
+            },
+            success: function (data) {
+                console.log(data);
+                alert("예약이 취소되었습니다.");
+                closeModal();
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX 오류: ", xhr.responseText);
+            }
+        });
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+
+    }
+
+    window.onclick = function (event) {
+        if (event.target == document.getElementById('myModal')) {
+            closeModal();
+        }
+
+    }
     const upPw = () => {
         document.getElementById("pw").readOnly = false;
         document.getElementById("pw").value = "";
@@ -255,6 +460,12 @@
     function updateSubmitButtonState() {
         const submitButton = document.getElementById("submitBtn");
         submitButton.disabled = !(isPwValid && isPhoneValid);
+
+        if (submitButton.disabled) {
+            submitButton.style.backgroundColor = "#aaaaaa";
+        } else {
+            submitButton.style.backgroundColor = "#3CB4FF";
+        }
     }
 
 
@@ -267,9 +478,9 @@
                     id: [[${user.id}]]
                 },
                 success: function (data) {
-                    if(data == 1){
+                    if (data == 1) {
                         alert("이용해 주셔서 감사했습니다.");
-                        location.href ="/";
+                        location.href = "/";
                     }
                 },
                 error: function (xhr, status, error) {
@@ -281,4 +492,5 @@
 
 
 </script>
+</body>
 </html>

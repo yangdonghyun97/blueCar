@@ -1,7 +1,9 @@
 package com.bluecar.bluecar.controller;
 
 import com.bluecar.bluecar.dto.MemberDTO;
+import com.bluecar.bluecar.dto.PaymentDTO;
 import com.bluecar.bluecar.service.MemberService;
+import com.bluecar.bluecar.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,7 @@ public class MemberController {
 
 
     private final MemberService memberService;
-
+    private final PaymentService paymentService;
     ////////Veiw
     @GetMapping("/regform")
     public String regForm() {
@@ -43,6 +45,7 @@ public class MemberController {
 
     @PostMapping("/login")
     public @ResponseBody String login(MemberDTO memberdto , HttpSession session) {
+        System.out.println("memberdto = " + memberdto);
         MemberDTO memberDTO = memberService.findId(memberdto);
 
         if (memberDTO == null || memberDTO.getPw() == null ) {

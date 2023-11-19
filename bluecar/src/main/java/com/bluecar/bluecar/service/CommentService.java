@@ -11,6 +11,10 @@ import java.util.List;
 public class CommentService {
     private final CommentRepository commentRepository;
 
+    public  int delete(CommentDTO commentDTO) {
+         return commentRepository.delete(commentDTO);
+    }
+
     public int save(CommentDTO commentDTO) {
       return  commentRepository.save(commentDTO);
     }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bluecar.bluecar.repository.PaymentRepository">
+
+    <insert id="save" parameterType="com.bluecar.bluecar.dto.PaymentDTO">
+        INSERT INTO payment_tbl (amount,orderId,member_id,orderName,customerName, startRentalDate, endRentalDate)
+        VALUES (#{amount}, #{orderId},#{member_id},#{orderName},#{customerName},#{startRentalDate},#{endRentalDate})
+    </insert>
+
+
+    <select id="findAll" parameterType="Long" resultType="com.bluecar.bluecar.dto.PaymentDTO">
+        select * from payment_tbl where member_id=#{id}
+    </select>
+
+    <select id="findById" parameterType="Long" resultType="com.bluecar.bluecar.dto.PaymentDTO">
+        select * from payment_tbl where member_id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="com.bluecar.bluecar.dto.PaymentDTO">
+        delete from payment_tbl where orderId = #{orderId}
+    </delete>
+</mapper>

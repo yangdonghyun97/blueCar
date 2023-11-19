@@ -11,9 +11,13 @@
         margin: 0px;
     }
 
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+    }
+
     .wrapper {
         width: 100%;
-        height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -24,17 +28,20 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        height: 139px;
-        border: 1px solid #e9ebee;
+        height: 80px;
+        border-bottom: 1px solid #e9ebee;
+        background-color: #3498db;
+        color: white;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .HomeIcon {
         display: flex;
         flex-direction: row;
         align-items: center;
-        font-size: 50px;
+        font-size: 24px;
         font-weight: bold;
-        padding-left: 50px;
+        padding-left: 20px;
         color: blue;
     }
 
@@ -57,29 +64,35 @@
 
     .sidemenu2:hover {
         font-weight: bold;
-
-
     }
 
     .wrapper_body {
         width: 700px;
-        height: 100vh;
+        height: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: #ffffff;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
 
+    .wrapper_body h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
     }
 
     .wrapper_body_main {
-        width: 400px;
-        height: 70vh;
+        width: 600px;
+        height: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
-        border: 1px solid black;
-        border-radius: 50px;
-
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #ffffff;
     }
 
     .join_container {
@@ -87,49 +100,46 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-
     }
 
     .regtext1, .regtext2, .regtext3 {
         font-size: 12px;
         visibility: hidden;
+        color: red;
     }
 
     .join_container input {
-
         width: 300px;
         height: 30px;
         font-size: 15px;
         padding: 16px 10px;
+        margin-bottom: 10px;
+        outline: none;
+        border: 1px solid #e9ebee;
+        border-radius: 5px;
     }
 
-    .join_container:nth-child(1) {
-        margin-top: 30px;
-    }
-
-    .join_container2 {
+    .join_container2,
+    .join_container3 {
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: center;
-
+        margin-top: 20px;
     }
 
-    .join_container2 input {
+    .join_container2 input,
+    .join_container3 input {
         width: 300px;
         padding: 16px 10px;
         height: 30px;
-    }
-
-    .join_container3 {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-
+        margin-right: 10px;
+        outline: none;
+        border: 1px solid #e9ebee;
+        border-radius: 5px;
     }
 
     .join_container3 input {
-        padding: 16px 10px;
         width: 120px;
     }
 
@@ -137,35 +147,21 @@
         width: 300px;
         height: 46px;
         margin-top: 50px;
-
-        /* 상자 디자인 큰틀 */
         margin-bottom: 30px;
         border: 0px;
         background-color: #E4EBF5;
-
-        /* 그림자 */
         border-radius: 10px;
-        box-shadow:.4rem .3rem 0.7rem #BEC5D0,
-        -.2rem -.2rem .4rem #FBFBFB;
-
-        /* 글씨 */
+        box-shadow: 0.4rem 0.3rem 0.7rem #BEC5D0, -0.2rem -0.2rem 0.4rem #FBFBFB;
         color: #333333;
         font-size: 15px;
         font-weight: bold;
-    }
-
-    .btn:active {
-        /*버튼 눌리는 효과*/
-        box-shadow: inset -.3rem -.1rem 1.4rem  #FBFBFB,
-        inset .3rem .4rem .8rem #BEC5D0;
         cursor: pointer;
+        outline: none;
     }
-
-
-
 
     input:focus {
         outline: none;
+        border: 1px solid #3498db; /* Added focus styling */
     }
 
     a {
@@ -173,7 +169,6 @@
         color: #374553;
         font-weight: bold;
     }
-
 </style>
 <body>
 <div class="wrapper">
@@ -186,7 +181,6 @@
 
     </div>
     <div class="wrapper_body">
-        <h2>블루카로 언제 어디서든 편하게 !</h2>
         <div class="wrapper_body_main">
             <form action="/member/save" method="post">
                 <div class="join_container">
@@ -215,7 +209,7 @@
                            type="text">
                 </div>
 
-                <input class="btn" disabled id="submitBtn" type="submit" value="회원가입 완료">
+                <input class="btn"  id="submitBtn" type="submit" value="회원가입 완료" disabled>
             </form>
 
         </div>
@@ -367,11 +361,13 @@ const idDuplicateCheck =()=>{
         const submitButton = document.getElementById("submitBtn");
         if (isIdValid && isPwValid && isPw2Valid && isPhoneValid && isPhoneValid && isDateValid && isNameValid) {
             submitButton.disabled = false;
+
+            submitButton.style.backgroundColor = "#3CB4FF";
         } else {
             submitButton.disabled = true;
+            submitButton.style.backgroundColor = "#E4EBF5"
         }
     }
-
 
 </script>
 </body>

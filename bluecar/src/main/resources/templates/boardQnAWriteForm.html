@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
     * {
         box-sizing: border-box;
-        margin: 0px;
+        margin: 0;
+        padding: 0;
     }
 
     .wrapper {
@@ -17,39 +19,32 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        border: 1px solid blue;
-    }
-
-    .wrapper_body {
-        width: 900px;
-        height: 85vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
     }
 
     .menubar {
         display: flex;
-        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
-        height: 15vh;
-        border: 1px solid #e9ebee;
+        height: 80px;
+        border-bottom: 1px solid #e9ebee;
+        background-color: #3498db;
+        color: white;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .HomeIcon {
-        display: flex;
-        flex-direction: row;
-        font-size: 50px;
+        font-size: 24px;
         font-weight: bold;
-        padding-left: 50px;
-        color: blue;
+        padding: 0 20px;
+        color: white;
     }
 
     .sidemenu {
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: end;
+        justify-content: flex-end;
     }
 
     .sidemenu2 {
@@ -64,69 +59,102 @@
 
     .sidemenu2:hover {
         font-weight: bold;
-
-
     }
 
+    .wrapper_body {
+        width: 900px;
+        height: 85vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
     .wrapper_body_main {
+
         width: 800px;
         height: 80vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        border: 1px solid red;
     }
-    .wrapper_body_main_header{
 
-        width: 80%;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        padding-top: 30px;
+    h2 {
+        font-size: 30px;
+        margin-top: 20px;
+        margin-bottom: 10px;
     }
-    .wrapper_body_main_title{
+
+    .wrapper_body_main_title {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
         width: 100%;
-
-        font-size: 30px;
-    }
-    .main_title{
-        width: 300px;
-        padding: 10px;
-        border: none;
-        border-bottom: 0.1rem;
-        border-bottom-style: solid;
+        font-size: 18px;
     }
 
-
-    .wrapper_body_main_contents{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        width: 700px;
-        height: 55vh;
-        border: 1px solid red;
+    .wrapper_body_main_title p {
+        margin: 0;
     }
 
-    .contentBox{
-        margin-top: 20px;
+    #boardTitle {
+        padding: 14px;
         width: 100%;
-        height: 50vh;
+        border: none;
+        border-bottom: 1px solid #3498db;
+        outline: none;
+        font-size: 18px;
     }
-
     a {
         text-decoration: none;
         color: #374553;
         font-weight: bold;
+        font-size: 16px;
+    }
+    input {
+        outline: none;
+        border: 1px solid white;
+    }
+
+    .wrapper_body_main_header {
+
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 16px;
     }
 
 
+    #boardContents {
+        width: 700px;
+        height: 50vh;
+        border: 1px solid #3498db;
+        border-width: 0.2rem;
+        outline: none;
+        resize: none;
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 16px;
+    }
 
+    .btn {
+        width: 100px;
+        height: 30px;
+        border: none;
+        background-color: #3498db;
+        border-radius: 10px;
+        box-shadow: 0.4rem 0.3rem 0.7rem #BEC5D0, -0.2rem -0.2rem 0.4rem #FBFBFB;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        margin-left: 10px;
+        cursor: pointer;
+    }
 
+    .btn:active {
+        box-shadow: inset -0.3rem -0.1rem 1.4rem #FBFBFB, inset 0.3rem 0.4rem 0.8rem #BEC5D0;
+    }
 
 
 </style>
@@ -135,53 +163,83 @@
     <div class="menubar">
         <div class="HomeIcon">blueCar</div>
         <div class="sidemenu">
-            <div class="sidemenu2">공지사항</div>
+            <div class="sidemenu2"><a th:href="@{/board/informationUse}">이용 약관</a></div>
             <div class="sidemenu2"><a th:href="@{/}">홈으로</a></div>
         </div>
 
     </div>
     <div class="wrapper_body">
         <div class="wrapper_body_main">
-            <form action="/board/save" method="post">
             <div class="wrapper_body_main_title">
-                <p >제목  <input class="main_title" type="text" name="boardTitle" ></p>
+                <p><input class="main_title" id="boardTitle" type="text" placeholder="제목을 입력해주세요"></p>
             </div>
             <div class="wrapper_body_main_header">
-                <p>작성자  <input type="text" name="boardWriter"  th:value="${session.userId}" readonly></p>
+                <p>작성자 <input id="boardWriter"  th:value="${session.userId}" type="text" style="border: 1px solid white" readonly></p>
             </div>
 
             <div class="wrapper_body_main_contents">
-                <textarea  name="boardContents" class="contentBox"></textarea>
-                <input type="hidden" th:value="${session.id}">
+                <textarea class="contentBox" id="boardContents"></textarea>
+                <input id="id" th:value="${session.id}" type="hidden">
             </div>
-                <input  type="submit"  value="작성완료">
-            </form>
+            <button class="btn" id="boardSave">작성 완료</button>
         </div>
     </div>
 </div>
 </body>
 
-<script >
+<script>
+    let isTitleValid = false;
+    let isContentValid = false;
 
+    $(document).ready(function () {
 
+        $("#boardSave").click(function () {
+            titleCheck()
+            contetnsCheck()
 
-    const titleCheck = ()=>{
+            if (isTitleValid === false || isContentValid === false) {
+                return;
+            }
+            $.ajax({
+                url: "/board/save",
+                method: "post",
+                data: {
+                    boardWriter: $("#boardWriter").val(),
+                    boardTitle: $("#boardTitle").val(),
+                    boardContents: $("#boardContents").val(),
+                    id: $("#id").val()
+                },
+                success: function (data) {
+                    console.log(data);
+                    location.href = "/board/";
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX 오류: ", xhr.responseText);
+                }
+            });
+
+        });
+    });
+
+    const titleCheck = () => {
         const boardTitleValue = document.querySelector("#boardTitle").value;
         if (!boardTitleValue.trim()) {
             alert("제목을 입력해주세요");
-            return false;
+
+        } else {
+            isTitleValid = true;
         }
-        return true;
+
     }
 
-    const contetnsCheck = ()=>{
+    const contetnsCheck = () => {
         const boardContentsValue = document.querySelector("#boardContents").value;
         if (!boardContentsValue.trim()) {
             alert("내용을 입력해주세요");
-            return false;
-            // You might want to add additional logic here, e.g., preventing the update or handling the situation
+
+        } else {
+            isContentValid = true;
         }
-        return true;
     }
 </script>
 </html>

@@ -14,4 +14,8 @@
     <select id="findAll" parameterType="Long" resultType="com.bluecar.bluecar.dto.CommentDTO">
         select * from comment_tbl where boardId=#{boardId}
     </select>
+
+    <delete id="delete" parameterType="Long" >
+        delete from comment_tbl where id=#{id}
+    </delete>
 </mapper>

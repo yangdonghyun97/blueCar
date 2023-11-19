@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f2f4f6;
+    }
+
+    .wrapper {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f2f4f6;
+    }
+
+    .wrapper_body {
+        width: 80%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    a {
+        text-decoration: none;
+        color: #374553;
+        font-weight: bold;
+    }
+
+    .menu a:hover {
+        color: #00b8ff;
+    }
+
+    .wrapper_body_secondArea h2 {
+        margin-top: 50px;
+        color: #333;
+        font-size: 28px;
+    }
+
+    .wrapper_body_firstArea {
+        width: 50%;
+        height: 85vh;
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .wrapper_body_firstArea img {
+        max-width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .wrapper_body_secondArea {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .select {
+        width: 100%;
+        max-width: 200px;
+        border: 1px solid #C4C4C4;
+        border-radius: 10px;
+        padding: 12px 13px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .select:focus {
+        border: 1px solid #00b8ff;
+        border-radius: 10px;
+        outline: 3px solid #00b8ff;
+    }
+
+    .menu {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        border-bottom: 1px solid #374553;
+        border-top: 1px solid #374553;
+        margin-top: 20px;
+        padding: 10px;
+        color: #555;
+    }
+
+    .carBox {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid #aaaaaa;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .carBox:hover {
+        background-color: #f2f2f2;
+    }
+
+    .firstCarBox {
+        width: 40%;
+        height: 15vh;
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    .firstCarBox img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
+    .secondCarBox {
+        width: 60%;
+        display: flex;
+        height: 15vh;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .secondCarBox h4 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .secondCarBox h5 {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+    .secondCarBox .price {
+        font-weight: bold;
+        color: #00b8ff;
+    }
+
+</style>
+<body>
+<div class="wrapper">
+    <div class="wrapper_body">
+        <div class="wrapper_body_firstArea">
+            <img alt="" src="/image/guide_image.png">
+        </div>
+
+        <div class="wrapper_body_secondArea">
+
+            <h2>차량 선택</h2>
+            <div class="area"><select class="select" id="area">
+                <option>서울</option>
+                <option>부산</option>
+                <option>울산</option>
+                <option>경주</option>
+            </select>
+                <div class="menu"><span><a th:href="@{/}">Home</a></span><span><a th:href="@{/board/}">QnA게시판</a></span><span><a
+                        th:href="@{/board/informationUse}">이용 약관</a></span></div>
+            </div>
+
+            <div class="carBox" id="firstCarBox">
+                <div class="firstCarBox"><img alt="" class="image" src="/image/Carimage/car1.png"></div>
+                <div class="secondCarBox">
+                    <div><h4>더뉴 셀토스</h4></div>
+                    <div><h5>2022~2023년| 1만~5만</h5></div>
+                    <div>일 <span class="price">44900</span> 원</div>
+
+                </div>
+            </div>
+            <div class="carBox">
+                <div class="firstCarBox"><img alt="" class="image" src="/image/Carimage/car2.png"></div>
+                <div class="secondCarBox">
+                    <div><h4>디 올뉴코나</h4></div>
+                    <div><h5>2023년| 3만~5만</h5></div>
+                    <div>일 <span class="price">57000</span> 원</div>
+                </div>
+            </div>
+            <div class="carBox">
+                <div class="firstCarBox"><img alt="" class="image" src="/image/Carimage/car3.png"></div>
+                <div class="secondCarBox">
+                    <div><h4>더뉴 K3</h4></div>
+                    <div><h5>2021~2023년| 1만~5만</h5></div>
+                    <div>일 <span class="price">39900</span> 원</div>
+
+                </div>
+            </div>
+            <div class="carBox">
+                <div class="firstCarBox"><img alt="" class="image" src="/image/Carimage/car4.png"></div>
+                <div class="secondCarBox">
+                    <div><h4>캐스퍼</h4></div>
+                    <div><h5>2021~2022년| 5만~10만</h5></div>
+                    <div>일 <span class="price">41000</span> 원</div>
+                </div>
+            </div>
+        </div>
+
+        <input id="id" th:value="${session.id}" type="hidden">
+        <input id="userId" th:value="${session.userId}" type="hidden">
+
+    </div>
+</div>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 각 carBox에 클릭 이벤트 추가
+        let carBoxes = document.querySelectorAll('.carBox');
+        carBoxes.forEach(function (carBox) {
+
+            carBox.addEventListener('click', function () {
+                let area = document.querySelector("#area").value;
+                let src = carBox.querySelector(".image").getAttribute("src");
+                let carName = carBox.querySelector('h4').innerText;
+                let carYear = carBox.querySelector('h5').innerText;
+                let carPrice = carBox.querySelector('.price').innerText;
+
+
+                let destination = '/car/carDetailForm';
+                let car = `?src=${encodeURIComponent(src)}&model=${encodeURIComponent(carName)}&yearRange=${encodeURIComponent(carYear)}&price=${encodeURIComponent(carPrice)}&area=${encodeURIComponent(area)}`;
+                window.location.href = destination + car;
+            });
+
+
+        });
+    });
+
+</script>
+
+</html>
