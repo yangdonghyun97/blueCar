@@ -12,13 +12,12 @@
     }
 
     body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f5f5f5;
+
     }
 
     .wrapper {
         width: 100%;
-        height: 100vh;
+        height: 80vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -27,28 +26,30 @@
 
     .menubar {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: row;
         width: 100%;
-        height: 80px;
+        height: 15vh;
         border-bottom: 1px solid #e9ebee;
-        background-color: #3498db;
         color: white;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .HomeIcon {
-        font-size: 24px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding-left: 250px;
+        color: #aaaaaa;
         font-weight: bold;
-        padding: 0 20px;
-        color: white;
+        font-size: 50px;
     }
 
     .sidemenu {
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: flex-end;
+        justify-content: end;
     }
 
     .sidemenu2 {
@@ -57,19 +58,18 @@
         align-items: center;
         color: #374553;
         cursor: pointer;
-        font-size: 14px;
-        padding-right: 20px;
-        text-decoration: none;
-        color: #374553;
+        font-size: 18px;
+        padding-right: 40px;
     }
 
     .sidemenu2:hover {
         font-weight: bold;
     }
 
+
     .wrapper_body {
-        width: 700px;
-        height: 100vh;
+        width: 500px;
+        height: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -85,100 +85,132 @@
         margin-bottom: 20px;
     }
 
-    .wrapper_body_main {
-        width: 600px;
-        height: auto;
+    .join_container {
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #ffffff;
-    }
-
-    .main_table {
-        display: flex;
-        flex-direction: column;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 15px;
-        border-bottom: 1px solid #e9ebee;
     }
 
     input {
-        padding: 7px;
-        border: 1px solid #e9ebee;
-        border-radius: 5px;
+        width: 393px;
+        height: 60px;
+        font-size: 15px;
+        padding: 20px 15px 20px 45px;
         margin-bottom: 10px;
         outline: none;
+        border: 1px solid #e9ebee;
+        border-radius: 5px;
+
     }
 
-    .regtext2 {
+    .input_id {
+        background-image: url("/image/idBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+
+    }
+
+    .input_pw {
+        background-image: url("/image/pwBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+
+    }
+
+    .input_name {
+        background-image: url("/image/nameBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+    }
+
+    .input_phone {
+        background-image: url("/image/phoneBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+    }
+
+    .input_date {
+        background-image: url("/image/yearBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+    }
+    .instructions {
         font-size: 12px;
         color: red;
         visibility: hidden;
-
         height: 1px;
     }
 
+    .pw_domain, .phone_domain{
+        margin-left: 50px;
+    }
+
+
+
+
+
+    /*버튼 모음*/
+    .btn {
+        width: 398px;
+        height: 60px;
+        margin-top: 30px;
+        background-color: #E4EBF5;
+        border-radius: 10px;
+        box-shadow: 0.4rem 0.3rem 0.7rem #BEC5D0, -0.2rem -0.2rem 0.4rem #FBFBFB;
+        color: #333333;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        outline: none;
+    }
     .edit-btn {
         padding: 10px;
         font-weight: bold;
         border-radius: 5px;
         border: 1px solid #ffffff;
-        background-color: #aaaaaa;
+        background-color: #3CB4FF;
         color: #ffffff;
         cursor: pointer;
     }
-
-    .btn {
-        margin-top: 20px;
-        font-weight: bold;
-        width: 100%;
-        height: 50px;
-        border-radius: 5px;
-        border: 1px solid #ffffff;
-        background-color: #aaaaaa;
-        color: #ffffff;
-        cursor: pointer;
-    }
-
     #memberDelte {
         margin-top: 20px;
         font-weight: bold;
         width: 100%;
         height: 50px;
-        border-radius: 5px;
+        border-radius: 15px;
         border: 1px solid #ffffff;
         background-color: #3CB4FF;
         color: #ffffff;
         cursor: pointer;
     }
 
-    input {
-        border: 1px solid white;
 
+    input:focus {
+        outline: none;
+        border: 1px solid #3498db;
     }
 
-    .modalBtn {
-        margin-top: 5px;
-        width: 100px;
+    a {
+        text-decoration: none;
+        color: #374553;
         font-weight: bold;
-        height: 50px;
-        border-radius: 5px;
-        border: 1px solid #ffffff;
-        background-color: #3CB4FF;
-        color: #ffffff;
-        cursor: pointer;
+    }
+    a:hover {
+        color: #00b8ff;
     }
 
-
+    /*    모달 */
     .modal {
         display: none;
         position: fixed;
@@ -192,13 +224,24 @@
     }
 
     .modal-content {
-        background-color: #f8f9fa;
+        background-color: #fefefe;
         margin: 15% auto;
         padding: 20px;
-        border-radius: 10px;
-        width: 60%;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        border: 1px solid #888;
+        width: 80%;
     }
+    .modalBtn {
+        margin-top: 5px;
+        width: 100px;
+        font-weight: bold;
+        height: 50px;
+        border-radius: 5px;
+        border: 1px solid #ffffff;
+        background-color: #3CB4FF;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
 
     .close {
         color: #aaa;
@@ -210,113 +253,76 @@
 
     .close:hover,
     .close:focus {
-        color: #333;
+        color: black;
         text-decoration: none;
         cursor: pointer;
     }
 
-    .modal-content div {
-        margin-bottom: 10px;
-    }
-
-    .modal-content span {
-        font-weight: bold;
-    }
-    a {
-        text-decoration: none;
-        color: #374553;
-        font-weight: bold;
-    }
-    a:hover {
-        color: #00b8ff;
-    }
 
 </style>
 <body>
-<div class="wrapper">
-    <div class="menubar">
-        <div class="HomeIcon">blueCar</div>
-        <div class="sidemenu">
-            <div class="sidemenu2"><a th:href="@{/board/informationUse}">이용 약관</a></div>
-            <div class="sidemenu2"><a th:href="@{/}">홈으로</a></div>
-        </div>
+<div class="menubar">
+
+    <div class="HomeIcon"><a th:href="@{/}"><img src="/image/socarPlan.png"></a></div>
+
+    <div class="sidemenu">
+        <div class="sidemenu2" onclick="openModal()">나의 예약내역</div>
+        <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
+        <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
 
     </div>
+</div>
+<div class="wrapper">
+
     <div class="wrapper_body">
         <h2>MyPage <span class="hidden" id="hidden"></span></h2>
-        <div class="wrapper_body_main">
-            <div class="main_table">
-                <form action="/member/update" method="post">
-                    <table>
-                        <tr>
-                            <th>아이디</th>
-                            <td><input id="id" name="userId" readonly th:value="${user.userId}" type="text"></td>
-                        </tr>
-                        <tr>
-                            <th>비밀번호</th>
-                            <td><input id="pw" name="pw" oninput="Pwcheck()" readonly
-                                       th:maxlength="12" th:placeholder="${user.pw}" th:value="${user.pw}"
-                                       type="text">
-                                <div class="regtext2">6~12자의 영문,숫자만 사용해주세요</div>
-                            </td>
+        <form action="/member/update" method="post">
+            <div class="join_container">
+                <input class="input_id" th:value="${user.userId}" id="userId" name="userId" oninput="Idcheck()"
+                       onblur="idDuplicateCheck()" placeholder="아이디" th:maxlength="10"
+                       type="text" readonly>
+                <div class="pw_domain"><input class="input_pw" th:placeholder="${user.pw}" th:value="${user.pw}" id="pw" name="pw"
+                       oninput="Pwcheck()" placeholder="패스워드" th:maxlength="12"
+                       type="password" readonly>
+                    <button class="edit-btn" onclick="upPw()" type="button">수정</button></div>
+                <div class="instructions" >6~12자의 영문,숫자만 사용해주세요</div>
 
-                            <td>
-                                <button class="edit-btn" onclick="upPw()" type="button">수정</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>휴대전화</th>
-                            <td>
-                                <input id="phonenum" name="phone" oninput="p1()" readonly
-                                       th:maxlength="12" th:placeholder="${user.phone}"
-                                       th:value="${user.phone}" type="text">
+                <input class="input_name" id="name" name="name"  readonly th:value="${user.name}" oninput="namecheck()" placeholder="이름" th:maxlength="11"
+                       type="text">
+               <div class="phone_domain"> <input class="input_phone" id="phonenum" name="phone" oninput="p1()" readonly
+                       th:maxlength="12" th:placeholder="${user.phone}"
+                            th:value="${user.phone}" type="text"><button class="edit-btn" onclick="upPhone()" type="button">수정</button></div>
 
-                            </td>
-                            <td>
-                                <button class="edit-btn" onclick="upPhone()" type="button">수정</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th>이름</th>
-                            <td><input id="name" name="name" readonly th:value="${user.name}" type="text"></td>
-
-                        </tr>
-                        <tr>
-                            <th>생년월일</th>
-                            <td><input id="yeardate" name="yeardate" readonly th:value="${user.yeardate}" type="text">
-                            </td>
-                        </tr>
-
-
-                        <input id="member_id" th:value="${user.id}" type="hidden">
-                    </table>
-                    <input class="btn" disabled id="submitBtn" type="submit" value="수정 완료">
-                    <input id="memberDelte" type="button" value="회원탈퇴">
-                </form>
-                <button class="modalBtn" onclick="openModal()">예약 내역</button>
+                <input class="input_date" id="date" name="yeardate"  readonly th:value="${user.yeardate}" oninput="datecheck()" placeholder="생년월일 YYYY/MM/DD"
+                       th:maxlength="8"
+                       type="text">
             </div>
+            <input id="member_id" name="id" th:value="${session.id}" type="hidden">
+            <input class="btn" disabled id="submitBtn" type="submit" value="수정 완료">
+            <input id="memberDelte" type="button" value="회원탈퇴">
+        </form>
 
-        </div>
-        <div class="modal" id="myModal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>주문번호</th>
-                        <th>차종</th>
-                        <th>대여 시작일</th>
-                        <th>대여 종료일</th>
-                        <th>가격</th>
-                    </tr>
-                    </thead>
-                    <tbody id="paymentTableBody">
-                    </tbody>
-                </table>
-            </div>
+
+    </div>
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <table>
+                <thead>
+                <tr>
+                    <th>주문번호</th>
+                    <th>차종</th>
+                    <th>대여 시작일</th>
+                    <th>대여 종료일</th>
+                    <th>가격</th>
+                </tr>
+                </thead>
+                <tbody id="paymentTableBody">
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 </div>
 <script th:inline="javascript">
 
@@ -429,15 +435,15 @@
         isPwValid = false;
         let regex = /^[a-zA-Z0-9]{6,12}$/;
         if (5 < pw.length && regex.test(pw)) {
-            document.querySelector(".regtext2").style.color = "blue"
+            document.querySelector(".instructions").style.color = "blue"
             document.querySelector("#pw").style.border = "1px solid blue"
-            document.querySelector(".regtext2").style.visibility = "visible";
+            document.querySelector(".instructions").style.visibility = "visible";
             isPwValid = true;
 
         } else {
-            document.querySelector(".regtext2").style.color = "red"
+            document.querySelector(".instructions").style.color = "red"
             document.querySelector("#pw").style.border = "1px solid red"
-            document.querySelector(".regtext2").style.visibility = "visible";
+            document.querySelector(".instructions").style.visibility = "visible";
         }
         updateSubmitButtonState()
     }

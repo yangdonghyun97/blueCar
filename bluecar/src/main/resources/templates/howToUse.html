@@ -29,7 +29,7 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-       height: 15vh;
+       height: 20vh;
         border-bottom: 1px solid #e9ebee;
         color: white;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -67,88 +67,34 @@
         font-weight: bold;
     }
 
-
-    .wrapper_body h2 {
-        font-size: 24px;
+    .wrapper_body {
+        width: 700px;
+        height: 85vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        border: 1px solid red;
     }
 
     .wrapper_body_main {
-        width: 450px;
-        height: 500px;
+        width: 600px;
+        height: auto;
         display: flex;
         flex-direction: column;
+        align-items: center;
         padding: 20px;
         border-radius: 10px;
         background-color: #ffffff;
-    }
-    .wrapper_body_main h2{
-        margin-bottom: 10px;
-    }
-    .join_container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .title{
-        display: flex;
-        flex-direction: row;
-
+        border: 1px solid red;
     }
 
 
-    .join_container input {
-        width: 398px;
-        height: 60px;
-        font-size: 15px;
-        padding: 20px 15px 20px 45px;
-        margin-bottom: 10px;
-        outline: none;
-        border: 1px solid #e9ebee;
-        border-radius: 5px;
 
-    }
-    .input_id{
-        background-image: url("/image/idBox.png");
-        background-size: 40px;
-        background-position: 10px;
-        background-repeat: no-repeat;
-        border-style: none;
 
-    }
-    .input_pw{
-        background-image: url("/image/pwBox.png");
-        background-size: 40px;
-        background-position: 10px;
-        background-repeat: no-repeat;
-        border-style: none;
-
-    }
-
-    .btn {
-        width: 398px;
-        height: 60px;
-        margin-top: 50px;
-        margin-bottom: 30px;
-        border: 0px;
-        background-color: #00b8ff;
-        border-radius: 10px;
-        box-shadow: 0.4rem 0.3rem 0.7rem #BEC5D0, -0.2rem -0.2rem 0.4rem #FBFBFB;
-        color: white;
-        font-size: 15px;
-        font-weight: bold;
-        cursor: pointer;
-        outline: none;
-    }
-
-    .btn:active {
-        box-shadow: inset -0.3rem -0.1rem 1.4rem #FBFBFB, inset 0.3rem 0.4rem 0.8rem #BEC5D0;
-    }
-
-    input:focus {
-        outline: none;
-        border: 1px solid #3498db;
-    }
 
     a {
         text-decoration: none;
@@ -160,7 +106,7 @@
 <body>
     <div class="menubar">
 
-        <div class="HomeIcon" ><a th:href="@{/}"><img src="/image/socarPlan.png"></a></div>
+        <div class="HomeIcon" ><</div>
 
         <div class="sidemenu">
             <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
@@ -169,18 +115,12 @@
 
     </div>
 <div class="wrapper">
+    <div class="wrapper_body">
         <div class="wrapper_body_main">
-        <div class="title"><h2>로그인</h2><span class="hidden" id="hidden"></span></div>
 
-            <div class="join_container">
-                <input class="input_id" id="userId" name="userId"  placeholder="아이디를 입력해주세요" th:maxlength="10"
-                       type="text" style="background-image : url('/image/idBox.png');">
-                <input class="input_pw" id="pw" name="pw"  placeholder="패스워드를 입력해주세요" th:maxlength="10"
-                       type="password">
-            </div>
-
-            <button class="btn" id="submitBtn" onclick="submit()">로그인</button>
         </div>
+
+    </div>
 </div>
 </body>
 <script>

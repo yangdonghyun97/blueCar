@@ -12,12 +12,12 @@
     }
 
     body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f5f5f5;
+
     }
 
     .wrapper {
         width: 100%;
+        height: 80vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -28,9 +28,8 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        height: 80px;
+        height: 15vh;
         border-bottom: 1px solid #e9ebee;
-        background-color: #3498db;
         color: white;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     }
@@ -39,10 +38,11 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        font-size: 24px;
+        justify-content: center;
+        padding-left: 250px;
+        color: #aaaaaa;
         font-weight: bold;
-        padding-left: 20px;
-        color: blue;
+        font-size: 50px;
     }
 
     .sidemenu {
@@ -66,8 +66,9 @@
         font-weight: bold;
     }
 
+
     .wrapper_body {
-        width: 700px;
+        width: 500px;
         height: auto;
         display: flex;
         flex-direction: column;
@@ -84,22 +85,59 @@
         margin-bottom: 20px;
     }
 
-    .wrapper_body_main {
-        width: 600px;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #ffffff;
-    }
-
     .join_container {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    input {
+        width: 398px;
+        height: 60px;
+        font-size: 15px;
+        padding: 20px 15px 20px 45px;
+        margin-bottom: 10px;
+        outline: none;
+        border: 1px solid #e9ebee;
+        border-radius: 5px;
+
+    }
+    .input_id{
+        background-image: url("/image/idBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+
+    }
+    .input_pw{
+        background-image: url("/image/pwBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+
+    }
+    .input_name{
+        background-image: url("/image/nameBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+    }
+    .input_phone{
+        background-image: url("/image/phoneBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+    }
+    .input_date{
+        background-image: url("/image/yearBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
     }
 
     .regtext1, .regtext2, .regtext3 {
@@ -108,16 +146,6 @@
         color: red;
     }
 
-    .join_container input {
-        width: 300px;
-        height: 30px;
-        font-size: 15px;
-        padding: 16px 10px;
-        margin-bottom: 10px;
-        outline: none;
-        border: 1px solid #e9ebee;
-        border-radius: 5px;
-    }
 
     .join_container2,
     .join_container3 {
@@ -128,32 +156,17 @@
         margin-top: 20px;
     }
 
-    .join_container2 input,
-    .join_container3 input {
-        width: 300px;
-        padding: 16px 10px;
-        height: 30px;
-        margin-right: 10px;
-        outline: none;
-        border: 1px solid #e9ebee;
-        border-radius: 5px;
-    }
 
-    .join_container3 input {
-        width: 120px;
-    }
 
     .btn {
-        width: 300px;
-        height: 46px;
-        margin-top: 50px;
-        margin-bottom: 30px;
-        border: 0px;
+        width: 398px;
+        height: 60px;
+        margin-top: 30px;
         background-color: #E4EBF5;
         border-radius: 10px;
         box-shadow: 0.4rem 0.3rem 0.7rem #BEC5D0, -0.2rem -0.2rem 0.4rem #FBFBFB;
         color: #333333;
-        font-size: 15px;
+        font-size: 20px;
         font-weight: bold;
         cursor: pointer;
         outline: none;
@@ -161,7 +174,7 @@
 
     input:focus {
         outline: none;
-        border: 1px solid #3498db; /* Added focus styling */
+        border: 1px solid #3498db;
     }
 
     a {
@@ -171,48 +184,44 @@
     }
 </style>
 <body>
-<div class="wrapper">
-    <div class="menubar">
-        <div class="HomeIcon">blueCar</div>
-        <div class="sidemenu">
-            <div class="sidemenu2">공지사항</div>
-            <div class="sidemenu2"><a th:href="@{/}">홈으로</a></div>
-        </div>
+<div class="menubar">
 
+    <div class="HomeIcon" ><a th:href="@{/}"><img src="/image/socarPlan.png"></a></div>
+
+    <div class="sidemenu">
+        <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
+        <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
     </div>
+
+</div>
+<div class="wrapper">
     <div class="wrapper_body">
-        <div class="wrapper_body_main">
             <form action="/member/save" method="post">
                 <div class="join_container">
-                    <input id="userId" name="userId" oninput="Idcheck()" onblur="idDuplicateCheck()" placeholder="아이디를 입력해주세요" th:maxlength="10"
+                   <input class="input_id" id="userId" name="userId" oninput="Idcheck()" onblur="idDuplicateCheck()" placeholder="아이디" th:maxlength="10"
                            type="text">
-                    <div class="regtext1">0</div>
-                    <input id="pw" name="pw" oninput="Pwcheck()" placeholder="패스워드를 입력해주세요" th:maxlength="12"
+                    <div class="regtext1"></div>
+                    <input class="input_pw" id="pw" name="pw" oninput="Pwcheck()" placeholder="패스워드" th:maxlength="12"
                            type="password">
                     <div class="regtext2">6~12자의 영문,숫자만 사용해주세요</div>
-                    <input id="rpw" name="rpw" oninput="Pwcheck2()" placeholder="패스워드를 다시 입력해주세요" th:maxlength="12"
+                    <input class="input_pw" id="rpw" name="rpw" oninput="Pwcheck2()" placeholder="패스워드를 다시 입력해주세요" th:maxlength="12"
                            type="password">
                     <div class="regtext3">다시 확인해주세요</div>
-                    <h4>이름 *</h4>
-                    <input id="name" name="name" oninput="namecheck()" placeholder="이름을 입력해주세요" th:maxlength="11"
+                    <input class="input_name" id="name" name="name" oninput="namecheck()" placeholder="이름" th:maxlength="11"
                            type="text">
-                    <h4>휴대폰 번호 *</h4>
                 </div>
                 <div class="join_container2">
-                    <input id="phonenum" name="phone" oninput="p1()" placeholder=" - 없이 입력해주세요" th:maxlength="12"
+                    <input class="input_phone" id="phonenum" name="phone" oninput="p1()" placeholder=" - 없이 입력해주세요" th:maxlength="12"
                            type="text">
                 </div>
 
                 <div class="join_container3">
-                    <h4>생년월일</h4>
-                    <input id="date" name="yeardate" oninput="datecheck()" placeholder="YYYY/MM/DD" th:maxlength="8"
+                    <input class="input_date" id="date" name="yeardate" oninput="datecheck()" placeholder="생년월일 YYYY/MM/DD" th:maxlength="8"
                            type="text">
                 </div>
 
-                <input class="btn"  id="submitBtn" type="submit" value="회원가입 완료" disabled>
+                <input class="btn"  id="submitBtn" type="submit" value="회원가입 " disabled>
             </form>
-
-        </div>
     </div>
 </div>
 <script th:inline="javascript">
