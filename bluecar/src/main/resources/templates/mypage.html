@@ -161,11 +161,17 @@
 
 
     /*버튼 모음*/
+    .btn_domain{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     .btn {
         width: 398px;
         height: 60px;
         margin-top: 30px;
-        background-color: #E4EBF5;
+        background-color: rgb(170, 170, 170);
         border-radius: 10px;
         box-shadow: 0.4rem 0.3rem 0.7rem #BEC5D0, -0.2rem -0.2rem 0.4rem #FBFBFB;
         color: #333333;
@@ -186,9 +192,9 @@
     #memberDelte {
         margin-top: 20px;
         font-weight: bold;
-        width: 100%;
-        height: 50px;
-        border-radius: 15px;
+        width: 398px;
+        height: 60px;
+        border-radius: 10px;
         border: 1px solid #ffffff;
         background-color: #3CB4FF;
         color: #ffffff;
@@ -230,18 +236,6 @@
         border: 1px solid #888;
         width: 80%;
     }
-    .modalBtn {
-        margin-top: 5px;
-        width: 100px;
-        font-weight: bold;
-        height: 50px;
-        border-radius: 5px;
-        border: 1px solid #ffffff;
-        background-color: #3CB4FF;
-        color: #ffffff;
-        cursor: pointer;
-    }
-
 
     .close {
         color: #aaa;
@@ -298,15 +292,16 @@
                        type="text">
             </div>
             <input id="member_id" name="id" th:value="${session.id}" type="hidden">
+            <div class="btn_domain">
             <input class="btn" disabled id="submitBtn" type="submit" value="수정 완료">
-            <input id="memberDelte" type="button" value="회원탈퇴">
+            <input id="memberDelte" type="button" value="회원탈퇴"></div>
         </form>
 
 
     </div>
     <div class="modal" id="myModal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal()">&times</span>
             <table>
                 <thead>
                 <tr>
@@ -356,6 +351,9 @@
 
         });
     });
+
+
+
 
     function openModal() {
         const id = $("#member_id").val();
@@ -435,18 +433,21 @@
         isPwValid = false;
         let regex = /^[a-zA-Z0-9]{6,12}$/;
         if (5 < pw.length && regex.test(pw)) {
-            document.querySelector(".instructions").style.color = "blue"
+             document.querySelector(".instructions").style.color = "blue"
             document.querySelector("#pw").style.border = "1px solid blue"
-            document.querySelector(".instructions").style.visibility = "visible";
+             document.querySelector(".instructions").style.visibility = "visible";
             isPwValid = true;
 
         } else {
-            document.querySelector(".instructions").style.color = "red"
+             document.querySelector(".instructions").style.color = "red"
             document.querySelector("#pw").style.border = "1px solid red"
-            document.querySelector(".instructions").style.visibility = "visible";
+             document.querySelector(".instructions").style.visibility = "visible";
+
         }
         updateSubmitButtonState()
     }
+
+
 
     const p1 = () => {
         isPhoneValid = false;

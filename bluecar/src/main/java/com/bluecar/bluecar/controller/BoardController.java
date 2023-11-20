@@ -40,7 +40,6 @@ public class BoardController {
 
     @PostMapping("/save")
     public @ResponseBody String save(BoardDTO boardDTO){
-
         System.out.println("boardDTO = " + boardDTO);
         int saveResult = boardService.save(boardDTO);
       
