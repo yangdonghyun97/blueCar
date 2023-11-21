@@ -71,4 +71,8 @@ public class BoardService {
         pageDTO.setEndPage(endPage);
         return pageDTO;
     }
+
+    public List<BoardDTO> findByCategory(BoardDTO boardDTO) {
+        return boardRepository.findByCategory(boardDTO);
+    }
 }

@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
-public class BoardDTO{
+public class BoardDTO extends UploadFile{
 
     private Long id;
     private String boardWriter;
@@ -15,4 +15,5 @@ public class BoardDTO{
     private String boardContents;
     private int boardHits;
     private Timestamp boardCreatedTime;
+    private String category;
 }

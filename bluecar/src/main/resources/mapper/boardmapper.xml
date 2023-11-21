@@ -6,8 +6,8 @@
 <mapper namespace="com.bluecar.bluecar.repository.BoardRepository">
 
     <insert id="save" parameterType="com.bluecar.bluecar.dto.BoardDTO">
-        insert into board_tbl(boardWriter, boardPass, boardTitle, boardContents)
-        values (#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents})
+        insert into board_tbl(boardWriter, boardPass, boardTitle, boardContents,category)
+        values (#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents}, #{category})
     </insert>
 
 
@@ -19,7 +19,10 @@
 
     <select id="findById" resultType="com.bluecar.bluecar.dto.BoardDTO">
         select * from board_tbl where id = #{id}
+    </select>
 
+    <select id="findByCategory" resultType="com.bluecar.bluecar.dto.BoardDTO">
+        select * from board_tbl where category = #{category}
     </select>
 
     <update id="updateHits" parameterType="Long">

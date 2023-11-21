@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,6 +26,13 @@ public class BoardController {
       List<BoardDTO> boardDTOList = boardService.findAll();
       model.addAttribute("boards", boardDTOList);
       return "boardlist";
+    }
+
+    @GetMapping("/category/{category}")
+    public @ResponseBody List<BoardDTO>  findByCategory(BoardDTO boardDTO, Model model){
+        List<BoardDTO> boardDTOList = boardService.findByCategory(boardDTO);
+        model.addAttribute("board", boardDTOList);
+            return boardDTOList;
     }
 
     @GetMapping("/informationUse")
@@ -93,4 +101,5 @@ public class BoardController {
 
         return "boardlist";
     }
+
 }

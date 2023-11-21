@@ -3,48 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>$(document).ready(function() {
+        $('#boardContents').summernote({
+            placeholder: 'Contents',
+            height: 500
+        });
+
+    });</script>
+
+
+</head>
 <style>
     * {
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    .wrapper {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        margin: 0px;
     }
 
     .menubar {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: row;
         width: 100%;
-        height: 80px;
+        height: 23vh;
         border-bottom: 1px solid #e9ebee;
-        background-color: #3498db;
         color: white;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
+        background-image: url("/image/boardImage.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-y: center;
     }
 
     .HomeIcon {
-        font-size: 24px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding-left: 250px;
+        color: #aaaaaa;
         font-weight: bold;
-        padding: 0 20px;
-        color: white;
+        font-size: 50px;
+    }
+    .HomeIcon img{
+        width: 200px;
     }
 
     .sidemenu {
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: flex-end;
+        justify-content: end;
     }
 
     .sidemenu2 {
@@ -60,6 +74,12 @@
     .sidemenu2:hover {
         font-weight: bold;
     }
+    .wrapper{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
     .wrapper_body {
         width: 900px;
@@ -67,44 +87,36 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+
     }
-
-    .wrapper_body_main {
-
-        width: 800px;
-        height: 80vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    h2 {
-        font-size: 30px;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-
-    .wrapper_body_main_title {
+    .wrapper_body_header{
+        margin-top: 10px;
+        width: 80%;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-around;
+    }
+    .wrapper_body_header p{
         width: 100%;
-        font-size: 18px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
     }
 
-    .wrapper_body_main_title p {
-        margin: 0;
-    }
 
     #boardTitle {
         padding: 14px;
         width: 100%;
         border: none;
-        border-bottom: 1px solid #3498db;
         outline: none;
         font-size: 18px;
     }
+
+
+
     a {
         text-decoration: none;
         color: #374553;
@@ -116,29 +128,8 @@
         border: 1px solid white;
     }
 
-    .wrapper_body_main_header {
 
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        font-size: 16px;
-    }
-
-
-    #boardContents {
-        width: 700px;
-        height: 50vh;
-        border: 1px solid #3498db;
-        border-width: 0.2rem;
-        outline: none;
-        resize: none;
-        padding: 10px;
-        margin-top: 10px;
-        font-size: 16px;
-    }
-
-    .btn {
+    .savebtn {
         width: 100px;
         height: 30px;
         border: none;
@@ -152,37 +143,37 @@
         cursor: pointer;
     }
 
-    .btn:active {
+    .savebtn:active {
         box-shadow: inset -0.3rem -0.1rem 1.4rem #FBFBFB, inset 0.3rem 0.4rem 0.8rem #BEC5D0;
     }
 
 
 </style>
 <body>
-<div class="wrapper">
-    <div class="menubar">
-        <div class="HomeIcon">blueCar</div>
-        <div class="sidemenu">
-            <div class="sidemenu2"><a th:href="@{/board/informationUse}">이용 약관</a></div>
-            <div class="sidemenu2"><a th:href="@{/}">홈으로</a></div>
-        </div>
+<div class="menubar">
 
+    <div class="HomeIcon"><a th:href="@{/}"><img src="/image/logo_blue.png" alt="svg"></a></div>
+
+    <div class="sidemenu">
+        <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
+        <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
     </div>
+</div>
+<div class="wrapper">
     <div class="wrapper_body">
-        <div class="wrapper_body_main">
-            <div class="wrapper_body_main_title">
-                <p><input class="main_title" id="boardTitle" type="text" placeholder="제목을 입력해주세요"></p>
-            </div>
-            <div class="wrapper_body_main_header">
-                <p>작성자 <input id="boardWriter"  th:value="${session.userId}" type="text" style="border: 1px solid white" readonly></p>
-            </div>
+        <div class="wrapper_body_header">
+                <input class="main_title" id="boardTitle" type="text" placeholder="Title">
+                <select id="category">
+                    <option>요금</option>
+                    <option>사고</option>
+                    <option>일정</option>
+                    <option>픽업</option>
+                </select></div>
 
-            <div class="wrapper_body_main_contents">
-                <textarea class="contentBox" id="boardContents"></textarea>
+        <textarea class="contentBox" name="boardContents" id="boardContents"></textarea>
                 <input id="id" th:value="${session.id}" type="hidden">
-            </div>
-            <button class="btn" id="boardSave">작성 완료</button>
-        </div>
+                 <input id="boardWriter" th:value="${session.userId}" type="hidden">
+            <button class="savebtn" id="boardSave">작성 완료</button>
     </div>
 </div>
 </body>
@@ -207,6 +198,7 @@
                     boardWriter: $("#boardWriter").val(),
                     boardTitle: $("#boardTitle").val(),
                     boardContents: $("#boardContents").val(),
+                    category:$("#category").val(),
                     id: $("#id").val()
                 },
                 success: function (data) {

@@ -8,74 +8,83 @@
 <style>
     * {
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f5f5f5;
-    }
-
-    .wrapper {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        margin: 0px;
     }
 
     .menubar {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: row;
         width: 100%;
-        height: 80px;
+        height: 23vh;
         border-bottom: 1px solid #e9ebee;
-        background-color: #3498db;
         color: white;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
+        background-image: url("/image/QnA_imege.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-y: center;
     }
 
     .HomeIcon {
-        font-size: 24px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding-left: 250px;
+        color: #aaaaaa;
         font-weight: bold;
-        padding: 0 20px;
-        color: white;
+        font-size: 50px;
+    }
+    .HomeIcon img{
+        width: 200px;
     }
 
     .sidemenu {
+        width: 100%;
         display: flex;
-        align-items: center;
+        flex-direction: row;
+        justify-content: end;
     }
 
     .sidemenu2 {
-        margin-right: 20px;
-        color: white;
-        font-size: 16px;
-        text-decoration: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #374553;
         cursor: pointer;
+        font-size: 18px;
+        padding-right: 40px;
     }
 
     .sidemenu2:hover {
         font-weight: bold;
     }
 
-    .wrapper_body {
-        width: 80%;
-        min-height: 80vh;
+    .wrapper {
+        width: 100%;
+        height: 85vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #fff;
-        margin-top: 20px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
+        justify-content: center;
     }
 
+    .wrapper_body {
+        width: 100%px;
+        height: 85vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ffffff;
+        margin-top: 20px;
+        border-radius: 10px;
+
+    }
     .wrapper_body_main {
         width: 800px;
         padding: 20px;
+
     }
 
     .wrapper_body_main_title {
@@ -218,24 +227,27 @@
     }
 </style>
 <body>
-<div class="wrapper">
-    <div class="menubar">
-        <div class="HomeIcon">blueCar</div>
-        <div class="sidemenu">
-            <div class="sidemenu2">공지사항</div>
-            <div class="sidemenu2"><a th:href="@{/}">Home</a></div>
-        </div>
+<div class="menubar">
 
+    <div class="HomeIcon"><a th:href="@{/}"><img src="/image/logo_blue.png" alt="svg"></a></div>
+
+    <div class="sidemenu">
+        <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
+        <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
     </div>
+</div>
+
+<div class="wrapper">
+
     <div class="wrapper_body">
         <div class="wrapper_body_main">
             <div class="wrapper_body_main_title">
                 <p>제목<input id="boardTitle" name="boardTitle" readonly th:value="${board.boardTitle}" type="text"></p>
-                <p><span>작성시간</span> <span th:text="${board.boardCreatedTime}"></span></p>
+                <p><span>작성시간</span> <span th:utext="${board.boardCreatedTime}"></span></p>
             </div>
             <div class="wrapper_body_main_header">
-                <p>작성자 <span th:text="${board.boardWriter}"></span></p>
-                <p>조회수 <span th:text="${board.boardHits}"></span></p>
+                <p>작성자 <span th:utext="${board.boardWriter}"></span></p>
+                <p>조회수 <span th:utext="${board.boardHits}"></span></p>
             </div>
             <div class="buttonArea">
                 <div th:if="${session.userId} == ${board.boardWriter}">
@@ -246,7 +258,7 @@
             </div>
             <div class="wrapper_body_main_contents">
                 <textarea class="contentBox" id="boardContents" name="boardContents" readonly
-                          th:text="${board.boardContents}"></textarea>
+                          th:utext="${board.boardContents}" th:remove="tag"></textarea>
             </div>
             <input id="id" th:value="${board.id}" type="hidden">
             <div class="comment_domain">

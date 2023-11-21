@@ -75,7 +75,7 @@
     }
 
     .wrapper_body {
-        width: 700px;
+        width: 800px;
         height: 85vh;
         display: flex;
         flex-direction: column;
@@ -83,8 +83,7 @@
         background-color: #ffffff;
         margin-top: 20px;
         border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        border: 1px solid red;
+
     }
 
     .wrapper_body h2 {
@@ -93,7 +92,7 @@
     }
 
     .wrapper_body_main {
-        width: 600px;
+        width: 800px;
         height: auto;
         display: flex;
         flex-direction: column;
@@ -103,19 +102,57 @@
         background-color: #ffffff;
     }
     .QnA_title{
-        width: 80%;
+        width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
 
+    ul, li {
+        list-style:none;
+    }
+    .menu {
+        display: flex;
+        margin-bottom: 20px;
+        width: 90%;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .menu-item {
+        background-color: #e3e3ed;
+        flex-grow: 1;
+        transition: 0.5s;
+    }
+    .menu-item:hover {
+        background-color: #C4C4C4;
+        flex-grow: 1.2;
+    }
+    .menu-link {
+        /* block이면 마우스 클릭영역이 더 커짐, a태그는 inline으로서 클릭영역이 콘텐츠에 한정됨*/
+        display: block;
+        padding: 16px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #555;
+        text-decoration: none;
+        text-align: center;
+    }
+    .menu-link:hover {
+        color: white;
+    }
+
     table {
         width: 100%;
         border-collapse: collapse;
+
+        justify-content: center;
+        align-items: center;
     }
 
     th, td {
-        padding: 15px;
+
+        padding: 10px;
         border-bottom: 1px solid #e9ebee;
     }
 
@@ -151,6 +188,12 @@
         color: #3CB4FF;
     }
 
+    .category{
+        width: 20px;
+        color: #00b8ff;
+        font-weight: bold;
+    }
+
 
 </style>
 <body>
@@ -168,16 +211,32 @@
 <div class="wrapper">
     <div class="wrapper_body">
          <div class="QnA_title"><h2>QnA</h2><button id="writeBtn">게시글 작성</button></div>
-        <div class="wrapper_body_main">
+        <ul class="menu">
+            <li class="menu-item">
+                <p class="menu-link" data-category="요금">요금</p>
+            </li>
+            <li class="menu-item">
+                <p class="menu-link" data-category="사고">사고</p>
+            </li>
+            <li class="menu-item">
+                <p class="menu-link" data-category="픽업">픽업</p>
+            </li>
+            <li class="menu-item">
+                <p class="menu-link" data-category="일정">일정</p>
+            </li>
+        </ul>
+        <div class="wrapper_body_main" id="table">
             <table>
                 <tr>
-                    <th>id</th>
-                    <th>title</th>
-                    <th>writer</th>
-                    <th>date</th>
-                    <th>hits</th>
+                    <th></th>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>시간</th>
+                    <th>조회수</th>
                 </tr>
                 <tr th:each="board : ${boards}">
+                    <td style="max-width: 64px"><span class="category" th:text="${board.category}"></span></td>
                     <td th:text="${board.id}"></td>
                     <td>
                         <a th:href="@{/board/boardDetail(id=${board.id})}" th:text="${board.boardTitle}"></a>
@@ -186,28 +245,86 @@
                     <td th:text="${board.boardCreatedTime}"></td>
                     <td th:text="${board.boardHits}"></td>
                 </tr>
+
             </table>
         </div>
         <input id="userId" th:value="${session.userId}" type="hidden">
 
     </div>
 </div>
-</div>
+
 </body>
 
 <script>
-
-    $
-
     $(document).ready(function () {
+        //게시글 작성
         $("#writeBtn").click(function () {
-            if ($("#userId").val() !== "") {
+            if ($("#userId").val().trim()) {
                 location.href = "/board/boardQnAWriteForm";
             } else {
                 alert("회원만 작성 가능합니다");
             }
         });
+
+        // 카테고리 이동
+        $(".menu-link").click(function (event) {
+            event.preventDefault();
+
+            let category = $(this).data("category");
+            console.log(category);
+
+            $.ajax({
+                url: "/board/category/"+ category ,
+                method: "get",
+                success: function (data) {
+                    console.log(data);
+                    updateBoardList(data);
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX 오류: ", xhr.responseText);
+                }
+            });
+        });
     });
 
+        // 카테고리 리스트
+    function updateBoardList(boards) {
+        // Assuming #table is the ID of the table body where boards will be displayed
+        let tableBody = $("#table");
+        tableBody.empty(); // Clear existing rows
+
+        // Create the table header outside of the loop
+        let tableContent = `<table><tr>
+            <th></th>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>시간</th>
+            <th>조회수</th>
+        </tr>`;
+
+        // Iterate through the received boards and append rows to the table content
+        boards.forEach(function (board) {
+            tableContent += `
+        <tr>
+            <td><span class="category">${board.category}</span></td>
+            <td>${board.id}</td>
+            <td><a href="/board/boardDetail?id=${board.id}">${board.boardTitle}</a></td>
+            <td>${board.boardWriter}</td>
+            <td>${board.boardCreatedTime}</td>
+            <td>${board.boardHits}</td>
+        </tr>`;
+        });
+
+        // Close the table tag after the loop
+        tableContent += "</table>";
+
+        // Append the entire table content to the table body
+        tableBody.append(tableContent);
+
+
+
+
+    }
 </script>
 </html>

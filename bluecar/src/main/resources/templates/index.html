@@ -46,6 +46,9 @@
         color: blue;
         padding-left: 70px;
     }
+    .HomeIcon img {
+        max-width: 200px;
+    }
 
     .menuIcon {
         width: 100%;
@@ -301,7 +304,7 @@
         <div class="wrapper_header">
             <div class="wrapper_header_menubar">
                 <div>
-                    <div class="HomeIcon"> BlueCar</div>
+                    <div class="HomeIcon"> <a th:href="@{/}"><img src="/image/logo_blue.png" alt="svg"></a></div>
 
                     <div class="menuIcon">
                         <input id="menuicon" type="checkbox">
@@ -340,6 +343,7 @@
 
             <div class="floating">
                 <div th:if="${session.userId}">
+                <span><img src="/image/appLogo.png" alt="logo"></span>
                     <div class="floating_content"><a th:href="@{/member/logout}">로그아웃</a></div>
                 </div>
                 <div th:unless="${session.userId}">

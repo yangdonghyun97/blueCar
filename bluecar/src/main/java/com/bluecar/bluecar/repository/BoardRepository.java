@@ -25,4 +25,6 @@ public interface BoardRepository {
     List<BoardDTO> pagingList(Map<String, Integer> pagingParms);
 
     int boardCount();
+
+    List<BoardDTO> findByCategory(BoardDTO boardDTO);
 }
