@@ -14,6 +14,7 @@ public class BoardDTO extends UploadFile{
     private String boardTitle;
     private String boardContents;
     private int boardHits;
-    private Timestamp boardCreatedTime;
+    private String boardCreatedTime;
+    private String date;
     private String category;
 }

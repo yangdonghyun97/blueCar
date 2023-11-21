@@ -243,7 +243,7 @@
         <div class="wrapper_body_main">
             <div class="wrapper_body_main_title">
                 <p>제목<input id="boardTitle" name="boardTitle" readonly th:value="${board.boardTitle}" type="text"></p>
-                <p><span>작성시간</span> <span th:utext="${board.boardCreatedTime}"></span></p>
+                <p><span>작성시간</span> <span th:utext="${board.date}"></span></p>
             </div>
             <div class="wrapper_body_main_header">
                 <p>작성자 <span th:utext="${board.boardWriter}"></span></p>

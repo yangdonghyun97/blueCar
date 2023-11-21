@@ -12,17 +12,17 @@
 
 
     <select id="findAll" resultType="com.bluecar.bluecar.dto.BoardDTO">
-        select *
+        select *,DATE_FORMAT(boardCreatedTime, '%Y-%m-%d %H:%i') AS date
         from board_tbl
         order by id desc
     </select>
 
     <select id="findById" resultType="com.bluecar.bluecar.dto.BoardDTO">
-        select * from board_tbl where id = #{id}
+        select *,DATE_FORMAT(boardCreatedTime, '%Y-%m-%d %H:%i') AS date from board_tbl where id = #{id}
     </select>
 
     <select id="findByCategory" resultType="com.bluecar.bluecar.dto.BoardDTO">
-        select * from board_tbl where category = #{category}
+        select *,DATE_FORMAT(boardCreatedTime, '%Y-%m-%d %H:%i') AS date from board_tbl where category = #{category}
     </select>
 
     <update id="updateHits" parameterType="Long">

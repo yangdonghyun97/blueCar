@@ -10,9 +10,9 @@ public class CarDTO {
     private String area;
     private String model;
     private String yearRange;
-    private String  price;
+    private String priceHors;
+    private String priceDay;
     private String src;
-    private String startRentalDate;
-    private String carCreatedTime;
-    private String endRentalDate;
+    private Long quantity;
+
 }

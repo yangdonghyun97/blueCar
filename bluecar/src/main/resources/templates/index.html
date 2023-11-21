@@ -215,6 +215,10 @@
     }
 
     .floating_content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         background-color: #00b8ff;;
         max-width: 100%;
         color: #862e9c;
@@ -347,6 +351,7 @@
                     <div class="floating_content"><a th:href="@{/member/logout}">로그아웃</a></div>
                 </div>
                 <div th:unless="${session.userId}">
+                    <span><img src="/image/appLogo.png" alt="logo"></span>
                     <div class="floating_content"><a th:href="@{/member/loginform}">로그인</a></div>
                 </div>
             </div>

@@ -168,7 +168,7 @@
         align-items: center;
     }
     .btn {
-        width: 398px;
+        width: 50%;
         height: 60px;
         margin-top: 30px;
         background-color: rgb(170, 170, 170);
@@ -192,7 +192,7 @@
     #memberDelte {
         margin-top: 20px;
         font-weight: bold;
-        width: 398px;
+        width: 50%;
         height: 60px;
         border-radius: 10px;
         border: 1px solid #ffffff;
@@ -293,8 +293,9 @@
             </div>
             <input id="member_id" name="id" th:value="${session.id}" type="hidden">
             <div class="btn_domain">
-            <input class="btn" disabled id="submitBtn" type="submit" value="수정 완료">
-            <input id="memberDelte" type="button" value="회원탈퇴"></div>
+                <button type="submit" class="btn" disabled id="submitBtn">수정 완료</button>
+                <button id="memberDelte" type="button">회원탈퇴</button>
+           </div>
         </form>
 
 
