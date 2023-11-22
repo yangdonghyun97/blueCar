@@ -129,32 +129,39 @@
         justify-content: center;
         margin-top: 20px;
     }
-    .model{
+    .modelDomain{
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .model {
         font-size: 17px;
         font-weight: bolder;
     }
-    .area{
+
+    .area {
         font-size: 11px;
     }
-    .price{
-        color: rgb(0 105 255);
-    }
-    .dayText{
-        height: auto;
-        text-align: start;
-        font-size: 13px;
-        text-align: ;
+    .yearRange{
+        font-size: 12px;
     }
 
-    .priceHors{
+    .priceHors,.priceDay {
+        color: rgb(0 105 255);
+    }
+
+
+    .priceDomain {
         display: flex;
         flex-direction: row;
 
     }
 
-    .secondCarBox{
+    .secondCarBox {
         font-weight: bold;
-       font-size: 20px;
+        font-size: 20px;
     }
 
 </style>
@@ -168,51 +175,61 @@
         <div class="wrapper_body_secondArea">
 
             <h2>쏘카플랜</h2>
-                <div class="menu"><span><a th:href="@{/}">Home</a></span><span><a th:href="@{/board/}">QnA게시판</a></span><span><a
-                        th:href="@{/board/informationUse}">이용 약관</a></span></div>
+            <div class="menu"><span><a th:href="@{/}">Home</a></span><span><a
+                    th:href="@{/board/}">QnA게시판</a></span><span>
+                <a th:href="@{/board/informationUse}">이용 약관</a></span></div>
             <div class="carBox" id="firstCarBox" th:each="cars: ${carlist}">
-                <div class="firstCarBox"><img alt="" class="image" src="/image/Carimage/car4.png"></div>
+                <input id="id" th:value="${cars.id}" type="hidden">
+                <input id="quantity" th:value="${cars.quantity}" type="hidden">
+
+                <div class="firstCarBox"><img alt="" class="image" th:src="${cars.src}"></div>
+                <input type="hidden" id="src" th:value="${cars.src}">
                 <div class="secondCarBox">
-                    <div class="model" th:text="${cars.model}"></div>
+                    <div class="modelDomain">
+                    <div class="model" th:text="${cars.model}"></div><span>/</span> <div class="yearRange" th:text="${cars.yearRange}"> </div><span class="yearRange">년</span></div>
+
                     <div class="area" th:text="${cars.area}"></div>
-                    <div class="priceHors"><div class="price" th:text="${cars.priceHors + '원'}"></div><div class="dayText">/시간당</div></div>
-
-                    <div class="price" th:text="${' 일 '+cars.priceDay + '원'}"></div>
-
+                    <div class="priceDomain">
+                        <span>시간</span><div class="priceHors" th:text="${cars.priceHors}"></div><span>원</span>
+                    </div>
+                    <div class="priceDomain">
+                    <span>일</span><div class="priceDay" th:text="${cars.priceDay}"></div><span>원</span></div>
                 </div>
             </div>
-        </div>
 
         </div>
-
-        <input id="id" th:value="${session.id}" type="hidden">
-        <input id="userId" th:value="${session.userId}" type="hidden">
 
     </div>
+    <input id="userId" th:value="${session.userId}" type="hidden">
+
 </div>
+
 </body>
 
 <script>
+
     document.addEventListener('DOMContentLoaded', function () {
         // 각 carBox에 클릭 이벤트 추가
         let carBoxes = document.querySelectorAll('.carBox');
         carBoxes.forEach(function (carBox) {
 
             carBox.addEventListener('click', function () {
-                let area = document.querySelector("#area").value;
-                let src = carBox.querySelector(".image").getAttribute("src");
-                let carName = carBox.querySelector('h4').innerText;
-                let carYear = carBox.querySelector('h5').innerText;
-                let carPrice = carBox.querySelector('.price').innerText;
+                let area = document.querySelector(".area").innerText;
+                let src = carBox.querySelector("#src").value;
+                let model = carBox.querySelector('.model').innerText;
+                let yearRange = carBox.querySelector('.yearRange').innerText;
+                let priceHors = carBox.querySelector('.priceHors').innerText;
+                let priceDay = carBox.querySelector('.priceDay').innerText;
+                let quantity = carBox.querySelector('#quantity').value;
+                let id = carBox.querySelector('#id').value;
+
+                let dto = `?area=${encodeURIComponent(area)}&src=${encodeURIComponent(src)}&model=${encodeURIComponent(model)}&yearRange=${encodeURIComponent(yearRange)}&priceHors=${encodeURIComponent(priceHors)}&priceDay=${encodeURIComponent(priceDay)}&quantity=${encodeURIComponent(quantity)}&id=${encodeURIComponent(id)}`;
+               window.location.href="/car/carDetail"+ dto;
+
+             });
 
 
-                let destination = '/car/carDetailForm';
-                let car = `?src=${encodeURIComponent(src)}&model=${encodeURIComponent(carName)}&yearRange=${encodeURIComponent(carYear)}&price=${encodeURIComponent(carPrice)}&area=${encodeURIComponent(area)}`;
-                window.location.href = destination + car;
-            });
-
-
-        });
+         });
     });
 
 </script>

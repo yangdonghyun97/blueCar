@@ -8,6 +8,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" type="text/javascript"></script>
+
 <style>
     * {
         box-sizing: border-box;
@@ -24,38 +25,49 @@
 
     .wrapper {
         width: 100%;
-        min-height: 100vh;
+        height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        background-color: #f2f4f6;
     }
 
     .wrapper_body {
         width: 80%;
+        max-width: 1200px;
+        margin: 0 auto;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        background-color: white;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-
-    .wrapper_body_firstArea img {
-        width: 100%;
-        max-height: 100%;
-        border-radius: 20px;
-        object-fit: cover;
-    }
-
-    .wrapper_body_secondArea {
-        width: 60%;
+    .wrapper_body_firstArea {
+        width: 50%;
+        height: 85vh;
+        margin-top: 100px;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
+    .wrapper_body_firstArea img {
+        max-width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .wrapper_body_secondArea {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
     h2 {
         margin-top: 20px;
         font-size: 24px;
@@ -121,33 +133,31 @@
         margin-left: 20px;
         border: 1px solid red;
     }
-
-    .price {
-        font-weight: bold;
-        color: #333;
+    .modelDomain{
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
     }
 
     .reservationInformation_domain {
         width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        align-items: start;
         margin-top: 20px;
+        border: 1px solid red;
     }
 
     .reservationInformation {
-        width: 80%;
-        border: 1px solid #374553;
-        border-radius: 10px;
-        margin-bottom: 20px;
+        width: 25%;;
         padding: 10px;
     }
 
     .reservationInformation input {
         width: 100%;
         padding: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         box-sizing: border-box;
         border: 1px solid #aaa;
         border-radius: 5px;
@@ -186,16 +196,6 @@
         margin-top: 10px;
     }
 
-    .secondCarBox {
-        width: 60%;
-        display: flex;
-        height: 15vh;
-        flex-direction: column;
-        align-items: start;
-        justify-content: center;
-        margin-top: 20px;
-    }
-
     .secondCarBox div {
         margin-bottom: 8px;
     }
@@ -231,7 +231,7 @@
 <div class="wrapper">
     <div class="wrapper_body">
         <div class="wrapper_body_firstArea">
-            <img alt="" src="/image/guide_image.png">
+            <img alt="" src="/image/socarPlan.png">
         </div>
 
         <div class="wrapper_body_secondArea">
@@ -246,11 +246,11 @@
                 <div class="firstCarBox"><img alt="" th:src="${car.src}"></div>
                 <div class="secondCarBox">
                     <div th:text="${car.area}"></div>
+                    <div class="modelDomain">
+                        <div class="model" th:text="${car.model}"></div><span>/</span> <div class="yearRange" th:text="${car.yearRange}"> </div><span class="yearRange">년</span></div>
 
-
-                    <div><h4 id="orderName" th:text="${car.model}"></h4></div>
-                    <div><h5 th:text="${car.yearRange}"></h5></div>
-                    <div>일 <span class="price" th:text="${car.price}"></span> 원</div>
+                    <div>시간 <span class="priceHors" th:text="${car.priceHors}"></span> 원</div>
+                    <div>일 <span class="priceDay" th:text="${car.priceDay}"></span> 원</div>
                 </div>
             </div>
             <div class="reservationInformation_domain">
@@ -391,32 +391,6 @@
         $("#dateDisplay").text((date + 1) + " 일");
     }
 
-    $(document).ready(function () {
-        $("#boardUpdate").click(function () {
-            if (!titleCheck() || !contetnsCheck()) {
-                return;
-            }
-
-            $.ajax({
-                url: "/board/update",
-                method: "post",
-                data: {
-                    boardTitle: $("#boardTitle").val(),
-                    boardContents: $("#boardContents").val(),
-                    id: $("#id").val()
-                },
-                success: function (data) {
-                    console.log(data);
-                    location.href = "/";
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX 오류: ", xhr.responseText);
-
-                }
-            });
-
-        });
-    });
 
 </script>
 </html>

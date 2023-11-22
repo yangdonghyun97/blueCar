@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -27,11 +28,23 @@ public class CarController {
 //        return "carDetail";
 //    }
 
-    @GetMapping("/carDetailForm")
+    @GetMapping("/carDetail")
     public String carDetailForm(CarDTO carDTO, Model model) {
         System.out.println("carDTO = " + carDTO);
+        // 받은 데이터를 모델에 추가
         model.addAttribute("car", carDTO);
-        return "carDetail";
 
+        // 최종적으로 이동할 페이지 리턴
+        return "carDetailPage";
+    }
+
+    @GetMapping("/carDetailPage")
+    public String carDetailPage() {
+
+        return "carDetailPage";
     }
 }
+
+
+
+
