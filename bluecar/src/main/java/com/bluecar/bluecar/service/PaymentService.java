@@ -27,4 +27,8 @@ public class PaymentService {
     public int delete(PaymentDTO paymentDTO) {
         return paymentRepository.delete(paymentDTO);
     }
+
+    public List<PaymentDTO> findByname(PaymentDTO paymentDTO) {
+        return  paymentRepository.findByName(paymentDTO);
+    }
 }

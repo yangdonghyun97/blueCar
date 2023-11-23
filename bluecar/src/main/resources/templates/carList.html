@@ -179,11 +179,11 @@
                     th:href="@{/board/}">QnA게시판</a></span><span>
                 <a th:href="@{/board/informationUse}">이용 약관</a></span></div>
             <div class="carBox" id="firstCarBox" th:each="cars: ${carlist}">
-                <input id="id" th:value="${cars.id}" type="hidden">
-                <input id="quantity" th:value="${cars.quantity}" type="hidden">
+                <input id="car_id" th:value="${cars.id}" type="hidden">
 
                 <div class="firstCarBox"><img alt="" class="image" th:src="${cars.src}"></div>
                 <input type="hidden" id="src" th:value="${cars.src}">
+
                 <div class="secondCarBox">
                     <div class="modelDomain">
                     <div class="model" th:text="${cars.model}"></div><span>/</span> <div class="yearRange" th:text="${cars.yearRange}"> </div><span class="yearRange">년</span></div>
@@ -220,10 +220,9 @@
                 let yearRange = carBox.querySelector('.yearRange').innerText;
                 let priceHors = carBox.querySelector('.priceHors').innerText;
                 let priceDay = carBox.querySelector('.priceDay').innerText;
-                let quantity = carBox.querySelector('#quantity').value;
-                let id = carBox.querySelector('#id').value;
+                let car_id = carBox.querySelector('#car_id').value;
 
-                let dto = `?area=${encodeURIComponent(area)}&src=${encodeURIComponent(src)}&model=${encodeURIComponent(model)}&yearRange=${encodeURIComponent(yearRange)}&priceHors=${encodeURIComponent(priceHors)}&priceDay=${encodeURIComponent(priceDay)}&quantity=${encodeURIComponent(quantity)}&id=${encodeURIComponent(id)}`;
+                let dto = `?area=${encodeURIComponent(area)}&src=${encodeURIComponent(src)}&model=${encodeURIComponent(model)}&yearRange=${encodeURIComponent(yearRange)}&priceHors=${encodeURIComponent(priceHors)}&priceDay=${encodeURIComponent(priceDay)}&id=${encodeURIComponent(car_id)}`;
                window.location.href="/car/carDetail"+ dto;
 
              });

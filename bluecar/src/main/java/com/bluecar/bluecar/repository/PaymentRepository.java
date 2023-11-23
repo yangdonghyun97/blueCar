@@ -17,4 +17,6 @@ public interface PaymentRepository {
     PaymentDTO findById(Long id);
 
     int delete(PaymentDTO paymentDTO);
+
+    List<PaymentDTO> findByName(PaymentDTO paymentDTO);
 }

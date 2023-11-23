@@ -12,5 +12,6 @@ public class PaymentDTO {
     private String customerName;
     private String startRentalDate;
     private String endRentalDate;
+    private String car_id;
 
 }

@@ -18,8 +18,8 @@ public class CarController {
     @GetMapping("/carlist")
     public String carList(Model model) {
        List<CarDTO> carDTOS  = carService.findAll();
-        model.addAttribute("carlist",carDTOS);
         System.out.println("carDTOS = " + carDTOS);
+        model.addAttribute("carlist",carDTOS);
         return "carList";
     }
 

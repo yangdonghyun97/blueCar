@@ -18,6 +18,9 @@
     <select id="findById" parameterType="Long" resultType="com.bluecar.bluecar.dto.PaymentDTO">
         select * from payment_tbl where member_id = #{id}
     </select>
+    <select id="findByName" parameterType="com.bluecar.bluecar.dto.PaymentDTO" resultType="com.bluecar.bluecar.dto.PaymentDTO">
+        select * from payment_tbl where car_id = #{car_id}
+    </select>
 
     <delete id="delete" parameterType="com.bluecar.bluecar.dto.PaymentDTO">
         delete from payment_tbl where orderId = #{orderId}
