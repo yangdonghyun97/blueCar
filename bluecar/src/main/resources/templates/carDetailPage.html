@@ -8,11 +8,11 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" type="text/javascript"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+<link href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css"/>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=003ac2ffcc45c4b326ade22cfb55812d" type="text/javascript"></script>
 <style>
     * {
         box-sizing: border-box;
@@ -21,7 +21,6 @@
     }
 
     body {
-        font-family: 'Arial', sans-serif;
         background-color: #f2f4f6;
         margin: 0;
         padding: 0;
@@ -29,7 +28,6 @@
 
     .wrapper {
         width: 100%;
-        height: 130vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -45,6 +43,7 @@
         flex-direction: row;
         justify-content: space-between;
     }
+
     .wrapper_body_firstArea {
         width: 50%;
         height: 85vh;
@@ -62,7 +61,6 @@
     }
 
     .wrapper_body_secondArea {
-        border: 1px solid red;
         width: 50%;
         height: 100%;
         display: flex;
@@ -73,19 +71,13 @@
         border-radius: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
     h2 {
         margin-top: 20px;
         font-size: 24px;
         color: #333;
     }
 
-    .area {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        border: 1px solid blue;
-    }
 
     .menu {
         width: 100%;
@@ -117,49 +109,119 @@
         width: 100%;
         display: flex;
         flex-direction: row;
-        border-bottom: 1px solid #aaaaaa;
-        margin-top: 20px;
-        padding-bottom: 20px;
+    }
+
+    .firstCarBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .firstCarBox img {
-        width: 100%;
-        height: 100%;
+        width: 345px;
+        height: 280px;
         border-radius: 10px;
-        object-fit: cover;
+        object-fit: contain;
     }
 
+
     .secondCarBox {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: center;
-        margin-left: 20px;
-        border: 1px solid red;
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: #fff;
     }
-    .modelDomain{
+
+    .modelDomain {
         display: flex;
         flex-direction: row;
-        justify-content: start;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .model {
+        font-size: 24px;
+        color: #333;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    .yearRange {
+        font-size: 18px;
+        color: #555;
+    }
+
+    .area {
+        font-size: 16px;
+        color: #444;
+        margin-bottom: 10px;
+    }
+
+    .priceDomain {
+        display: flex;
+        flex-direction: row;
         align-items: center;
     }
+
+    .priceDay {
+        color: rgb(0, 105, 255);
+        font-size: 20px;
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    span {
+        margin-right: 5px;
+    }
+
+
+
+
+
+    .dateContent {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        font-weight: bold;
+        font-size: 17px;
+    }
+
 
     .reservationInformation_domain {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: start;
-        margin-top: 20px;
-        border: 1px solid red;
     }
 
     .reservationInformation {
-        width: 25%;;
-        padding: 10px;
+        width: 100%;
     }
 
-    .carBox{
+    .useDomain {
+        width: 100%;
+        border-bottom: 1px solid #888888;
+        border-bottom-style: dotted;
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .useDomain:nth-child(1){
+        border-top: 1px  solid #888888;
+        border-top-style: dotted;
+
+    }
+
+
+    .carBox {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -167,12 +229,19 @@
     }
 
     .reservationInformation input {
-        padding: 5px;
-        margin-bottom: 5px;
-        box-sizing: border-box;
-        border: 1px solid #aaa;
+        padding: 13px;
+        margin-bottom: 2px;
+        border: 1px solid white;
+        font-size: 17px;
         border-radius: 5px;
         text-align: center;
+    }
+
+    .modalBtn {
+        width: 100px;
+        height: 48px;
+        border: 1px solid white;
+        border-radius: 30px;
     }
 
 
@@ -202,30 +271,90 @@
     }
 
     #dateDisplay {
-        font-size: 18px;
+        font-size: 29px;
         font-weight: bold;
         color: #3498db;
-        margin-top: 10px;
     }
 
-    .secondCarBox div {
-        margin-bottom: 8px;
+
+    .modelDomain {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
     }
 
-    .secondCarBox div:first-child {
-        color: #3498db;
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        margin: 15% auto;
+        width: 800px;
+        height: 700px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 50px;
         font-weight: bold;
+        cursor: pointer;
+        height: 94%;
     }
 
-    .secondCarBox h4 {
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .detail_domain {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+    }
+
+    .detail_domain h3 {
         font-size: 24px;
         color: #333;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
+    .detail_domain img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
 
-    .dateContent {
+    .detail-info {
+        font-size: 16px;
+        color: #555;
+    }
+
+    .detail-info div {
+        margin-bottom: 10px;
+    }
+
+    .detail-info strong {
         font-weight: bold;
+        margin-right: 5px;
     }
 
 </style>
@@ -238,47 +367,66 @@
 
         <div class="wrapper_body_secondArea">
             <h2>상세페이지</h2>
-            <div class="area">
-                <div class="menu"><span><a th:href="@{/}">Home</a></span><span><a th:href="@{/board/}">QnA게시판</a></span><span><a
-                        th:href="@{/board/informationUse}">이용 약관</a></span></div>
-            </div>
+            <div class="menu"><span><a th:href="@{/}">Home</a></span><span><a
+                    th:href="@{/board/}">QnA게시판</a></span><span>
+                <a th:href="@{/board/informationUse}">이용 약관</a></span></div>
 
             <div class="carBox" id="firstCarBox">
                 <div class="firstCarBox"><img alt="" th:src="${car.src}"></div>
                 <div class="secondCarBox">
-                    <div th:text="${car.area}"></div>
-                    <input id="car_id" th:value="${car.id}" type="hidden">
-
                     <div class="modelDomain">
-                        <div class="model" id="model" th:text="${car.model}"></div><span>/</span> <div class="yearRange" th:text="${car.yearRange}"> </div><span class="yearRange">년</span></div>
+                        <div class="model" th:text="${car.model}"></div>
+                        <span>|</span>
+                        <div class="yearRange" th:text="${car.yearRange}"></div>
+                        <span class="yearRange">년</span></div>
 
-                    <div>시간 <span class="priceHors" th:text="${car.priceHors}"></span> 원</div>
-                    <div>일 <span class="priceDay" th:text="${car.priceDay}"></span> 원</div>
+                    <div class="area" th:text="${car.area}"></div>
+                    <div class="priceDomain">
+                        <span>일</span>
+                        <div class="priceDay" th:text="${car.priceDay}"></div>
+                        <span>원</span></div>
                 </div>
             </div>
             <div class="reservationInformation_domain">
                 <div class="reservationInformation">
-                    <div class="dateContent">이용 타입</div>
-                    <div class="dateContent">이용 기간</div>
-                    <div> <input type="text" id="daterange" name="daterange" value="" />
+                    <div class="useDomain">
+                        <div class="dateContent">이용 기간</div>
+                        <div><input id="daterange" name="daterange" type="text" value=""/>
+                        </div>
+                    </div>
+                    <div class="useDomain">
+                        <div class="dateContent">픽업장소</div>
+                        <div>
+                            <button class="modalBtn" onclick="openModal()">보기</button>
+                        </div>
+                    </div>
+                    <div class="useDomain">
+                        <div class="dateContent">예약 기간<p id="dateDisplay"></p></div>
+                    </div>
+                    <div class="useDomain">
+                        <div class="dateContent">가격<div  id="price"></div></div>
                     </div>
                 </div>
 
-                <div class="reservationInformation">
-                    <div class="dateContent">예약 기간 <span id="dateDisplay"></span></div>
 
-                </div>
             </div>
             <div class="detail_domain">
                 <h3>상세 내용</h3>
-                <img alt="" src="/image/carDetail.png">
-                <div>색상 : 아틀라스화이트</div>
-                <div> 인수 가능시간 : 평일 13시~18시 (주말, 공휴일 제외)</div>
-                <div> 하이패스 카드 장착 차량, 사용하신 만큼 청구될 수 있습니다. (실시간 청구가 불가하며 확인 후 순차적으로 청구 진행됩니다.)</div>
+                <img src="/image/carDetail.png" alt="Car Detail Image">
+                <div class="detail-info">
+                    <div><strong>색상:</strong> 아틀라스화이트</div>
+                    <div><strong>인수 가능시간:</strong> 평일 13시~18시 (주말, 공휴일 제외)</div>
+                    <div>
+                        <strong>하이패스 카드 장착 차량</strong>, 사용하신 만큼 청구될 수 있습니다.
+                        (실시간 청구가 불가하며 확인 후 순차적으로 청구 진행됩니다.)
+                    </div>
+                </div>
             </div>
             <div class="paymentArea">
-                <div id="priceDisplay"></div>
-               <div> <button class="paymentBtn">결제하기</button></div>
+<!--                <div id="priceDisplay"></div>-->
+                <div>
+                    <button class="paymentBtn">결제하기</button>
+                </div>
 
             </div>
 
@@ -290,11 +438,93 @@
 
     </div>
 </div>
+
+
+<div class="modal" id="myModal">
+    <div class="modal-content">
+        <div id="map" style="width:700px;height:600px;"></div>
+        <div class="close" onclick="closeModal()">&times;</div>
+    </div>
+</div>
+
 </body>
 
 <script>
-    const startRental ="";
-    const endRental ="";
+
+
+    //카카오맵 api
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng(37.5559460, 126.9723170),
+        level: 3
+    };
+
+    var map = new kakao.maps.Map(container, options);
+
+    markerPosition = new kakao.maps.LatLng(37.5559460, 126.9723170);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+
+    var iwContent = '<div>쏘카존 서울역 <br><a href="https://map.kakao.com/link/map/쏘카존 서울역,37.5559460, 126.9723170" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/map/쏘카존 서울역,37.5559460, 126.9723170" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        iwPosition = new kakao.maps.LatLng(37.5559460, 126.9723170); //인포윈도우 표시 위치입니다
+
+    // 인포윈도우를 생성합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        position: iwPosition,
+        content: iwContent
+    });
+    map.setCenter(markerPosition);
+    // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+    infowindow.open(map, marker);
+
+
+    //모달
+    function openModal() {
+        document.getElementById('myModal').style.display = 'block';
+        setTimeout(function () {
+            map.relayout();
+            map.setCenter(markerPosition);
+        }, 500);
+
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+    window.onclick = function (event) {
+        if (event.target == document.getElementById('myModal')) {
+            closeModal();
+        }
+    }
+
+
+    // 달력 api
+    let startRental;
+    let endRental;
+    let invalidDateRanges = [];
+    let rentalDays;
+    let startRentalConversion;
+    let endRentalConversion;
+
+    $.ajax({
+        url: '/payment/getDateRanges',
+        method: 'GET',
+        data: {car_id: $("#car_id").val()},
+        async: false,
+        success: function (response) {
+            invalidDateRanges = response;
+        },
+        error: function (error) {
+            console.error('Error fetching payment date ranges:', error);
+        }
+    });
+
     $('#daterange').daterangepicker({
         "alwaysShowCalendars": true,
         "locale": {
@@ -312,26 +542,11 @@
             "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
             "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
         },
-        isInvalidDate: function(date) {
-            var invalidDateRanges = []
-
-
-            $.ajax({
-                url: '/payment/getDateRanges',
-                method: 'GET',
-                data:{car_id: $("#car_id").val()},
-                async: false, // 비동기 방식으로 동작하도록 설정
-                success: function(response) {
-                    invalidDateRanges = response;
-                    console.log(invalidDateRanges)
-                },
-                error: function(error) {
-                    console.error('Error fetching payment date ranges:', error);
-                }
-            });
-
+        isInvalidDate: function (date) {
             let isInvalid = false;
-            invalidDateRanges.forEach(function(range) {
+
+            // Check if any date within the range is invalid
+            invalidDateRanges.forEach(function (range) {
                 let startDate = moment(range.startRentalDate);
                 let endDate = moment(range.endRentalDate);
 
@@ -346,29 +561,53 @@
         "minDate": new Date(),
         "endDate": new Date(),
         "drops": "auto"
-    }, function(start, end, label) {
+    }, function (start, end, label) {
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+        startRentalConversion = start.format('YYYY-MM-DD');
+        endRentalConversion = end.format('YYYY-MM-DD');
+        startRental = start;
+        endRental = end;
+
 
     });
 
-    $('#daterange').on('show.daterangepicker', function () {
+    let re
+    // 예약 불가 날짜
+    $('#daterange').on('apply.daterangepicker', function () {
+        invalidDateRanges.forEach(function (range) {
+            let startDate = moment(range.startRentalDate);
+            let endDate = moment(range.endRentalDate);
 
-        alert("zz")
+
+            if (startDate.isBetween(startRental, endRental) || endDate.isBetween(startRental, endRental) || startRental.isBetween(startDate, endDate) || endRental.isBetween(startDate, endDate)) {
+                alert("예약 불가 날짜가 포함되어있습니다.");
+
+                // Allow the user to adjust the date range
+                $('#daterange').data('daterangepicker').show();
+            }
+        });
+        rentalDays = endRental.diff(startRental, 'days');
+        $("#dateDisplay").text(rentalDays+1+"일");
+       let price= $(".priceDay").text();
+        $("#price").text((rentalDays+1)*price+"원");
+
 
     });
 
+
+    // 결제 api
     const IMP = window.IMP;
     IMP.init("imp81805605");
-
     $(document).on("click", ".paymentBtn", function () {
         const member_id = $('#id').val();
-        const amount = $(`#priceDisplay`).text();
+        const amount = rentalDays * parseInt($(".priceDay").text());
         const randomNo = Math.floor(Math.random() * 89999) + 100000;
-        const orderName = $("#orderName").text();
+        const orderName = $(".model").text();
         const customerName = $("#userId").val();
-        const startRentalDate = startRental;
-        const endRentalDate = endRental;
-
+        const startRentalDate = startRentalConversion;
+        const endRentalDate = endRentalConversion;
+        const car_id = $("#car_id").val();
+        const rentalDay = rentalDays;
 
         IMP.request_pay({
             pg: "kakaopay",
@@ -377,37 +616,42 @@
             name: orderName,
             amount: amount,  //ticketPrice로 수정해야함
         }, function (rsp) { // callback
-            console.log(rsp);
-            const paymentData = {
-                member_id: member_id,
-                amount: amount,
-                orderId: randomNo,
-                orderName: orderName,
-                customerName: customerName,
-                startRentalDate: startRentalDate,
-                endRentalDate: endRentalDate
+            const result = rsp.success;
+            console.log(result);
+            if (result == false) {
+                alert("결제를 취소하셨습니다.");
+                console.error("Payment failed. Response:", rsp);
+            } else {
+                console.log("Payment succeeded. Response:", rsp);
 
-            };
-            $.ajax({
-                type: "post",
-                url: "/payment/save",
-                contentType: "application/json",
-                data: JSON.stringify(paymentData),
-                success: function (response) {
-                    alert("결제완료되었습니다.")
-                    window.location.href = "/"
+                const paymentData = {
+                    member_id: member_id,
+                    amount: amount,
+                    orderId: randomNo,
+                    orderName: orderName,
+                    customerName: customerName,
+                    startRentalDate: startRentalDate,
+                    endRentalDate: endRentalDate,
+                    car_id: car_id,
+                    rentalDay: rentalDay
+                };
+                $.ajax({
+                    type: "post",
+                    url: "/payment/save",
+                    contentType: "application/json",
+                    data: JSON.stringify(paymentData),
+                    success: function (response) {
+                        alert("결제완료되었습니다.")
+                        window.location.href = "/"
 
-                },
-                error: function (error) {
-                    console.error(error);
-                }
-            });
-
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            }
         });
     });
-
-
-
 
 </script>
 </html>

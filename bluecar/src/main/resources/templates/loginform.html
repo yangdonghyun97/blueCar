@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+
 </head>
 <style>
 
@@ -29,7 +32,7 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-       height: 15vh;
+        height: 15vh;
         border-bottom: 1px solid #e9ebee;
         color: white;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -158,33 +161,66 @@
 
 </style>
 <body>
-    <div class="menubar">
+<div class="menubar">
 
-        <div class="HomeIcon" ><a th:href="@{/}"><img src="/image/socarPlan.png"></a></div>
+    <div class="HomeIcon" ><a th:href="@{/}"><img src="/image/socarPlanLogo.png"></a></div>
 
-        <div class="sidemenu">
-            <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
-            <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
-        </div>
-
+    <div class="sidemenu">
+        <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
+        <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
     </div>
+
+</div>
 <div class="wrapper">
-        <div class="wrapper_body_main">
+    <div class="wrapper_body_main">
         <div class="title"><h2>로그인</h2><span class="hidden" id="hidden"></span></div>
 
-            <div class="join_container">
-                <input class="input_id" id="userId" name="userId"  placeholder="아이디를 입력해주세요" th:maxlength="10"
-                       type="text" style="background-image : url('/image/idBox.png');">
-                <input class="input_pw" id="pw" name="pw"  placeholder="패스워드를 입력해주세요" th:maxlength="10"
-                       type="password">
-            </div>
-
-            <button class="btn" id="submitBtn" onclick="submit()">로그인</button>
+        <div class="join_container">
+            <input class="input_id" id="userId" name="userId"  placeholder="아이디를 입력해주세요" th:maxlength="10"
+                   type="text" style="background-image : url('/image/idBox.png');">
+            <input class="input_pw" id="pw" name="pw"  placeholder="패스워드를 입력해주세요" th:maxlength="10"
+                   type="password">
         </div>
+
+        <button class="btn" id="submitBtn" onclick="submit()">로그인</button>
+    </div>
+    <a href="javascript:kakaoLogin();">로그인</a>
+    <button onclick="kakaoLogout()">로그아웃</button>
 </div>
 </body>
 <script>
+    //003ac2ffcc45c4b326ade22cfb55812d
 
+    window.Kakao.init("003ac2ffcc45c4b326ade22cfb55812d");
+
+    function kakaoLogin() {
+        console.log("Attempting Kakao login...");
+
+        window.Kakao.Auth.login({
+            scope: 'profile_nickname, profile_image, account_email',
+            success: function (authObj) {
+                console.log("Kakao login successful:", authObj);
+
+                window.Kakao.API.request({
+                    url: "/v2/user/me",
+                    success: function (res) {
+                        const kakao_account = res.kakao_account;
+                        console.log("Kakao account information:", kakao_account);
+                    }
+                });
+            },
+            fail: function (error) {
+                console.log("Kakao login failed:", error);
+            }
+        });
+    }
+
+    function kakaoLogout() {
+        window.Kakao.Auth.logout(function() {
+            console.log("Logout successful");
+            // Handle successful logout, if needed
+        });
+    }
 
     const submit = () => {
         const id = document.querySelector("#userId").value;

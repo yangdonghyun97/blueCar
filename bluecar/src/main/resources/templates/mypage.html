@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>마이페이지</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </head>
 <style>
     * {
@@ -60,6 +61,7 @@
         cursor: pointer;
         font-size: 18px;
         padding-right: 40px;
+        font-weight: bold;
     }
 
     .sidemenu2:hover {
@@ -96,7 +98,7 @@
         width: 393px;
         height: 60px;
         font-size: 15px;
-        padding: 20px 15px 20px 45px;
+        padding: 20px 15px 20px 60px;
         margin-bottom: 10px;
         outline: none;
         border: 1px solid #e9ebee;
@@ -105,7 +107,7 @@
     }
 
     .input_id {
-        background-image: url("/image/idBox.png");
+        background-image: url("/image/Id_icon.png");
         background-size: 40px;
         background-position: 10px;
         background-repeat: no-repeat;
@@ -145,6 +147,15 @@
         background-repeat: no-repeat;
         border-style: none;
     }
+    .input_email{
+        background-image: url("/image/idBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+
+    }
+
     .instructions {
         font-size: 12px;
         color: red;
@@ -212,9 +223,6 @@
         color: #374553;
         font-weight: bold;
     }
-    a:hover {
-        color: #00b8ff;
-    }
 
     /*    모달 */
     .modal {
@@ -235,6 +243,8 @@
         padding: 20px;
         border: 1px solid #888;
         width: 80%;
+        border-radius: 10px; /* Added rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added a subtle box shadow */
     }
 
     .close {
@@ -252,17 +262,42 @@
         cursor: pointer;
     }
 
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border-bottom: 1px solid #f2f2f2;
+        padding: 12px;
+        text-align: left;
+    }
+
+    thead {
+        background-color: #f2f2f2;
+    }
+
+    tbody {
+        background-color: #fff;
+    }
+
+    .delete-btn {
+        width: 50px;
+        height: 30px;
+        border: 1px solid white;
+    }
+
 
 </style>
 <body>
 <div class="menubar">
 
-    <div class="HomeIcon"><a th:href="@{/}"><img src="/image/socarPlan.png"></a></div>
+    <div class="HomeIcon"><a th:href="@{/}"><img src="/image/socarPlan_icon.png"></a></div>
 
     <div class="sidemenu">
         <div class="sidemenu2" onclick="openModal()">나의 예약내역</div>
         <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
-        <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
 
     </div>
 </div>
@@ -280,7 +315,8 @@
                        type="password" readonly>
                     <button class="edit-btn" onclick="upPw()" type="button">수정</button></div>
                 <div class="instructions" >6~12자의 영문,숫자만 사용해주세요</div>
-
+                <input class="input_email" id="email" name="email" placeholder="이메일" th:value="${user.email}" readonly
+                            type="text">
                 <input class="input_name" id="name" name="name"  readonly th:value="${user.name}" oninput="namecheck()" placeholder="이름" th:maxlength="11"
                        type="text">
                <div class="phone_domain"> <input class="input_phone" id="phonenum" name="phone" oninput="p1()" readonly
@@ -337,7 +373,7 @@
                 },
                 success: function (data) {
                     console.log(data)
-                    alert("예약이 취소되었습니다.")
+                    alert("환불 완료되었습니다.")
                     let elements = document.querySelectorAll("div > span");
                     elements.forEach(function (element) {
                         element.remove();
@@ -372,8 +408,8 @@
                         "<td>" + payment.orderName + "</td>" +
                         "<td>" + payment.startRentalDate + "</td>" +
                         "<td>" + payment.endRentalDate + "</td>" +
-                        "<td>" + payment.amount + "</td>" +
-                        "<td><button class='delete-btn' onclick='deletePayment(" + payment.orderId + ")'>삭제</button></td>" +
+                        "<td>" + payment.amount+'원' + "</td>" +
+                        "<td><button class='delete-btn' onclick='deletePayment(" + payment.orderId + ")'>환불</button></td>" +
                         "</tr>";
 
                     $("#paymentTableBody").append(row);

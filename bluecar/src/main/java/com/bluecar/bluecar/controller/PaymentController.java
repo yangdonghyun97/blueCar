@@ -25,14 +25,15 @@ public class PaymentController {
 
     @GetMapping("/getDateRanges")
     public @ResponseBody List<PaymentDTO> getdateList(PaymentDTO paymentDTO){
-        System.out.println("paymentDTO = " + paymentDTO);
+
       List <PaymentDTO> paymentDate = paymentService.findByname(paymentDTO);
-        System.out.println("paymentDate = " + paymentDate);
+
        return paymentDate;
     }
 
     @PostMapping("/save")
     public @ResponseBody String save(@RequestBody PaymentDTO paymentDTO){
+        System.out.println("paymentDTO = " + paymentDTO);
 
         int result = paymentService.save(paymentDTO);
         return String.valueOf(result);

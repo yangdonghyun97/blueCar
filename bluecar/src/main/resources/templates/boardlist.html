@@ -12,6 +12,7 @@
 <style>
     * {
         box-sizing: border-box;
+
         margin: 0px;
     }
 
@@ -80,7 +81,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #ffffff;
+
+
         margin-top: 20px;
         border-radius: 10px;
 
@@ -120,7 +122,7 @@
         align-items: center;
     }
     .menu-item {
-        background-color: #e3e3ed;
+        background-color: #F3EBEB;
         flex-grow: 1;
         transition: 0.5s;
     }
@@ -152,7 +154,7 @@
 
     th, td {
         text-align: center;
-        padding: 25px;
+        padding: 23px;
         border-bottom: 1px solid #e9ebee;
     }
 
@@ -194,6 +196,83 @@
         font-weight: bold;
     }
 
+    .writeBtnDomain{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        margin-top: 10px;
+    }
+
+    .wrapper_body_imgDomain{
+        margin-bottom: 100px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 450px;
+        height: 600px;
+    }
+
+    .wrapper_body_imgDomain img {
+        width: 300px;
+        height: 700px;
+    }
+
+
+    .slider {
+        position: relative;
+        overflow: hidden;
+
+        width: 600px;
+        height: 570px;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 360px;
+        height: 600px;
+        background-size: cover;
+        background-position: center;
+
+        animation: slider 7.5s infinite linear;
+    }
+
+    .slide:nth-child(1) {
+        background-image: url(/image/workation.jpg);
+        animation-delay: 0;
+    }
+    .slide:nth-child(2) {
+        background-image: url(/image/monthly-subscription.png);
+        animation-delay: -2.5s;
+    }
+    .slide:nth-child(3) {
+        background-image: url(/image/sideImage2.png);
+        animation-delay: -5s;
+    }
+
+    @keyframes slider {
+        0% {
+            transform: translateX(0);
+        }
+
+        26% {
+            transform: translateX(0);
+        }
+        33% {
+            transform: translateX(-100%);
+            animation-timing-function: step-end;
+        }
+        93% {
+            transform: translateX(100%);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
+
 
 </style>
 <body>
@@ -209,8 +288,18 @@
     </div>
 </div>
 <div class="wrapper">
+    <div class="wrapper_body_imgDomain">
+
+        <div class="slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+
+    </div>
     <div class="wrapper_body">
-         <div class="QnA_title"><h2>QnA</h2><button id="writeBtn">게시글 작성</button></div>
+
+        <div class="QnA_title"><h2>QnA</h2></div>
         <ul class="menu">
             <li class="menu-item">
                 <p class="menu-link" data-category="요금">요금</p>
@@ -247,7 +336,9 @@
                 </tr>
 
             </table>
+
         </div>
+        <div class="writeBtnDomain"><button id="writeBtn">게시글 작성</button></div>
         <input id="userId" th:value="${session.userId}" type="hidden">
 
     </div>
@@ -287,7 +378,7 @@
         });
     });
 
-        // 카테고리 리스트
+    // 카테고리 리스트
     function updateBoardList(boards) {
         let tableBody = $("#table");
         tableBody.empty();

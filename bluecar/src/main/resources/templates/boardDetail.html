@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <style>
     * {
         box-sizing: border-box;
@@ -82,7 +83,7 @@
 
     }
     .wrapper_body_main {
-        width: 800px;
+        width: 940px;
         padding: 20px;
 
     }
@@ -117,6 +118,7 @@
 
     .wrapper_body_main_contents {
         width: 100%;
+        height: 350px;
         margin-top: 20px;
 
     }
@@ -133,13 +135,29 @@
 
     .buttonArea {
         width: 100%;
-        margin-top: 20px;
         display: flex;
         justify-content: flex-end;
+
+        border-bottom: 0.2rem solid #C4C4C4;
+        border-bottom-width: thin;
     }
 
     .btn {
-        width: 80px;
+        width: 40px;
+        height: 20px;
+        border: 0;
+        background-color: #3498db;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    .writebtn{
+        width: 40px;
         height: 40px;
         border: 0;
         background-color: #3498db;
@@ -160,6 +178,8 @@
         width: 100%;
         display: flex;
         flex-direction: column;
+        border-top: 1px solid #C4C4C4;
+
     }
 
     .comment {
@@ -203,8 +223,8 @@
     }
 
     .comment-delete-btn {
-        width: 80px;
-        height: 40px;
+        width: 60px;
+        height: 22px;
         border: 0;
         background-color: #3498db;
         border-radius: 5px;
@@ -225,6 +245,80 @@
     a:hover {
         color: #3CB4FF;
     }
+
+    .wrapper_body_imgDomain{
+        margin-bottom: 100px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 450px;
+        height: 600px;
+
+    }
+
+    .wrapper_body_imgDomain img {
+        width: 300px;
+        height: 700px;
+
+    }
+
+    .slider {
+        position: relative;
+        overflow: hidden;
+
+        width: 600px;
+        height: 570px;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 360px;
+        height: 600px;
+        background-size: cover;
+        background-position: center;
+
+
+        animation: slider 7.5s infinite linear;
+    }
+
+    .slide:nth-child(1) {
+        background-image: url(/image/workation.jpg);
+        animation-delay: 0;
+        box-shadow: 0px 0px 10px 0px gray;
+    }
+    .slide:nth-child(2) {
+        background-image: url(/image/monthly-subscription.png);
+        animation-delay: -2.5s;
+        box-shadow: 0px 0px 10px 0px gray;
+    }
+    .slide:nth-child(3) {
+        background-image: url(/image/sideImage2.png);
+        animation-delay: -5s;
+        box-shadow: 0px 0px 10px 0px gray;
+    }
+
+    @keyframes slider {
+        0% {
+            transform: translateX(0);
+        }
+
+        26% {
+            transform: translateX(0);
+        }
+        33% {
+            transform: translateX(-100%);
+            animation-timing-function: step-end;
+        }
+        93% {
+            transform: translateX(100%);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
 </style>
 <body>
 <div class="menubar">
@@ -240,13 +334,22 @@
 <div class="wrapper">
 
     <div class="wrapper_body">
+        <div class="wrapper_body_imgDomain">
+
+            <div class="slider">
+                <div class="slide"></div>
+                <div class="slide"></div>
+                <div class="slide"></div>
+            </div>
+
+        </div>
         <div class="wrapper_body_main">
             <div class="wrapper_body_main_title">
                 <p>제목<input id="boardTitle" name="boardTitle" readonly th:value="${board.boardTitle}" type="text"></p>
                 <p><span>작성시간</span> <span th:utext="${board.date}"></span></p>
             </div>
             <div class="wrapper_body_main_header">
-                <p>작성자 <span th:utext="${board.boardWriter}"></span></p>
+                <p>작성자 <span id="boardWriter" th:utext="${board.boardWriter}"></span></p>
                 <p>조회수 <span th:utext="${board.boardHits}"></span></p>
             </div>
             <div class="buttonArea">
@@ -264,12 +367,13 @@
             <div class="comment_domain">
 
                 <div class="commentList"></div>
+                <input type="hidden" th:value="${session.userId}" id="user_Id">
                 <div th:if="${session.userId}">
                     <div class="commentInput">
                         <input id="commentWriter" readonly th:value="${session.userId}" type="text">
                         <textarea id="commentContents"></textarea>
                         <div class="comment_btn">
-                            <button class="btn" id="comment-write-btn">작성</button>
+                            <button class="writebtn" id="comment-write-btn">작성</button>
                         </div>
                     </div>
                 </div>
@@ -279,7 +383,10 @@
     </div>
 </div>
 </body>
-<script>
+<script th:inline="javascript">
+
+    const user_Id = $("#user_Id").val();
+    const session_ID = $("#commentWriter").val();
 
     const firstUpdateBtn = () => {
 
@@ -305,9 +412,10 @@
                 data.sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime));
                 data.forEach(function (comment) {
                     let commentHtml = `<div class="comment" data-comment-id="${comment.id}">
-        ${comment.commentWriter} : ${comment.commentContents}
-        <button class="comment-delete-btn">삭제</button>
-    </div>`;
+    ${comment.commentWriter} : ${comment.commentContents}
+    ${comment.commentWriter === user_Id ? '<button class="comment-delete-btn">삭제</button>' : ''}
+</div>`;
+
 
                     $(".commentList").append(commentHtml);
                 });
@@ -349,7 +457,6 @@
     }
 
     $(document).ready(function () {
-
         $("#boardUpdate").click(function () {
 
             if (!titleCheck() || !contetnsCheck()) {

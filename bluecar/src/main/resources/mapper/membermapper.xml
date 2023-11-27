@@ -7,7 +7,7 @@
 <mapper namespace="com.bluecar.bluecar.repository.MemberRepository">
 
     <insert id="save" parameterType="com.bluecar.bluecar.dto.MemberDTO">
-        INSERT INTO member_tbl(userId,pw,name,phone,yeardate) values (#{userId},#{pw},#{name},#{phone},#{yeardate})
+        INSERT INTO member_tbl(userId,pw,name,phone,yeardate,email) values (#{userId},#{pw},#{name},#{phone},#{yeardate},#{email})
     </insert>
 
     <select id="findId"   resultType="com.bluecar.bluecar.dto.MemberDTO">

@@ -6,8 +6,8 @@
 <mapper namespace="com.bluecar.bluecar.repository.PaymentRepository">
 
     <insert id="save" parameterType="com.bluecar.bluecar.dto.PaymentDTO">
-        INSERT INTO payment_tbl (amount,orderId,member_id,orderName,customerName, startRentalDate, endRentalDate)
-        VALUES (#{amount}, #{orderId},#{member_id},#{orderName},#{customerName},#{startRentalDate},#{endRentalDate})
+        INSERT INTO payment_tbl (amount, orderId, member_id, orderName, customerName, startRentalDate, endRentalDate, car_id, rentalDay)
+        VALUES (#{amount}, #{orderId}, #{member_id}, #{orderName}, #{customerName}, #{startRentalDate}, #{endRentalDate}, #{car_id}, #{rentalDay})
     </insert>
 
 
