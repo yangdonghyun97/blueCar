@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0px;
+    }
+
+    body {
+
+    }
+
+    .wrapper {
+        width: 100%;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menubar {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 15vh;
+        border-bottom: 1px solid #e9ebee;
+        color: white;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .HomeIcon {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding-left: 250px;
+        color: #aaaaaa;
+        font-weight: bold;
+        font-size: 50px;
+    }
+
+    .sidemenu {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+    }
+
+    .sidemenu2 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #374553;
+        cursor: pointer;
+        font-size: 18px;
+        padding-right: 40px;
+    }
+
+    .sidemenu2:hover {
+        font-weight: bold;
+    }
+
+
+    .wrapper_body {
+        width: 500px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .wrapper_body h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .join_container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    input {
+        width: 398px;
+        height: 60px;
+        font-size: 15px;
+        padding: 20px 15px 20px 60px;
+        margin-bottom: 10px;
+        outline: none;
+        border: 1px solid #e9ebee;
+        border-radius: 5px;
+
+    }
+    .input_email{
+        background-image: url("/image/idBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+
+    }
+    .input_pw{
+        background-image: url("/image/pwBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+
+    }
+    .input_name{
+        background-image: url("/image/nameBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+    }
+    .input_phone{
+        background-image: url("/image/phoneBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+    }
+    .input_date{
+        background-image: url("/image/yearBox.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+    }
+    .input_id{
+        background-image: url("/image/Id_icon.png");
+        background-size: 40px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        border-style: none;
+    }
+
+    .regtext1, .regtext2, .regtext3 {
+        font-size: 12px;
+        visibility: hidden;
+        color: red;
+    }
+
+
+    .join_container2,
+    .join_container3 {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .emailDomain{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+    .btn {
+        margin-left: 47px;
+        width: 398px;
+        height: 60px;
+        margin-top: 30px;
+        background-color: #E4EBF5;
+        border-radius: 10px;
+        box-shadow: 0.4rem 0.3rem 0.7rem #BEC5D0, -0.2rem -0.2rem 0.4rem #FBFBFB;
+        color: #333333;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        outline: none;
+    }
+
+    input:focus {
+        outline: none;
+        border: 1px solid #3498db;
+    }
+
+    a {
+        text-decoration: none;
+        color: #374553;
+        font-weight: bold;
+    }
+</style>
+<body>
+<div class="menubar">
+
+    <div class="HomeIcon" ><a th:href="@{/}"><img src="/image/socarPlan_icon.png"></a></div>
+
+    <div class="sidemenu">
+        <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
+        <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
+    </div>
+
+</div>
+<div class="wrapper">
+    <div class="wrapper_body">
+        <form action="/member/save" method="post">
+            <div class="join_container">
+                <input class="input_id" id="userId" name="userId" oninput="Idcheck()" onblur="idDuplicateCheck()" placeholder="아이디" th:maxlength="10"
+                       type="text">
+                <div class="regtext1"></div>
+                <input class="input_pw" id="pw" name="pw" oninput="Pwcheck()" placeholder="패스워드" th:maxlength="12"
+                       type="password">
+                <div class="regtext2">6~12자의 영문,숫자만 사용해주세요</div>
+                <input class="input_pw" id="rpw" name="rpw" oninput="Pwcheck2()" placeholder="패스워드를 다시 입력해주세요" th:maxlength="12"
+                       type="password">
+                <div class="regtext3">다시 확인해주세요</div>
+                <div class="emailDomain">
+                    <div><input class="input_email" id="email" name="email" th:value="${email}"  placeholder="이메일"
+                                type="text"></div></div>
+
+                <input class="input_name" id="name" name="name" oninput="namecheck()" placeholder="이름" th:maxlength="11"
+                       type="text">
+            </div>
+            <div class="join_container2">
+                <input class="input_phone" id="phonenum" name="phone" oninput="p1()" placeholder=" - 없이 입력해주세요" th:maxlength="12"
+                       type="text">
+            </div>
+
+            <div class="join_container3">
+                <input class="input_date" id="date" name="yeardate" oninput="datecheck()" placeholder="생년월일 YYYY/MM/DD" th:maxlength="8"
+                       type="text">
+            </div>
+            <input class="btn"  id="submitBtn" type="submit" value="회원가입 " disabled>
+
+        </form>
+    </div>
+</div>
+<script th:inline="javascript">
+    let isIdValid = false;
+    let isPwValid = false;
+    let isPw2Valid = false;
+    let isPhoneValid = false;
+    let isDateValid = false;
+    let isNameValid = false;
+
+    let emailCheck;
+
+    //이메일 인증 보내기+유효성 검사
+
+
+
+    const checkAuthenticationNumber = ()=>{
+        const certificationNumber = document.querySelector("#certificationNumber").value;
+
+        if (certificationNumber == emailCheck){
+            isEmailValid = true;
+            alert("인증 완료되었습니다");
+        }else {
+            alert("인증번호 다시 확인해주세요");
+        }
+    }
+
+
+    // ID 대소문자, 숫자만 유효성 검사
+    const Idcheck = () => {
+        const id = document.getElementById("userId").value;
+        let regex = /^[a-zA-Z0-9]{4,10}$/;
+        if (3 < id.length && regex.test(id)) {
+            document.querySelector(".regtext1").innerText = " 4~10자의 영문,숫자만 사용해주세요";
+            document.querySelector(".regtext1").style.color = "blue"
+            document.querySelector("#userId").style.border = "1px solid blue"
+            document.querySelector(".regtext1").style.visibility = "visible";
+        } else {
+            document.querySelector(".regtext1").innerText = " 4~10자의 영문,숫자만 사용해주세요";
+            document.querySelector(".regtext1").style.color = "red"
+            document.querySelector("#userId").style.border = "1px solid red"
+            document.querySelector(".regtext1").style.visibility = "visible";
+            isIdValid = false;
+        }
+        updateSubmitButtonState();
+    }
+
+
+    const idDuplicateCheck =()=>{
+        const userId = $("#userId").val();
+        if(userId.length >3 ){
+            $.ajax({
+                url: "/member/duplicateCheck",
+                method: "post",
+                data: {
+                    userId: userId
+                },
+                success: function (data) {
+                    console.log("Server Response:", data);
+                    if (data == 0) {
+                        $('.regtext1').text("사용가능한 아이디입니다");
+                        isIdValid = true;
+                    }else if(data == 1){
+                        $('.regtext1').css("color", "red");
+                        $('#userId').css('border-color', 'red');
+                        $('.regtext1').text("중복된 아이디입니다");
+                    }
+
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX 오류: ", xhr.responseText);
+                }
+            });
+        }
+
+    }
+
+
+
+
+
+    // pw 대소문자, 숫자만 유효성검사
+    const Pwcheck = () => {
+        const pw = document.getElementById("pw").value;
+        let regex = /^[a-zA-Z0-9]{6,12}$/;
+        if (5 < pw.length && regex.test(pw)) {
+            console.log("맞음");
+            document.querySelector(".regtext2").style.color = "blue"
+            document.querySelector("#pw").style.border = "1px solid blue"
+            document.querySelector(".regtext2").style.visibility = "visible";
+            isPwValid = true;
+
+        } else {
+            document.querySelector(".regtext2").style.color = "red"
+            document.querySelector("#pw").style.border = "1px solid red"
+            document.querySelector(".regtext2").style.visibility = "visible";
+            isPwValid = false;
+        }
+        updateSubmitButtonState();
+    }
+
+    const Pwcheck2 = () => {
+        const pw = document.querySelector("#pw").value;
+        const rpw = document.querySelector("#rpw").value;
+
+        if (pw == rpw) {
+            document.querySelector(".regtext3").style.color = "blue"
+            document.querySelector("#rpw").style.border = "1px solid blue"
+            document.querySelector(".regtext3").style.visibility = "visible";
+            isPw2Valid = true;
+        } else {
+            document.querySelector(".regtext3").style.visibility = "visible";
+            document.querySelector(".regtext3").style.color = "red"
+            document.querySelector("#rpw").style.border = "1px solid red"
+            isPw2Valid = false;
+        }
+        updateSubmitButtonState();
+    }
+
+    const p1 = () => {
+        let phoneNum = document.querySelector("#phonenum").value;
+        phoneNum1 = phoneNum.replace(/\D/g, "");
+        let phonevalue = phoneNum1.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+        document.querySelector("#phonenum").value = phonevalue;
+        isPhoneValid = false;
+
+        if (phoneNum.length == 11) {
+            isPhoneValid = true;
+        }
+        updateSubmitButtonState();
+
+    }
+
+    const namecheck = () => {
+        let inputName = document.querySelector("#name").value;
+
+        if (inputName.trim() !== "" && inputName.trim().length >= 2) {
+            document.querySelector("#name").style.border = "1px solid blue"
+            isNameValid = true;
+        } else {
+            document.querySelector("#name").style.border = "1px solid red"
+            isNameValid = false;
+
+        }
+        updateSubmitButtonState()
+    }
+
+    const datecheck = () => {
+        const inputDate = document.querySelector("#date").value;
+        const formattedDate = inputDate.replace(/(\d{4})(\d{2})(\d{2})/, "$1/$2/$3");
+
+        if (inputDate.length == 8) {
+            document.querySelector("#date").value = formattedDate;
+            document.querySelector("#date").style.border = "1px solid blue"
+            isDateValid = true;
+        } else {
+            document.querySelector("#date").style.border = "1px solid red"
+            isDateValid = false;
+        }
+        updateSubmitButtonState()
+    }
+
+    function updateSubmitButtonState() {
+        const submitButton = document.getElementById("submitBtn");
+        if (isIdValid && isPwValid && isPw2Valid && isPhoneValid && isPhoneValid && isDateValid && isNameValid) {
+            submitButton.disabled = false;
+
+            submitButton.style.backgroundColor = "#3CB4FF";
+        } else {
+            submitButton.disabled = true;
+            submitButton.style.backgroundColor = "#E4EBF5"
+        }
+    }
+
+</script>
+</body>
+</html>

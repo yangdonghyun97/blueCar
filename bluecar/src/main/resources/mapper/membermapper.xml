@@ -22,6 +22,10 @@
         delete from member_tbl where id=#{id}
     </delete>
 
+    <select id="findByEmail" resultType="com.bluecar.bluecar.dto.MemberDTO">
+        select * from member_tbl where email=#{email}
+    </select>
+
 
 
 </mapper>

@@ -27,4 +27,8 @@ public class MemberService {
     public int delte(MemberDTO memberDTO) {
       return   memberRepository.delete(memberDTO);
     }
+
+    public MemberDTO findByEmail(MemberDTO memberDTO) {
+        return memberRepository.findByEmail(memberDTO);
+    }
 }

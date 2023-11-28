@@ -39,7 +39,28 @@ public class MemberController {
         return "mypage";
     }
 
+    @GetMapping("/kakaoRegform")
+    public String kakaoRegform(@RequestParam("email") String email,Model model
+    ){
+        model.addAttribute("email",email);
+        return "kakaoRegform";
+    }
 
+
+    @PostMapping("/emailCheck")
+    public @ResponseBody String emailCheck(MemberDTO memberDTO, HttpSession session){
+       MemberDTO memberDTO1 = memberService.findByEmail(memberDTO);
+        System.out.println("memberDTO1 = " + memberDTO1);
+       String result = "";
+       if (memberDTO1 == null){
+           result = "0";
+       }else {
+           session.setAttribute("userId", memberDTO1.getUserId());
+           session.setAttribute("id", memberDTO1.getId());
+           result ="1";
+       }
+        return result;
+    }
 
 
 

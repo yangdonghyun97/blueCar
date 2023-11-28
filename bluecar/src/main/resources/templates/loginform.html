@@ -192,7 +192,7 @@
     //003ac2ffcc45c4b326ade22cfb55812d
 
     window.Kakao.init("003ac2ffcc45c4b326ade22cfb55812d");
-
+    console.log( Kakao.isInitialized() );
     function kakaoLogin() {
         console.log("Attempting Kakao login...");
 
@@ -204,8 +204,31 @@
                 window.Kakao.API.request({
                     url: "/v2/user/me",
                     success: function (res) {
-                        const kakao_account = res.kakao_account;
-                        console.log("Kakao account information:", kakao_account);
+                        const account = res.kakao_account;
+                        console.log("Kakao account information:", account);
+                        let email = account.email;
+
+                        $.ajax({
+                            type: "post",
+                            url: "/member/emailCheck",
+                            data: {email: email},
+                            success: function (res) {
+                                if(res === "0"){
+                                    alert("가입되어있지 않은 회원입니다 가입페이지로 이동합니다.")
+                                    window.location.href = "/member/kakaoRegform?email="+email;
+                                }else {
+                                    alert("로그인되었습니다.")
+                                    window.location.href ="/";
+                                }
+
+                            },
+                            error: function (res) {
+
+                            }
+
+                        })
+
+
                     }
                 });
             },
@@ -216,11 +239,19 @@
     }
 
     function kakaoLogout() {
-        window.Kakao.Auth.logout(function() {
-            console.log("Logout successful");
-            // Handle successful logout, if needed
-        });
+        window.Kakao.API.request({
+            url: '/v1/user/unlink',
+        })
+            .then(function(response) {
+                console.log(response);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+
     }
+
+
 
     const submit = () => {
         const id = document.querySelector("#userId").value;
