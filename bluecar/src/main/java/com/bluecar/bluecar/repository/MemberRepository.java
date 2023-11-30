@@ -13,5 +13,5 @@ public interface MemberRepository {
 
     int delete(MemberDTO memberDTO);
 
-    MemberDTO findByEmail(MemberDTO memberDTO);
+    MemberDTO findByEmail(String email);
 }

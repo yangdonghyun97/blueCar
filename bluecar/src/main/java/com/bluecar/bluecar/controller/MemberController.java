@@ -47,18 +47,46 @@ public class MemberController {
     }
 
 
-    @PostMapping("/emailCheck")
-    public @ResponseBody String emailCheck(MemberDTO memberDTO, HttpSession session){
-       MemberDTO memberDTO1 = memberService.findByEmail(memberDTO);
-        System.out.println("memberDTO1 = " + memberDTO1);
-       String result = "";
-       if (memberDTO1 == null){
-           result = "0";
-       }else {
-           session.setAttribute("userId", memberDTO1.getUserId());
-           session.setAttribute("id", memberDTO1.getId());
-           result ="1";
-       }
+    @PostMapping("/kakaoLogin")
+    public @ResponseBody String kakaoLogin(@RequestParam("email") String email,
+                                           @RequestParam("kakaoToken") String kakaoToken,
+                                           HttpSession session) {
+        // Validate the Kakao token (you may want to call Kakao API to validate)
+        // Process Kakao login logic
+        MemberDTO memberInfo = memberService.findByEmail(email);
+        String result = "";
+
+        if (memberInfo == null) {
+            result = "0";
+        } else {
+            session.setAttribute("userId", memberInfo.getUserId());
+            session.setAttribute("id", memberInfo.getId());
+            session.setAttribute("kakaoToken", kakaoToken);
+            result = "1";
+        }
+
+        return result;
+    }
+
+
+    @GetMapping("/naverLogin")
+    public @ResponseBody String naverLogin(@RequestParam("email") String email,
+                                           @RequestParam("naverToken") String naverToken,
+                                           HttpSession session) {
+        // Validate the Kakao token (you may want to call Kakao API to validate)
+        // Process Kakao login logic
+        MemberDTO memberInfo = memberService.findByEmail(email);
+        String result = "";
+
+        if (memberInfo == null) {
+            result = "0";
+        } else {
+            session.setAttribute("userId", memberInfo.getUserId());
+            session.setAttribute("id", memberInfo.getId());
+            session.setAttribute("naverToken", naverToken);
+            result = "1";
+        }
+
         return result;
     }
 
@@ -88,6 +116,7 @@ public class MemberController {
     @GetMapping("/logout")
     public String  logout(HttpSession session){
         session.removeAttribute("userId");
+        session.removeAttribute("kakaoToken");
         return "redirect:/";
     }
 

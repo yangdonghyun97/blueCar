@@ -271,6 +271,7 @@
         let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (regex.test(email)) {
+            alert("이메일을 확인해주세요");
             $.ajax({
                 url: "/emailConfirm",
                 method: "post",

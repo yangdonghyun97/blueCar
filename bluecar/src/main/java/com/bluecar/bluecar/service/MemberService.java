@@ -28,7 +28,7 @@ public class MemberService {
       return   memberRepository.delete(memberDTO);
     }
 
-    public MemberDTO findByEmail(MemberDTO memberDTO) {
-        return memberRepository.findByEmail(memberDTO);
+    public MemberDTO findByEmail(String email) {
+        return memberRepository.findByEmail(email);
     }
 }
