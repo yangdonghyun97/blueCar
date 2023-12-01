@@ -183,52 +183,56 @@
                    type="password">
         </div>
 
+
         <button class="btn" id="submitBtn" onclick="submit()">로그인</button>
     </div>
     <a href="javascript:kakaoLogin();">로그인</a>
-    <div id="naver_id_login"></div>
+<!--    <div id="naver_id_login"></div>-->
 </div>
 </body>
-<script type="text/javascript">
-    var naver_id_login = new naver_id_login("63RezrYVr558zyyaoYW9", "http://localhost:8083");
-    var state = naver_id_login.getUniqState();
-    naver_id_login.setButton("white", 2,40);
-    naver_id_login.setDomain("http://localhost:8083");
-    naver_id_login.setState(state);
-    naver_id_login.init_naver_id_login();
+<!--<script type="text/javascript">-->
+<!--    var naver_id_login = new naver_id_login("63RezrYVr558zyyaoYW9", "http://localhost:8083/member/loginform");-->
+<!--    var state = naver_id_login.getUniqState();-->
+<!--    naver_id_login.setButton("white", 2,40);-->
+<!--    naver_id_login.setDomain("http://localhost:8083");-->
+<!--    naver_id_login.setState(state);-->
+<!--    naver_id_login.init_naver_id_login();-->
 
-    // Callback function after successful login
-    function naverLoginCallback(data) {
-        alert(data);
-        // Fetch user profile information from Naver API
-        naver_id_login.get_naver_userprofile("naverLoginCallbackAfterApi", true);
-    }
+<!--    // Callback function after successful login-->
 
-    // Callback function after fetching user profile from Naver API
-    function naverLoginCallbackAfterApi(data) {
-        // Extract email from the user profile data
-        var email_naver = data.response.email;
-alert(email_naver);
-        // Make an AJAX request to your server with the email
-        $.ajax({
-            type: "get",
-            url: "http://localhost:8083/member/naverLogin",
-            data: {
-                email: email_naver,
-                naverToken: naver_id_login.oauthParams.access_token
-            },
-            success: function(response) {
-                // Handle the server response
-                handleLoginResult(response);
-                alert("Server Response: " + response);
-            },
-            error: function(error) {
-                // Handle the error
-                console.error("AJAX Error:", error);
-            }
-        });
-    }
-</script>
+<!--</script>-->
+
+<!--<script type="text/javascript">-->
+<!--    // var naver_id_login = new naver_id_login("63RezrYVr558zyyaoYW9", "YOUR_CALLBACK_URL");-->
+<!--    naver_id_login.get_naver_userprofile("naverSignInCallback()");-->
+
+<!--    // Callback function after fetching user profile from Naver API-->
+<!--    function naverSignInCallback() {-->
+<!--        // Extract email from the user profile data-->
+<!--        var email_naver = naver_id_login.getProfileData('email');-->
+<!--        alert(email_naver);-->
+<!--        // Make an AJAX request to your server with the email-->
+<!--        $.ajax({-->
+<!--            type: "get",-->
+<!--            url: "http://localhost:8083/member/naverLogin",-->
+<!--            data: {-->
+<!--                email: email_naver,-->
+<!--                naverToken: naver_id_login.oauthParams.access_token-->
+<!--            },-->
+<!--            success: function(response) {-->
+<!--                // Handle the server response-->
+<!--                handleLoginResult(response);-->
+<!--                alert("Server Response: " + response);-->
+<!--            },-->
+<!--            error: function(error) {-->
+<!--                // Handle the error-->
+<!--                console.error("AJAX Error:", error);-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+
+<!--</script>-->
+
 <script>
     //003ac2ffcc45c4b326ade22cfb55812d
 

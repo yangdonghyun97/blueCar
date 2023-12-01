@@ -249,7 +249,7 @@
                            type="text">
                 </div>
                 <input class="btn"  id="submitBtn" type="submit" value="회원가입 " disabled>
-
+                <input type="hidden" name="admin" th:value="${session.admin != null ? session.admin : 'false'}">
             </form>
     </div>
 </div>

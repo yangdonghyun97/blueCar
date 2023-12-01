@@ -27,6 +27,12 @@ public class MemberController {
         return "regform";
     }
 
+    @GetMapping("callback")
+    public String callback(){
+
+        return "callback";
+    }
+
     @GetMapping("/loginform")
     public String loginForm(){
         return "loginform";
