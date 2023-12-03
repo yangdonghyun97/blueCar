@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- mapper DTD 선언 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- SQL Mapping -->
+<mapper namespace="com.bluecar.bluecar.repository.AdminRepository">
+
+
+    <update id="userUpdate" parameterType="com.bluecar.bluecar.dto.MemberDTO">
+        update member_tbl set userId = #{userId}, pw = #{pw}, email= #{email}, name= #{name} , pw= #{pw}, phone= #{phone}, yeardate= #{yeardate} where id = #{id}
+    </update>
+
+    <select id="findByEmail" resultType="com.bluecar.bluecar.dto.MemberDTO">
+        select * from member_tbl where email=#{email}
+    </select>
+
+    <select id="findAll" resultType="com.bluecar.bluecar.dto.MemberDTO">
+        select * from member_tbl
+    </select>
+
+    <select id="findId"   resultType="com.bluecar.bluecar.dto.MemberDTO">
+        select * from member_tbl where id = #{id}
+    </select>
+
+    <insert id="adminCommentSave" parameterType="com.bluecar.bluecar.dto.CommentDTO">
+        insert into comment_tbl(commentWriter, commentContents, boardId)
+        values(#{commentWriter}, #{commentContents}, #{boardId})
+    </insert>
+
+    <update id="stateUpdate" parameterType="map">
+        update board_tbl set state=#{state} where id=#{id}
+    </update>
+    <insert id="carSave" parameterType="map">
+        INSERT INTO car_tbl (area, model, yearRange, priceHors, priceDay, storedFileName)
+        VALUES (#{carDTO.area}, #{carDTO.model}, #{carDTO.yearRange}, #{carDTO.priceHors}, #{carDTO.priceDay}, #{storedFileName})
+    </insert>
+
+
+
+
+</mapper>

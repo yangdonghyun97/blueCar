@@ -372,7 +372,7 @@
                 <a th:href="@{/board/informationUse}">이용 약관</a></span></div>
 
             <div class="carBox" id="firstCarBox">
-                <div class="firstCarBox"><img alt="" th:src="${car.src}"></div>
+                <div class="firstCarBox"><img th:src="@{|/upload/${car.storedFileName}|}" alt="" id="src"></div>
                 <div class="secondCarBox">
                     <div class="modelDomain">
                         <div class="model" th:text="${car.model}"></div>

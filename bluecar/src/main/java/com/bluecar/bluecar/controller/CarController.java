@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class CarController {
        List<CarDTO> carDTOS  = carService.findAll();
         System.out.println("carDTOS = " + carDTOS);
         model.addAttribute("carlist",carDTOS);
-        return "carList";
+        return "car/carList";
     }
 
 //    @GetMapping("/carDetail")
@@ -35,13 +34,13 @@ public class CarController {
         model.addAttribute("car", carDTO);
 
         // 최종적으로 이동할 페이지 리턴
-        return "carDetailPage";
+        return "car/carDetailPage";
     }
 
     @GetMapping("/carDetailPage")
     public String carDetailPage() {
 
-        return "carDetailPage";
+        return "car/carDetailPage";
     }
 }
 

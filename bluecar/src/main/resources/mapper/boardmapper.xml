@@ -6,8 +6,8 @@
 <mapper namespace="com.bluecar.bluecar.repository.BoardRepository">
 
     <insert id="save" parameterType="com.bluecar.bluecar.dto.BoardDTO">
-        insert into board_tbl(boardWriter, boardPass, boardTitle, boardContents,category)
-        values (#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents}, #{category})
+        insert into board_tbl(boardWriter, boardPass, boardTitle, boardContents,category,state)
+        values (#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents}, #{category},#{state})
     </insert>
 
 

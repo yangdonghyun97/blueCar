@@ -17,4 +17,5 @@ public class BoardDTO extends UploadFile{
     private String boardCreatedTime;
     private String date;
     private String category;
+    private String state;
 }

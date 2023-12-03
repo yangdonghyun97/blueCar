@@ -308,7 +308,7 @@
         <div class="wrapper_header">
             <div class="wrapper_header_menubar">
                 <div>
-                    <div class="HomeIcon"> <a th:href="@{/}"><img src="/image/logo_blue.png" alt="svg"></a></div>
+                    <div class="HomeIcon"> <a th:href="@{/static}"><img src="/image/logo_blue.png" alt="svg"></a></div>
 
                     <div class="menuIcon">
                         <input id="menuicon" type="checkbox">
@@ -345,7 +345,6 @@
             </div>
         </div>
         <div class="wrapper_footer">
-
             <div class="floating">
                 <div th:if="${session.kakaoToken == null and session.userId != null}">
                 <span><img src="/image/appLogo.png" alt="logo"></span>
@@ -359,7 +358,6 @@
                     <div class="floating_content"><a th:href="@{/member/loginform}">로그인</a></div>
                 </div>
             </div>
-
         </div>
         <div class="wrapper_main2">
             <div class="wrapper_main2_body1">

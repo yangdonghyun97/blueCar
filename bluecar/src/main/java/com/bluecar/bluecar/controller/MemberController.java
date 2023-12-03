@@ -1,11 +1,9 @@
 package com.bluecar.bluecar.controller;
 
 import com.bluecar.bluecar.dto.MemberDTO;
-import com.bluecar.bluecar.dto.PaymentDTO;
 import com.bluecar.bluecar.service.MemberService;
 import com.bluecar.bluecar.service.PaymentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,32 +22,27 @@ public class MemberController {
     @GetMapping("/regform")
     public String regForm() {
 
-        return "regform";
+        return "user/regform";
     }
 
-    @GetMapping("callback")
-    public String callback(){
-
-        return "callback";
-    }
 
     @GetMapping("/loginform")
     public String loginForm(){
-        return "loginform";
+        return "user/loginform";
     }
 
     @GetMapping("/mypage/{userId}")
     public String myPage(MemberDTO memberDTO, Model model){
        MemberDTO member= memberService.findId(memberDTO);
        model.addAttribute("user", member);
-        return "mypage";
+        return "user/mypage";
     }
 
     @GetMapping("/kakaoRegform")
     public String kakaoRegform(@RequestParam("email") String email,Model model
     ){
         model.addAttribute("email",email);
-        return "kakaoRegform";
+        return "user/kakaoRegform";
     }
 
 
@@ -136,7 +129,7 @@ public class MemberController {
             model.addAttribute("memberId", member.getId());
             return "redirect:/";
         } else {
-            return "regform";
+            return "user/regform";
 
         }
     }
@@ -168,7 +161,7 @@ public class MemberController {
        if(result == 1){
            return "redirect:/";
        }else {
-           return "mypage";
+           return "user/mypage";
        }
 
     }
@@ -180,5 +173,12 @@ public class MemberController {
         session.removeAttribute("userId");
 
       return String.valueOf(result);
+    }
+
+    @GetMapping("/adminDelete")
+    public @ResponseBody String  adminDelete(MemberDTO memberDTO, HttpSession session){
+        int result = memberService.delte(memberDTO);
+        System.out.println("memberDTO = " + memberDTO);
+        return String.valueOf(result);
     }
 }

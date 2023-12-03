@@ -3,12 +3,10 @@ package com.bluecar.bluecar.controller;
 import com.bluecar.bluecar.dto.BoardDTO;
 import com.bluecar.bluecar.dto.PageDTO;
 import com.bluecar.bluecar.service.BoardService;
-import com.bluecar.bluecar.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class BoardController {
     public String findAll(Model model){
       List<BoardDTO> boardDTOList = boardService.findAll();
       model.addAttribute("boards", boardDTOList);
-      return "boardlist";
+      return "board/boardlist";
     }
 
     @GetMapping("/category/{category}")
@@ -43,7 +41,7 @@ public class BoardController {
     @GetMapping("/boardQnAWriteForm")
     public String saveForm(){
 
-        return "boardQnAWriteForm";
+        return "board/boardQnAWriteForm";
     }
 
     @PostMapping("/save")
@@ -64,7 +62,7 @@ public class BoardController {
         boardService.updateHits(id);
        BoardDTO boardDTO = boardService.findById(id);
        model.addAttribute("board",boardDTO);
-        return "boardDetail";
+        return "board/boardDetail";
     }
 
     @PostMapping("/update")
@@ -99,7 +97,7 @@ public class BoardController {
         model.addAttribute("pagingList", pagingList);
         model.addAttribute("paging", pageDTO);
 
-        return "boardlist";
+        return "board/boardlist";
     }
 
 }

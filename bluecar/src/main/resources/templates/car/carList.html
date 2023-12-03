@@ -105,13 +105,14 @@
     }
 
     .firstCarBox {
-        width: 100%;
-        height: 30vh;
+        width: 200px;
+        height: 15vh;
         display: flex;
         flex-direction: row;
         margin-top: 20px;
         overflow: hidden;
         border-radius: 10px;
+
     }
 
     .firstCarBox img {
@@ -122,12 +123,14 @@
     }
 
     .secondCarBox {
-        position: absolute;
+       display: flex;
         padding: 10px;
         flex-direction: column;
         align-items: start;
         justify-content: center;
         margin-top: 20px;
+        font-weight: bold;
+        font-size: 20px;
     }
     .modelDomain{
         display: flex;
@@ -142,13 +145,13 @@
     }
 
     .area {
-        font-size: 11px;
+        font-size: 12px;
     }
     .yearRange{
         font-size: 12px;
     }
 
-    .priceHors,.priceDay {
+    .priceDay {
         color: rgb(0 105 255);
     }
 
@@ -159,53 +162,73 @@
 
     }
 
-    .secondCarBox {
-        font-weight: bold;
-        font-size: 20px;
-    }
 
 </style>
 <body>
-<a id="kakao-login-btn" href="javascript:loginWithKakao()">
-    <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
-         alt="카카오 로그인 버튼" />
-</a>
-<p id="token-result"></p>
+<div class="wrapper">
+    <div class="wrapper_body">
+        <div class="wrapper_body_firstArea">
+            <img alt="" src="/image/socarPlan.png">
+        </div>
+
+        <div class="wrapper_body_secondArea">
+
+            <h2>쏘카플랜</h2>
+            <div class="menu"><span><a th:href="@{/}">Home</a></span><span><a
+                    th:href="@{/board/}">QnA게시판</a></span><span>
+                <a th:href="@{/board/informationUse}">이용 약관</a></span></div>
+            <div class="carBox" id="firstCarBox" th:each="cars: ${carlist}">
+                <input id="car_id" th:value="${cars.id}" type="hidden">
+
+                <div class="firstCarBox"><img th:src="@{|/upload/${cars.storedFileName}|}" alt=""></div>
+                <input type="hidden" th:value="${cars.storedFileName}" id="src">
+
+
+                <div class="secondCarBox">
+                    <div class="modelDomain">
+                    <div class="model" th:text="${cars.model}"></div><span>|</span> <div class="yearRange" th:text="${cars.yearRange}"> </div><span class="yearRange">년</span></div>
+
+                    <div class="area" th:text="${cars.area}"></div>
+                    <div class="priceDomain">
+                    <span>일</span><div class="priceDay" th:text="${cars.priceDay}"></div><span>원</span></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <input id="userId" th:value="${session.userId}" type="hidden">
+
+</div>
 
 </body>
 
 <script>
 
-    function loginWithKakao() {
-        Kakao.Auth.authorize({
-            redirectUri: 'https://developers.kakao.com/tool/demo/oauth',
-        });
-    }
+    document.addEventListener('DOMContentLoaded', function () {
+        // 각 carBox에 클릭 이벤트 추가
+        let carBoxes = document.querySelectorAll('.carBox');
+        carBoxes.forEach(function (carBox) {
 
-    // 아래는 데모를 위한 UI 코드입니다.
-    displayToken()
-    function displayToken() {
-        var token = getCookie('authorize-access-token');
+            carBox.addEventListener('click', function () {
+                let area = document.querySelector(".area").innerText;
+                let src = carBox.querySelector("#src").value;
 
-        if(token) {
-            Kakao.Auth.setAccessToken(token);
-            Kakao.Auth.getStatusInfo()
-                .then(function(res) {
-                    if (res.status === 'connected') {
-                        document.getElementById('token-result').innerText
-                            = 'login success, token: ' + Kakao.Auth.getAccessToken();
-                    }
-                })
-                .catch(function(err) {
-                    Kakao.Auth.setAccessToken(null);
-                });
-        }
-    }
+                let model = carBox.querySelector('.model').innerText;
+                let yearRange = carBox.querySelector('.yearRange').innerText;
+                // let priceHors = carBox.querySelector('.priceHors').innerText;
+                let priceDay = carBox.querySelector('.priceDay').innerText;
+                let car_id = carBox.querySelector('#car_id').value;
+                alert(src);
 
-    function getCookie(name) {
-        var parts = document.cookie.split(name + '=');
-        if (parts.length === 2) { return parts[1].split(';')[0]; }
-    }
+                let dto = `?area=${encodeURIComponent(area)}&storedFileName=${encodeURIComponent(src)}&model=${encodeURIComponent(model)}&yearRange=${encodeURIComponent(yearRange)}&priceDay=${encodeURIComponent(priceDay)}&id=${encodeURIComponent(car_id)}`;
+               window.location.href="/car/carDetail"+ dto;
+
+             });
+
+
+         });
+    });
 
 </script>
 

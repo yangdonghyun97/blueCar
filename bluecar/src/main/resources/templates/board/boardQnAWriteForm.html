@@ -114,7 +114,12 @@
         outline: none;
         font-size: 18px;
     }
-
+#category{
+    padding: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 5px;
+}
 
 
     a {
@@ -173,6 +178,7 @@
         <textarea class="contentBox" name="boardContents" id="boardContents"></textarea>
                 <input id="id" th:value="${session.id}" type="hidden">
                  <input id="boardWriter" th:value="${session.userId}" type="hidden">
+        <input type="hidden" id="state" th:value="미답변">
             <button class="savebtn" id="boardSave">작성 완료</button>
     </div>
 </div>
@@ -199,7 +205,8 @@
                     boardTitle: $("#boardTitle").val(),
                     boardContents: $("#boardContents").val(),
                     category:$("#category").val(),
-                    id: $("#id").val()
+                    id: $("#id").val(),
+                    state: $("#state").val()
                 },
                 success: function (data) {
                     console.log(data);

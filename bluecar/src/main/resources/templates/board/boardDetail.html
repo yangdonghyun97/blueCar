@@ -37,7 +37,8 @@
         font-weight: bold;
         font-size: 50px;
     }
-    .HomeIcon img{
+
+    .HomeIcon img {
         width: 200px;
     }
 
@@ -82,9 +83,13 @@
         border-radius: 10px;
 
     }
+
     .wrapper_body_main {
         width: 940px;
         padding: 20px;
+        border: 1px solid #aaaaaa;
+        box-shadow: 0px 0px 10px 0px #888888;
+        border-radius: 10px;
 
     }
 
@@ -95,6 +100,7 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
+
     }
 
     .wrapper_body_main_title p {
@@ -106,8 +112,7 @@
         outline: none;
         border: 1px solid white;
         font-weight: bold;
-        font-size: 30px;
-        margin-left: 20px;
+        font-size: 24px;
     }
 
     .wrapper_body_main_title p span {
@@ -156,7 +161,7 @@
         cursor: pointer;
     }
 
-    .writebtn{
+    .writebtn {
         width: 40px;
         height: 40px;
         border: 0;
@@ -246,7 +251,7 @@
         color: #3CB4FF;
     }
 
-    .wrapper_body_imgDomain{
+    .wrapper_body_imgDomain {
         margin-bottom: 100px;
         position: fixed;
         bottom: 0;
@@ -286,17 +291,18 @@
     .slide:nth-child(1) {
         background-image: url(/image/workation.jpg);
         animation-delay: 0;
-        box-shadow: 0px 0px 10px 0px gray;
+
     }
+
     .slide:nth-child(2) {
         background-image: url(/image/monthly-subscription.png);
         animation-delay: -2.5s;
-        box-shadow: 0px 0px 10px 0px gray;
+
     }
+
     .slide:nth-child(3) {
         background-image: url(/image/sideImage2.png);
         animation-delay: -5s;
-        box-shadow: 0px 0px 10px 0px gray;
     }
 
     @keyframes slider {
@@ -323,7 +329,7 @@
 <body>
 <div class="menubar">
 
-    <div class="HomeIcon"><a th:href="@{/}"><img src="/image/logo_blue.png" alt="svg"></a></div>
+    <div class="HomeIcon"><a th:href="@{/}"><img alt="svg" src="/image/logo_blue.png"></a></div>
 
     <div class="sidemenu">
         <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
@@ -345,7 +351,7 @@
         </div>
         <div class="wrapper_body_main">
             <div class="wrapper_body_main_title">
-                <p>제목<input id="boardTitle" name="boardTitle" readonly th:value="${board.boardTitle}" type="text"></p>
+                <p><input id="boardTitle" name="boardTitle" readonly th:value="${board.boardTitle}" type="text"></p>
                 <p><span>작성시간</span> <span th:utext="${board.date}"></span></p>
             </div>
             <div class="wrapper_body_main_header">
@@ -361,13 +367,13 @@
             </div>
             <div class="wrapper_body_main_contents">
                 <textarea class="contentBox" id="boardContents" name="boardContents" readonly
-                          th:utext="${board.boardContents}" th:remove="tag"></textarea>
+                          th:remove="tag" th:utext="${board.boardContents}"></textarea>
             </div>
             <input id="id" th:value="${board.id}" type="hidden">
             <div class="comment_domain">
 
                 <div class="commentList"></div>
-                <input type="hidden" th:value="${session.userId}" id="user_Id">
+                <input id="user_Id" th:value="${session.userId}" type="hidden">
                 <div th:if="${session.userId}">
                     <div class="commentInput">
                         <input id="commentWriter" readonly th:value="${session.userId}" type="text">
