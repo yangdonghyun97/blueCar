@@ -36,6 +36,10 @@
         VALUES (#{carDTO.area}, #{carDTO.model}, #{carDTO.yearRange}, #{carDTO.priceHors}, #{carDTO.priceDay}, #{storedFileName})
     </insert>
 
+    <delete id="carDelete" parameterType="String">
+        delete from car_tbl where id=#{id}
+    </delete>
+
 
 
 

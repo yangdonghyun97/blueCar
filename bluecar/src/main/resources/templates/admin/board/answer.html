@@ -20,6 +20,21 @@
             width: 100%;
             justify-content: end;
         }
+
+
+
+         .container {
+             padding: 2rem 0rem;
+         }
+
+        h4 {
+            margin: 2rem 0rem 1rem;
+        }
+
+        td, th {
+            vertical-align: middle;
+        }
+
     </style>
 </head>
 <body class="sb-nav-fixed">
@@ -154,6 +169,32 @@
 
                                 </tbody>
                             </table>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-image">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Contents</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="comment : ${comments}">
+
+                                            <td th:text="${comment.commentWriter}"></td>
+                                            <td th:text="${comment.commentContents}"></td>
+                                            <td></td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                         <form action="/admin/answerUpdate" method="post">
                             <input type="hidden" name="commentWriter" th:value="${session.userId}">
                             <input type="hidden" name="boardId" th:value="${board.id}">

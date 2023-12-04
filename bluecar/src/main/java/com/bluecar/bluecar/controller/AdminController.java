@@ -4,17 +4,12 @@ import com.bluecar.bluecar.dto.BoardDTO;
 import com.bluecar.bluecar.dto.CarDTO;
 import com.bluecar.bluecar.dto.CommentDTO;
 import com.bluecar.bluecar.dto.MemberDTO;
-import com.bluecar.bluecar.service.AdminService;
-import com.bluecar.bluecar.service.BoardService;
-import com.bluecar.bluecar.service.CarService;
-import com.bluecar.bluecar.service.MemberService;
+import com.bluecar.bluecar.service.*;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -28,22 +23,20 @@ public class AdminController {
     private final AdminService adminService;
     private final BoardService boardService;
     private final CarService carService;
+    private final CommentService commentService;
     @GetMapping("adminIndex")
     public String adminIndex(){
         return "adminIndex";
     }
 
-    @GetMapping("adminLogin")
+    @GetMapping("adminReg")
     public String adminLogin(HttpSession session){
     session.setAttribute("admin", "true");
-        return "user/loginform";
+        return "user/regform";
     }
 
 
-    @GetMapping("charts")
-    public String charts(){
-        return "admin/charts";
-    }
+
     @GetMapping("userList")
     public String userList(Model model){
         List<MemberDTO> memberInfo = adminService.findAll();
@@ -77,13 +70,23 @@ public class AdminController {
     @PostMapping("carReg")
     public String carReg(CarDTO carDTO)throws IOException {
         adminService.carSave(carDTO);
-        return "redirect: admin/car/enrollment";
+        return "redirect:carList";
+    }
+
+    @GetMapping("carDelete/{id}")
+    public String carDelete(@PathVariable("id") String id){
+        System.out.println("id = " + id);
+        adminService.carDelete(id);
+        return "redirect:/admin/carList";
     }
 
 
     @GetMapping("answer/{id}")
     public String answer(BoardDTO boardDTO ,Model model){
       BoardDTO boardInfo = boardService.findById(boardDTO.getId());
+
+      List<CommentDTO> commentInfo = commentService.findAll(boardDTO.getId());
+      model.addAttribute("comments", commentInfo);
       model.addAttribute("board",boardInfo);
       return "admin/board/answer";
     }

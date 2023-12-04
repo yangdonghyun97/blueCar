@@ -96,7 +96,6 @@
         height: 60px;
         font-size: 15px;
         padding: 20px 15px 20px 60px;
-        margin-bottom: 10px;
         outline: none;
         border: 1px solid #e9ebee;
         border-radius: 5px;
@@ -248,7 +247,7 @@
                     <input class="input_date" id="date" name="yeardate" oninput="datecheck()" placeholder="생년월일 YYYY/MM/DD" th:maxlength="8"
                            type="text">
                 </div>
-                <input class="btn"  id="submitBtn" type="submit" value="회원가입 " disabled>
+                <button class="btn"  id="submitBtn" type="submit" disabled>회원가입</button>
                 <input type="hidden" name="admin" th:value="${session.admin != null ? session.admin : 'false'}">
             </form>
     </div>

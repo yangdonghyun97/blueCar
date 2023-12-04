@@ -144,6 +144,21 @@
         cursor: pointer;
         outline: none;
     }
+    .loginInstructions{
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+        color: #C4C4C4;
+    }
+
+    .kakaoBtn{
+        border: 1px solid white;
+        background-color: white;
+    }
+
+    .kakaoBtn:hover{
+       cursor: pointer;
+    }
 
     .btn:active {
         box-shadow: inset -0.3rem -0.1rem 1.4rem #FBFBFB, inset 0.3rem 0.4rem 0.8rem #BEC5D0;
@@ -185,8 +200,10 @@
 
 
         <button class="btn" id="submitBtn" onclick="submit()">로그인</button>
+        <div class="loginInstructions"> 또는</div>
+    <button class="kakaoBtn" onclick="kakaoLogin()"><img src="/image/kakao_login_medium_narrow.png" alt=""> </button>
     </div>
-    <a href="javascript:kakaoLogin();">로그인</a>
+
 <!--    <div id="naver_id_login"></div>-->
 </div>
 </body>

@@ -136,7 +136,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Update</h1>
+                <h1 class="mt-4">차량등록</h1>
 
                 <div class="card mb-4">
                     <div class="card-body">
@@ -172,7 +172,7 @@
                             </div>
 
                             <div class="submit">
-                                <button class="btn btn-primary" style="margin-top: 10px" type="submit">수정</button>
+                                <button class="btn btn-primary" style="margin-top: 10px" type="submit">등록</button>
                             </div>
                         </form>
                     </div>
@@ -199,36 +199,6 @@
 <script crossorigin="anonymous"
         src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
 <script src="/js/datatables-simple-demo.js"></script>
-<script>
 
-
-    $(document).ready(function () {
-
-
-
-        $(".delete-btn").click(function () {
-            let userId = $(this).data('user-id');
-            alert(userId);
-            $.ajax({
-                url: "/member/delete",
-                method: "get",
-                data: {
-                    id: userId
-                },
-                success: function (data) {
-                    if (data == 1) {
-                        alert("삭제되었습니다.");
-                        window.location.href = "/admin/tables"
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX 오류: ", xhr.responseText);
-                }
-            });
-        });
-
-    })
-
-</script>
 </body>
 </html>

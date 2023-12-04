@@ -50,4 +50,8 @@ public class AdminService {
 
         adminRepository.carSave(carDTO,storedFileName);
     }
+
+    public void carDelete(String id) {
+        adminRepository.carDelete(id);
+    }
 }

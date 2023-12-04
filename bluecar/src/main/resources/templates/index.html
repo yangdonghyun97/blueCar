@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
     <title>BlueCar</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <style>
@@ -308,7 +309,7 @@
         <div class="wrapper_header">
             <div class="wrapper_header_menubar">
                 <div>
-                    <div class="HomeIcon"> <a th:href="@{/static}"><img src="/image/logo_blue.png" alt="svg"></a></div>
+                    <div class="HomeIcon"> <a th:href="@{/}"><img src="/image/logo_blue.png" alt="svg"></a></div>
 
                     <div class="menuIcon">
                         <input id="menuicon" type="checkbox">
@@ -330,7 +331,7 @@
                                 <li class="sideMenu"><a th:href="@{/car/carlist}">차량 예약</a></li>
                                 <li class="sideMenu"><a th:href="@{/board/informationUse}">이용 약관</a></li>
                                 <li class="sideMenu"><a th:href="@{/board/}">QnA게시판</a></li>
-                                <li class="sideMenu"></li>
+                                <li class="sideMenu" th:if="${session.admin == 'true'}"><a th:href="@{/admin/adminPage}">어드민페이지</a></li>
                             </ul>
                         </div>
                     </div>
@@ -388,13 +389,15 @@
                 </div>
             </div>
 
-
+        <input type="hidden" id="admin" th:value="${session.admin}">
         </div>
 
 
     </div>
 </div>
+<script>
 
+</script>
 </body>
 
 </html>

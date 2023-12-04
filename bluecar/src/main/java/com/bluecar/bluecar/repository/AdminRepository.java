@@ -26,4 +26,6 @@ public interface AdminRepository {
     void adminCommentSave(CommentDTO commentDTO);
 
     void carSave(CarDTO carDTO, @Param("storedFileName") String storedFileName);
+
+    void carDelete(@Param("id") String id);
 }

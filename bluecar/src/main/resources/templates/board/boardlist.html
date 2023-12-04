@@ -205,20 +205,32 @@
         margin-top: 10px;
     }
 
-    .wrapper_body_imgDomain{
-        margin-bottom: 100px;
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        width: 450px;
-        height: 600px;
-    }
-
     .wrapper_body_imgDomain img {
         width: 300px;
         height: 700px;
     }
 
+
+    #stateZone{
+       font-size: medium;
+        font-style: revert;
+        font-weight: bold;
+    }
+
+    .wrapper_body_imgDomain {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 311px;
+        height: 600px;
+
+    }
+
+    .wrapper_body_imgDomain img {
+        width: 300px;
+        height: 700px;
+
+    }
 
     .slider {
         position: relative;
@@ -232,10 +244,11 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 360px;
-        height: 600px;
+        width: 300px;
+        height: 400px;
         background-size: cover;
         background-position: center;
+
 
         animation: slider 7.5s infinite linear;
     }
@@ -243,11 +256,15 @@
     .slide:nth-child(1) {
         background-image: url(/image/workation.jpg);
         animation-delay: 0;
+
     }
+
     .slide:nth-child(2) {
         background-image: url(/image/monthly-subscription.png);
         animation-delay: -2.5s;
+
     }
+
     .slide:nth-child(3) {
         background-image: url(/image/sideImage2.png);
         animation-delay: -5s;
@@ -274,14 +291,13 @@
         }
     }
 
-
 </style>
 <body>
 
 
 <div class="menubar">
 
-    <div class="HomeIcon"><a th:href="@{/static}"><img src="/image/logo_blue.png" alt="svg"></a></div>
+    <div class="HomeIcon"><a th:href="@{/}"><img src="/image/logo_blue.png" alt="svg"></a></div>
 
     <div class="sidemenu">
         <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
@@ -306,18 +322,19 @@
                 <p class="menu-link" data-category="요금">요금</p>
             </li>
             <li class="menu-item">
-                <p class="menu-link" data-category="사고">사고</p>
-            </li>
-            <li class="menu-item">
-                <p class="menu-link" data-category="픽업">픽업</p>
+                <p class="menu-link" data-category="장소">장소</p>
             </li>
             <li class="menu-item">
                 <p class="menu-link" data-category="일정">일정</p>
+            </li>
+            <li class="menu-item">
+                <p class="menu-link" data-category="차량">차량</p>
             </li>
         </ul>
         <div class="wrapper_body_main" id="table">
             <table>
                 <tr>
+                    <th></th>
                     <th></th>
                     <th>번호</th>
                     <th>제목</th>
@@ -326,7 +343,8 @@
                     <th>조회수</th>
                 </tr>
                 <tr th:each="board : ${boards}">
-                    <td style="max-width: 72px"><span class="category" th:text="${board.category}"></span></td>
+                    <td id="stateZone" th:text="${board.state}" ></td>
+                    <td><span class="category" th:text="${board.category}"></span></td>
                     <td th:text="${board.id}"></td>
                     <td>
                         <a th:href="@{/board/boardDetail(id=${board.id})}" th:text="${board.boardTitle}"></a>

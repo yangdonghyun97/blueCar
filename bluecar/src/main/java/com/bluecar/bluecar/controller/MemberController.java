@@ -60,35 +60,12 @@ public class MemberController {
         } else {
             session.setAttribute("userId", memberInfo.getUserId());
             session.setAttribute("id", memberInfo.getId());
-            session.setAttribute("kakaoToken", kakaoToken);
+            session.setAttribute("admin", memberInfo.getAdmin());
             result = "1";
         }
 
         return result;
     }
-
-
-    @GetMapping("/naverLogin")
-    public @ResponseBody String naverLogin(@RequestParam("email") String email,
-                                           @RequestParam("naverToken") String naverToken,
-                                           HttpSession session) {
-        // Validate the Kakao token (you may want to call Kakao API to validate)
-        // Process Kakao login logic
-        MemberDTO memberInfo = memberService.findByEmail(email);
-        String result = "";
-
-        if (memberInfo == null) {
-            result = "0";
-        } else {
-            session.setAttribute("userId", memberInfo.getUserId());
-            session.setAttribute("id", memberInfo.getId());
-            session.setAttribute("naverToken", naverToken);
-            result = "1";
-        }
-
-        return result;
-    }
-
 
 
     @PostMapping("/login")
@@ -107,6 +84,8 @@ public class MemberController {
         if (inputPw.equals(storedPw)) {
             session.setAttribute("userId", memberDTO.getUserId());
             session.setAttribute("id", memberDTO.getId());
+            System.out.println("memberDTO.getAdmin() = " + memberDTO.getAdmin());
+            session.setAttribute("admin",memberDTO.getAdmin());
             return "성공";
         }
 
@@ -115,7 +94,8 @@ public class MemberController {
     @GetMapping("/logout")
     public String  logout(HttpSession session){
         session.removeAttribute("userId");
-        session.removeAttribute("kakaoToken");
+        session.removeAttribute("admin");
+        session.removeAttribute("id");
         return "redirect:/";
     }
 
