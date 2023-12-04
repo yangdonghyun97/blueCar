@@ -3,6 +3,7 @@ package com.bluecar.bluecar.repository;
 import com.bluecar.bluecar.dto.CarDTO;
 import com.bluecar.bluecar.dto.CommentDTO;
 import com.bluecar.bluecar.dto.MemberDTO;
+import com.bluecar.bluecar.dto.PaymentDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -28,4 +29,8 @@ public interface AdminRepository {
     void carSave(CarDTO carDTO, @Param("storedFileName") String storedFileName);
 
     void carDelete(@Param("id") String id);
+
+    List<PaymentDTO> paymentList();
+
+    void paymentDelete(@Param("id") String id);
 }

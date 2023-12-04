@@ -14,18 +14,11 @@
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="adminPage">SOCAR</a>
+    <a class="navbar-brand ps-3" href="/admin/adminPage">SOCAR</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" href="#!" id="sidebarToggle"><i
             class="fas fa-bars"></i></button>
-    <!-- Navbar Search-->
-    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input aria-describedby="btnNavbarSearch" aria-label="Search for..." class="form-control" placeholder="Search for..."
-                   type="text"/>
-            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-        </div>
-    </form>
+    <
     <!-- Navbar-->
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
@@ -47,16 +40,16 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <div class="sb-sidenav-menu-heading">User</div>
                     <a class="nav-link" href="/">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         홈페이지가기
                     </a>
-                    <a class="nav-link" href="adminReg">
+                    <a class="nav-link" href="/admin/adminReg">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         관리자 가입
                     </a>
-                    <div class="sb-sidenav-menu-heading">Addons</div>
+                    <div class="sb-sidenav-menu-heading">Administration</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         차량 관리
@@ -64,19 +57,19 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="carList">차량 목록</a>
-                            <a class="nav-link" href="enrollment">차량 등록</a>
+                            <a class="nav-link" href="/admin/carList">차량 목록</a>
+                            <a class="nav-link" href="/admin/enrollment">차량 등록</a>
                         </nav>
                     </div>
-                    <a class="nav-link" href="charts">
+                    <a class="nav-link" href="/admin/paymentList">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                        Charts
+                        매출 관리
                     </a>
-                    <a class="nav-link" href="userList">
+                    <a class="nav-link" href="/admin/userList">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         유저목록보기
                     </a>
-                    <a class="nav-link" href="boardList">
+                    <a class="nav-link" href="/admin/boardList">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         게시글목록보기
                     </a>
@@ -91,32 +84,18 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Dashboard</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Dashboard</li>
-                </ol>
-                <div class="row">
-                    <div class="col-xl-3 col-md-6">
 
-                    </div>
+                <div class="row">
+
                 </div>
                 <div class="row">
-                    <div class="col-xl-6">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-area me-1"></i>
-                                Area Chart Example
-                            </div>
-                            <div class="card-body">
-                                <canvas height="40" id="myAreaChart" width="100%"></canvas>
-                            </div>
-                        </div>
+                    <div class="col-xl6">
+
                     </div>
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-chart-bar me-1"></i>
-                                Bar Chart Example
+
                             </div>
                             <div class="card-body">
                                 <canvas height="40" id="myBarChart" width="100%"></canvas>

@@ -1,9 +1,6 @@
 package com.bluecar.bluecar.controller;
 
-import com.bluecar.bluecar.dto.BoardDTO;
-import com.bluecar.bluecar.dto.CarDTO;
-import com.bluecar.bluecar.dto.CommentDTO;
-import com.bluecar.bluecar.dto.MemberDTO;
+import com.bluecar.bluecar.dto.*;
 import com.bluecar.bluecar.service.*;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
@@ -17,63 +14,63 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final AdminService adminService;
     private final BoardService boardService;
     private final CarService carService;
     private final CommentService commentService;
-    @GetMapping("adminIndex")
+    @GetMapping("/adminIndex")
     public String adminIndex(){
-        return "adminIndex";
+        return "/admin/adminIndex";
     }
 
-    @GetMapping("adminReg")
+    @GetMapping("/adminReg")
     public String adminLogin(HttpSession session){
     session.setAttribute("admin", "true");
-        return "user/regform";
+        return "/user/regform";
     }
 
 
 
-    @GetMapping("userList")
+    @GetMapping("/userList")
     public String userList(Model model){
         List<MemberDTO> memberInfo = adminService.findAll();
         System.out.println("memberInfo = " + memberInfo);
         model.addAttribute("users", memberInfo);
-        return "admin/user/userList";
+        return "/admin/user/userList";
     }
-    @GetMapping("boardList")
+    @GetMapping("/boardList")
     public String boardList(Model model){
         List<BoardDTO> boardList = boardService.findAll();
         System.out.println("boardList = " + boardList);
         model.addAttribute("boards", boardList);
-        return "admin/board/boardList";
+        return "/admin/board/boardList";
     }
 
-    @GetMapping("carList")
+    @GetMapping("/carList")
     public String carList(Model model){
         List<CarDTO> carList = carService.findAll();
         model.addAttribute("cars", carList);
-        return "admin/car/carList";
+        return "/admin/car/carList";
     }
 
 
-    @GetMapping("enrollment")
+    @GetMapping("/enrollment")
     public String enrollment(CarDTO carDTO) {
 
 
-        return "admin/car/enrollment";
+        return "/admin/car/enrollment";
     }
 
-    @PostMapping("carReg")
+    @PostMapping("/carReg")
     public String carReg(CarDTO carDTO)throws IOException {
         adminService.carSave(carDTO);
         return "redirect:carList";
     }
 
-    @GetMapping("carDelete/{id}")
+    @GetMapping("/carDelete/{id}")
     public String carDelete(@PathVariable("id") String id){
         System.out.println("id = " + id);
         adminService.carDelete(id);
@@ -81,14 +78,14 @@ public class AdminController {
     }
 
 
-    @GetMapping("answer/{id}")
+    @GetMapping("/answer/{id}")
     public String answer(BoardDTO boardDTO ,Model model){
       BoardDTO boardInfo = boardService.findById(boardDTO.getId());
 
       List<CommentDTO> commentInfo = commentService.findAll(boardDTO.getId());
       model.addAttribute("comments", commentInfo);
       model.addAttribute("board",boardInfo);
-      return "admin/board/answer";
+      return "/admin/board/answer";
     }
 
     @GetMapping("/user/updateForm/{id}")
@@ -96,7 +93,7 @@ public class AdminController {
    MemberDTO memberInfo= adminService.findId(memberDTO);
 
       model.addAttribute("user",memberInfo);
-        return "admin/user/update";
+        return "/admin/user/update";
     }
 
     @PostMapping("userUpdate")
@@ -116,13 +113,27 @@ public class AdminController {
     }
 
 
-    @GetMapping("adminPage")
+    @GetMapping("/adminPage")
     public String adminPage(Model model) {
         List<MemberDTO> memberInfo = adminService.findAll();
         System.out.println("memberInfo = " + memberInfo);
         model.addAttribute("users", memberInfo);
-        return "admin/adminPage";
+        return "/admin/adminPage";
     }
 
 
+
+    @GetMapping("/paymentList")
+    public String paymentList(Model model){
+       List<PaymentDTO> paymentDTOS= adminService.paymentList();
+       model.addAttribute("payments",paymentDTOS);
+        System.out.println("paymentDTOS = " + paymentDTOS);
+       return "admin/payment/paymentList";
+    }
+
+    @GetMapping("/paymentDelete/{id}")
+public String paymentDelete(@PathVariable("id") String id){
+adminService.paymentDelete(id);
+        return "redirect:/admin/paymentList";
+    }
 }

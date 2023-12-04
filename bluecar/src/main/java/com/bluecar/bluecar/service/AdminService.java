@@ -1,9 +1,6 @@
 package com.bluecar.bluecar.service;
 
-import com.bluecar.bluecar.dto.BoardDTO;
-import com.bluecar.bluecar.dto.CarDTO;
-import com.bluecar.bluecar.dto.CommentDTO;
-import com.bluecar.bluecar.dto.MemberDTO;
+import com.bluecar.bluecar.dto.*;
 import com.bluecar.bluecar.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -53,5 +50,13 @@ public class AdminService {
 
     public void carDelete(String id) {
         adminRepository.carDelete(id);
+    }
+
+    public List<PaymentDTO> paymentList() {
+        return adminRepository.paymentList();
+    }
+
+    public void paymentDelete(String id) {
+        adminRepository.paymentDelete(id);
     }
 }

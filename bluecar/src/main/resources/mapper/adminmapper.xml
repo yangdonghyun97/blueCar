@@ -40,6 +40,14 @@
         delete from car_tbl where id=#{id}
     </delete>
 
+    <select id="paymentList" resultType="com.bluecar.bluecar.dto.PaymentDTO">
+        select * from payment_tbl
+    </select>
+
+    <delete id="paymentDelete"  parameterType="String">
+        delete from payment_tbl where id=#{id}
+    </delete>
+
 
 
 
