@@ -4,6 +4,8 @@ import com.bluecar.bluecar.dto.BoardDTO;
 import com.bluecar.bluecar.dto.PageDTO;
 import com.bluecar.bluecar.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -61,7 +63,10 @@ public class BoardController {
     public String findById(@RequestParam("id") Long id, Model model){
         boardService.updateHits(id);
        BoardDTO boardDTO = boardService.findById(id);
+        String text = boardDTO.getBoardContents();
+        String convertingText = Jsoup.clean(text, Whitelist.none());
        model.addAttribute("board",boardDTO);
+       model.addAttribute("boardContent",convertingText);
         return "board/boardDetail";
     }
 

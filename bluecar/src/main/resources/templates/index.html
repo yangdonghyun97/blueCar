@@ -352,6 +352,7 @@
                     <div class="floating_content"><a th:href="@{/member/logout}">로그아웃</a></div>
                 </div>
                 <div th:if="${session.kakaoToken}">
+                    <span><img src="/image/appLogo.png" alt="logo"></span>
                     <div class="floating_content">  <a href="https://kauth.kakao.com/oauth/logout?client_id=003ac2ffcc45c4b326ade22cfb55812d&logout_redirect_uri=http://localhost:8083/member/logout">로그아웃</a></div>
                 </div>
                 <div th:unless="${session.userId}">

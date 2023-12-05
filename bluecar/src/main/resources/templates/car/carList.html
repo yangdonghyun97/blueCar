@@ -219,7 +219,6 @@
                 // let priceHors = carBox.querySelector('.priceHors').innerText;
                 let priceDay = carBox.querySelector('.priceDay').innerText;
                 let car_id = carBox.querySelector('#car_id').value;
-                alert(src);
 
                 let dto = `?area=${encodeURIComponent(area)}&storedFileName=${encodeURIComponent(src)}&model=${encodeURIComponent(model)}&yearRange=${encodeURIComponent(yearRange)}&priceDay=${encodeURIComponent(priceDay)}&id=${encodeURIComponent(car_id)}`;
                window.location.href="/car/carDetail"+ dto;

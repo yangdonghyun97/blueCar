@@ -132,7 +132,6 @@
         flex-grow: 1.2;
     }
     .menu-link {
-        /* block이면 마우스 클릭영역이 더 커짐, a태그는 inline으로서 클릭영역이 콘텐츠에 한정됨*/
         display: block;
         padding: 16px;
         font-size: 18px;
@@ -300,8 +299,7 @@
     <div class="HomeIcon"><a th:href="@{/}"><img src="/image/logo_blue.png" alt="svg"></a></div>
 
     <div class="sidemenu">
-        <div class="sidemenu2"><a th:href="@{/board/}">이용방법</a></div>
-        <div class="sidemenu2"><a th:href="@{/member/regform}">회원가입</a></div>
+
     </div>
 </div>
 <div class="wrapper">
@@ -325,10 +323,10 @@
                 <p class="menu-link" data-category="장소">장소</p>
             </li>
             <li class="menu-item">
-                <p class="menu-link" data-category="일정">일정</p>
+                <p class="menu-link" data-category="차량">차량</p>
             </li>
             <li class="menu-item">
-                <p class="menu-link" data-category="차량">차량</p>
+                <p class="menu-link" data-category="기타">기타</p>
             </li>
         </ul>
         <div class="wrapper_body_main" id="table">
@@ -404,6 +402,7 @@
 
         let tableContent = `<table><tr>
             <th></th>
+            <th></th>
             <th>번호</th>
             <th>제목</th>
             <th>작성자</th>
@@ -415,6 +414,7 @@
         boards.forEach(function (board) {
             tableContent += `
         <tr>
+        <td id="stateZone">${board.state}</td>
             <td><span class="category">${board.category}</span></td>
             <td>${board.id}</td>
             <td><a href="/board/boardDetail?id=${board.id}">${board.boardTitle}</a></td>

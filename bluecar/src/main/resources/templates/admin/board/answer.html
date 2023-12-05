@@ -214,7 +214,6 @@
         //삭제
         $(".delete-btn").click(function () {
             let userId= $(this).data('user-id');
-            alert(userId);
             $.ajax({
                 url: "/member/delete",
                 method: "get",

@@ -318,12 +318,14 @@ let email
             success: function (res) {
                 if (res == "성공") {
                     location.href = "/";
+                }else {
+                    alert("계정을 다시 확인해주세요");
                 }
                 document.getElementById("hidden").style.color = "red";
-                document.getElementById("hidden").innerText = res;
+
             },
             error: function (res) {
-                document.getElementById("hidden").innerText = res;
+
                 document.getElementById("hidden").style.color = "red";
             }
         });

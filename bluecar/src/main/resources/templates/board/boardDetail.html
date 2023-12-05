@@ -5,7 +5,6 @@
     <title>Title</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
 <style>
     * {
         box-sizing: border-box;
@@ -384,8 +383,8 @@
                 </div>
             </div>
             <div class="wrapper_body_main_contents">
-                <textarea class="contentBox" id="boardContents" name="boardContents" readonly
-                          th:remove="tag" th:utext="${board.boardContents}"></textarea>
+                <textarea class="contentBox" id="boardContents" name="boardContents" readOnly
+                          th:text="${boardContent}"></textarea>
             </div>
             <input id="id" th:value="${board.id}" type="hidden">
             <div class="comment_domain">
@@ -412,18 +411,7 @@
     const user_Id = $("#user_Id").val();
     const session_ID = $("#commentWriter").val();
 
-    const firstUpdateBtn = () => {
 
-        document.querySelector("#boardContents").readOnly = false;
-        document.querySelector("#boardContents").style.border = "1px solid blue";
-        document.querySelector("#boardContents").focus();
-        document.querySelector("#boardTitle").readOnly = false;
-        document.querySelector("#boardTitle").style.borderBottom = "1px solid blue";
-
-        document.querySelector("#boardUpdate").style.visibility = 'visible';
-        document.querySelector("#firstUpdateBtn").style.display = 'none';
-
-    }
     const commentList = () => {
         $.ajax({
             url: "/comment/list",
@@ -481,33 +469,6 @@
     }
 
     $(document).ready(function () {
-        $("#boardUpdate").click(function () {
-
-            if (!titleCheck() || !contetnsCheck()) {
-                return;
-            }
-            $.ajax({
-                url: "/board/update",
-                method: "post",
-                data: {
-                    boardTitle: $("#boardTitle").val(),
-                    boardContents: $("#boardContents").val(),
-                    id: $("#id").val()
-                },
-
-                success: function (data) {
-                    console.log(data);
-                    location.href = "/board/";
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX 오류: ", xhr.responseText);
-                }
-            });
-
-        });
-    });
-
-    $(document).ready(function () {
 
         commentList()
         $("#comment-write-btn").click(function () {
@@ -535,6 +496,50 @@
             });
 
         });
+
+        $("#boardUpdate").click(function () {
+
+            if (!titleCheck() || !contetnsCheck()) {
+                return;
+            }
+            $.ajax({
+                url: "/board/update",
+                method: "post",
+                data: {
+                    boardTitle: $("#boardTitle").val(),
+                    boardContents: $("#boardContents").val(),
+                    id: $("#id").val()
+                },
+
+                success: function (data) {
+                    console.log(data);
+                    location.href = "/board/";
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX 오류: ", xhr.responseText);
+                }
+            });
+
+        });
+
+
+        $("#boardDelete").click(function () {
+            $.ajax({
+                url: "/board/delete",
+                method: "post",
+                data: {
+                    id: $("#id").val()
+                },
+                // AJAX 요청 전에 실행될 함수
+                success: function (data) {
+                    console.log(data);
+                    location.href = "/board/";
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX 오류: ", xhr.responseText);
+                }
+            });
+        });
     });
     const titleCheck = () => {
         const boardTitleValue = document.querySelector("#boardTitle").value;
@@ -556,25 +561,17 @@
     }
 
 
-    $(document).ready(function () {
-        $("#boardDelete").click(function () {
-            $.ajax({
-                url: "/board/delete",
-                method: "post",
-                data: {
-                    id: $("#id").val()
-                },
-                // AJAX 요청 전에 실행될 함수
-                success: function (data) {
-                    console.log(data);
-                    location.href = "/board/";
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX 오류: ", xhr.responseText);
-                }
-            });
-        });
-    });
+    const firstUpdateBtn = () => {
+        document.querySelector("#boardContents").style.border = "1px solid blue";
+        document.querySelector("#boardContents").focus();
+        document.querySelector("#boardTitle").readOnly = false;
+        document.querySelector("#boardTitle").style.borderBottom = "1px solid blue";
+        document.querySelector("#boardContents").readOnly = false;
+        document.querySelector("#boardUpdate").style.visibility = 'visible';
+        document.querySelector("#firstUpdateBtn").style.display = 'none';
+
+    }
+
 
 </script>
 </html>

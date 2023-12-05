@@ -61,6 +61,7 @@ public class MemberController {
             session.setAttribute("userId", memberInfo.getUserId());
             session.setAttribute("id", memberInfo.getId());
             session.setAttribute("admin", memberInfo.getAdmin());
+            session.setAttribute("kakaoToken",kakaoToken);
             result = "1";
         }
 
@@ -96,6 +97,8 @@ public class MemberController {
         session.removeAttribute("userId");
         session.removeAttribute("admin");
         session.removeAttribute("id");
+        session.removeAttribute("kakaoToken");
+
         return "redirect:/";
     }
 
@@ -151,6 +154,9 @@ public class MemberController {
         int result = memberService.delte(memberDTO);
         System.out.println("memberDTO = " + memberDTO);
         session.removeAttribute("userId");
+        session.removeAttribute("admin");
+        session.removeAttribute("id");
+        session.removeAttribute("kakaoToken");
 
       return String.valueOf(result);
     }

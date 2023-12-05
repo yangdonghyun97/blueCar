@@ -45,6 +45,9 @@
           padding-top: 10px;
             font-size: 25px;
         }
+        input{
+            border: 1px solid white;
+        }
         button{
             border: 1px solid white;
             border-radius: 10px;
@@ -172,7 +175,7 @@
                                             <td th:text="${#numbers.formatCurrency(payment.amount)}"></td>
 
                                             <td>
-                                                <button class="payment-btn" th:data-payment-id="${payment.id}">예약취소</button>
+                                                <button class="payment-btn" th:data-payment-id="${payment.id}">환불</button>
                                             </td>
                                             <td></td>
                                         </tr>
@@ -244,35 +247,34 @@
             startRental = start;
             endRental = end;
 
-            // Filter the table when a new date range is selected
+
             filterTableByDateRange(startRentalConversion, endRentalConversion);
 
-            // Calculate and display the total amount after filtering
+
             updateTotalAmount();
         });
 
         function filterTableByDateRange(startDate, endDate) {
             $("tbody tr").each(function () {
-                let startRentalDate = $(this).find("td:eq(3)").text(); // Assuming the start date is in the 4th column
-                let endRentalDate = $(this).find("td:eq(4)").text();   // Assuming the end date is in the 5th column
+                let startRentalDate = $(this).find("td:eq(3)").text();
+                let endRentalDate = $(this).find("td:eq(4)").text();
 
                 if (startRentalDate >= startDate && endRentalDate <= endDate) {
-                    $(this).show(); // Show the row
+                    $(this).show();
                 } else {
-                    $(this).hide(); // Hide the row
+                    $(this).hide();
                 }
             });
         }
 
         function updateTotalAmount() {
-            let totalAmount = 0; // Initialize to 0.0 instead of 0
-            // Calculate the total amount after filtering
+            let totalAmount = 0;
+
             $("tbody tr:visible").each(function () {
                 let amount = parseFloat($(this).find("td:eq(6)").text().replace(/[^\d.-]+/g, ''));
                 totalAmount += amount;
             });
             totalAmount -= 3;
-            // Update the total amount on the screen
             $("#totalAmount").text(new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalAmount));
 
         }
@@ -282,7 +284,7 @@
 
         $(".payment-btn").click(function () {
             let id = $(this).data('payment-id');
-            alert(id);
+
             window.location.href = "/admin/paymentDelete/" + encodeURIComponent(id);
         });
 

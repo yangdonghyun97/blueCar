@@ -100,7 +100,7 @@ public class AdminController {
     public String userUpdate(MemberDTO memberDTO){
         System.out.println("memberDTO = " + memberDTO);
         adminService.userUpdate(memberDTO);
-       return "redirect:/admin/user/update";
+       return "redirect:/admin/userList";
 
     }
     @PostMapping("/answerUpdate")

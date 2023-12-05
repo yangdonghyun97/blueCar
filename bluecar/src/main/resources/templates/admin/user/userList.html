@@ -156,7 +156,6 @@
         $(document).ready(function () {
             $(".delete-btn").click(function () {
                 let userId= $(this).data('user-id');
-                alert(userId);
                 $.ajax({
                     url: "/member/delete",
                     method: "get",
@@ -166,7 +165,7 @@
                     success: function (data) {
                         if (data == 1) {
                             alert("삭제되었습니다.");
-                            window.location.href="/admin/tables"
+                            window.location.href="/admin/userList"
                         }
                     },
                     error: function (xhr, status, error) {
@@ -179,7 +178,6 @@
 
             $(".update-btn").click(function () {
                 let id= $(this).data('user-id');
-                alert(id);
                 window.location.href="user/updateForm/"+id;
             });
 
