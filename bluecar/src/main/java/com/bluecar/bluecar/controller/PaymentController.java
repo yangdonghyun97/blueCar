@@ -33,8 +33,6 @@ public class PaymentController {
 
     @PostMapping("/save")
     public @ResponseBody String save(@RequestBody PaymentDTO paymentDTO){
-        System.out.println("paymentDTO = " + paymentDTO);
-
         int result = paymentService.save(paymentDTO);
         return String.valueOf(result);
 

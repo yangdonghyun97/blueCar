@@ -37,14 +37,12 @@ public class AdminController {
     @GetMapping("/userList")
     public String userList(Model model){
         List<MemberDTO> memberInfo = adminService.findAll();
-        System.out.println("memberInfo = " + memberInfo);
         model.addAttribute("users", memberInfo);
         return "/admin/user/userList";
     }
     @GetMapping("/boardList")
     public String boardList(Model model){
         List<BoardDTO> boardList = boardService.findAll();
-        System.out.println("boardList = " + boardList);
         model.addAttribute("boards", boardList);
         return "/admin/board/boardList";
     }
@@ -72,7 +70,6 @@ public class AdminController {
 
     @GetMapping("/carDelete/{id}")
     public String carDelete(@PathVariable("id") String id){
-        System.out.println("id = " + id);
         adminService.carDelete(id);
         return "redirect:/admin/carList";
     }
@@ -98,7 +95,6 @@ public class AdminController {
 
     @PostMapping("userUpdate")
     public String userUpdate(MemberDTO memberDTO){
-        System.out.println("memberDTO = " + memberDTO);
         adminService.userUpdate(memberDTO);
        return "redirect:/admin/userList";
 
@@ -116,7 +112,6 @@ public class AdminController {
     @GetMapping("/adminPage")
     public String adminPage(Model model) {
         List<MemberDTO> memberInfo = adminService.findAll();
-        System.out.println("memberInfo = " + memberInfo);
         model.addAttribute("users", memberInfo);
         return "/admin/adminPage";
     }
@@ -127,7 +122,6 @@ public class AdminController {
     public String paymentList(Model model){
        List<PaymentDTO> paymentDTOS= adminService.paymentList();
        model.addAttribute("payments",paymentDTOS);
-        System.out.println("paymentDTOS = " + paymentDTOS);
        return "admin/payment/paymentList";
     }
 

@@ -58,13 +58,12 @@
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <!-- Navbar Brand-->
+
     <a class="navbar-brand ps-3" href="/admin/adminPage">SOCAR</a>
-    <!-- Sidebar Toggle-->
+
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" href="#!" id="sidebarToggle"><i
             class="fas fa-bars"></i></button>
-    <
-    <!-- Navbar-->
+
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
             <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown"
@@ -213,7 +212,7 @@
 <script>
 
     $(document).ready(function () {
-        // 달력 api
+
         let startRental;
         let endRental;
         let startRentalConversion;
@@ -279,7 +278,7 @@
 
         }
 
-        // 초기화
+
         let totalAmount = 0;
 
         $(".payment-btn").click(function () {
@@ -288,14 +287,14 @@
             window.location.href = "/admin/paymentDelete/" + encodeURIComponent(id);
         });
 
-        // 각 결제 항목의 가격을 가져와서 총 합계 계산
+
         $("tbody tr").each(function () {
             let amount = parseFloat($(this).find("td:eq(6)").text().replace(/[^0-9.-]+/g, ''));
             totalAmount += amount;
         });
 
 
-        // 총 합계를 화면에 출력
+
         $("#totalAmount").text(new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalAmount));
     });
 </script>

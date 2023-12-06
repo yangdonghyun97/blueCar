@@ -107,7 +107,6 @@ public class MemberController {
     @PostMapping("/save")
     public String memberSave(MemberDTO member, Model model) {
         int result = memberService.save(member);
-        System.out.println("result = " + result);
         if (result == 1) {
             model.addAttribute("memberId", member.getId());
             return "redirect:/";
@@ -120,10 +119,7 @@ public class MemberController {
     @PostMapping("/duplicateCheck")
     public @ResponseBody String idCheck(MemberDTO memberDTO){
        MemberDTO userId = memberService.findId(memberDTO);
-        System.out.println("userId = " + userId);
 
-        // 0 이면 사용가능
-        // 1 이면 불가능
        if(userId == null){
            return "0";
        }
@@ -131,7 +127,6 @@ public class MemberController {
         if(!userId.getUserId().isEmpty()){
             return "1";
         }else {
-            // 아이디 사용가능
             return "0";
         }
 
@@ -152,7 +147,6 @@ public class MemberController {
     @GetMapping("/delete")
     public @ResponseBody String  memberDelete(MemberDTO memberDTO, HttpSession session){
         int result = memberService.delte(memberDTO);
-        System.out.println("memberDTO = " + memberDTO);
         session.removeAttribute("userId");
         session.removeAttribute("admin");
         session.removeAttribute("id");
@@ -164,7 +158,6 @@ public class MemberController {
     @GetMapping("/adminDelete")
     public @ResponseBody String  adminDelete(MemberDTO memberDTO, HttpSession session){
         int result = memberService.delte(memberDTO);
-        System.out.println("memberDTO = " + memberDTO);
         return String.valueOf(result);
     }
 }

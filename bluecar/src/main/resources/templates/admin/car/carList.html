@@ -34,13 +34,12 @@
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <!-- Navbar Brand-->
+
     <a class="navbar-brand ps-3" href="/admin/adminPage">SOCAR</a>
-    <!-- Sidebar Toggle-->
+
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" href="#!" id="sidebarToggle"><i
             class="fas fa-bars"></i></button>
-    <
-    <!-- Navbar-->
+
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
             <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown"
@@ -151,36 +150,6 @@
                             </div>
                         </div>
 
-
-                        <!--                        <table id="datatablesSimple">-->
-                        <!--                            <thead>-->
-                        <!--                            <tr>-->
-                        <!--                                <th>이미지</th>-->
-                        <!--                                <th>차량 명</th>-->
-                        <!--                                <th>년식</th>-->
-                        <!--                                <th>지역</th>-->
-                        <!--                                <th>가격</th>-->
-                        <!--                                <th></th>-->
-                        <!--                                <th></th>-->
-                        <!--                            </tr>-->
-                        <!--                            </thead>-->
-                        <!--                            <tbody>-->
-                        <!--                            <tr th:each="car : ${cars}">-->
-                        <!--                                &lt;!&ndash;                                <td><img th:src="${car.src}" alt='' ></td>&ndash;&gt;-->
-                        <!--                                <td><img th:src="@{|/upload/${car.storedFileName}|}" alt=""></td>-->
-                        <!--                                <td th:text="${car.model}"></td>-->
-                        <!--                                <td th:text="${car.yearRange}"></td>-->
-                        <!--                                <td th:text="${car.area}"></td>-->
-                        <!--                                <td th:text="${car.priceDay+'원'}"></td>-->
-                        <!--                                <td>-->
-                        <!--                                    <button class="carDelete-btn" th:data-car-id="${car.id}">삭제</button>-->
-                        <!--                                </td>-->
-                        <!--                                <td></td>-->
-                        <!--                            </tr>-->
-
-                        <!--                            </tbody>-->
-                        <!--                        </table>-->
-
                     </div>
                 </div>
             </div>
@@ -207,26 +176,6 @@
 <script src="/js/datatables-simple-demo.js"></script>
 <script>
     $(document).ready(function () {
-        // $(".").click(function () {
-        //     let userId= $(this).data('user-id');
-        //     alert(userId);
-        //     $.ajax({
-        //         url: "/member/delete",
-        //         method: "get",
-        //         data: {
-        //             id: userId
-        //         },
-        //         success: function (data) {
-        //             if (data == 1) {
-        //                 alert("삭제되었습니다.");
-        //                 window.location.href="/admin/tables"
-        //             }
-        //         },
-        //         error: function (xhr, status, error) {
-        //             console.error("AJAX 오류: ", xhr.responseText);
-        //         }
-        //     });
-        // });
 
 
         $(".carDelete-btn").click(function () {

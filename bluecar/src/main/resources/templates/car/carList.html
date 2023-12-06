@@ -206,7 +206,6 @@
 <script>
 
     document.addEventListener('DOMContentLoaded', function () {
-        // 각 carBox에 클릭 이벤트 추가
         let carBoxes = document.querySelectorAll('.carBox');
         carBoxes.forEach(function (carBox) {
 
@@ -216,7 +215,6 @@
 
                 let model = carBox.querySelector('.model').innerText;
                 let yearRange = carBox.querySelector('.yearRange').innerText;
-                // let priceHors = carBox.querySelector('.priceHors').innerText;
                 let priceDay = carBox.querySelector('.priceDay').innerText;
                 let car_id = carBox.querySelector('#car_id').value;
 

@@ -253,9 +253,6 @@
 
     let emailCheck;
 
-    //이메일 인증 보내기+유효성 검사
-
-
 
     const checkAuthenticationNumber = ()=>{
         const certificationNumber = document.querySelector("#certificationNumber").value;
@@ -269,7 +266,7 @@
     }
 
 
-    // ID 대소문자, 숫자만 유효성 검사
+
     const Idcheck = () => {
         const id = document.getElementById("userId").value;
         let regex = /^[a-zA-Z0-9]{4,10}$/;
@@ -322,7 +319,6 @@
 
 
 
-    // pw 대소문자, 숫자만 유효성검사
     const Pwcheck = () => {
         const pw = document.getElementById("pw").value;
         let regex = /^[a-zA-Z0-9]{6,12}$/;

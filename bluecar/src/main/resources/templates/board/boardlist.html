@@ -365,7 +365,6 @@
 
 <script>
     $(document).ready(function () {
-        //게시글 작성
         $("#writeBtn").click(function () {
             if ($("#userId").val().trim()) {
                 location.href = "/board/boardQnAWriteForm";
@@ -374,7 +373,6 @@
             }
         });
 
-        // 카테고리 이동
         $(".menu-link").click(function (event) {
             event.preventDefault();
 
@@ -395,7 +393,6 @@
         });
     });
 
-    // 카테고리 리스트
     function updateBoardList(boards) {
         let tableBody = $("#table");
         tableBody.empty();

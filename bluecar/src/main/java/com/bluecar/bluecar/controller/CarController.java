@@ -17,23 +17,18 @@ public class CarController {
     @GetMapping("/carlist")
     public String carList(Model model) {
        List<CarDTO> carDTOS  = carService.findAll();
-        System.out.println("carDTOS = " + carDTOS);
         model.addAttribute("carlist",carDTOS);
         return "car/carList";
     }
 
-//    @GetMapping("/carDetail")
-//    public String carDetail(){
-//        return "carDetail";
-//    }
+
 
     @GetMapping("/carDetail")
     public String carDetailForm(CarDTO carDTO, Model model) {
-        System.out.println("carDTO = " + carDTO);
-        // 받은 데이터를 모델에 추가
+
         model.addAttribute("car", carDTO);
 
-        // 최종적으로 이동할 페이지 리턴
+
         return "car/carDetailPage";
     }
 

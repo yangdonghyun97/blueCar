@@ -21,22 +21,20 @@ public class CommentController {
     @PostMapping("/list")
     public @ResponseBody List<CommentDTO> list(CommentDTO commentDTO){
         List<CommentDTO> commentList = commentService.findAll(commentDTO.getBoardId());
-        System.out.println("commentList = " + commentList);
         return commentList;
 
     }
 
     @PostMapping("/save")
-    public @ResponseBody String save(CommentDTO commentDTO){
-       int result = commentService.save(commentDTO);
-        return String.valueOf(result);
-
+    public @ResponseBody int save(CommentDTO commentDTO){
+        int result = commentService.save(commentDTO);
+        return result;
     }
 
     @PostMapping("/delete")
-    public @ResponseBody String delete(CommentDTO commentDTO){
-       int result = commentService.delete(commentDTO);
-       return String.valueOf(result);
+    public @ResponseBody int delete(CommentDTO commentDTO){
+      int result = commentService.delete(commentDTO);
+       return result;
     }
 
 

@@ -453,7 +453,6 @@
 <script>
 
 
-    //카카오맵 api
     var container = document.getElementById('map');
     var options = {
         center: new kakao.maps.LatLng(37.5559460, 126.9723170),
@@ -464,23 +463,23 @@
 
     markerPosition = new kakao.maps.LatLng(37.5559460, 126.9723170);
 
-    // 마커를 생성합니다
+
     var marker = new kakao.maps.Marker({
         position: markerPosition
     });
-    // 마커가 지도 위에 표시되도록 설정합니다
+
     marker.setMap(map);
 
     var iwContent = '<div>쏘카존 서울역 <br><a href="https://map.kakao.com/link/map/쏘카존 서울역,37.5559460, 126.9723170" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/map/쏘카존 서울역,37.5559460, 126.9723170" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        iwPosition = new kakao.maps.LatLng(37.5559460, 126.9723170); //인포윈도우 표시 위치입니다
+        iwPosition = new kakao.maps.LatLng(37.5559460, 126.9723170);
 
-    // 인포윈도우를 생성합니다
+
     var infowindow = new kakao.maps.InfoWindow({
         position: iwPosition,
         content: iwContent
     });
     map.setCenter(markerPosition);
-    // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+
     infowindow.open(map, marker);
 
 
@@ -505,7 +504,7 @@
     }
 
 
-    // 달력 api
+
     let startRental;
     let endRental;
     let invalidDateRanges = [];
@@ -546,7 +545,7 @@
         isInvalidDate: function (date) {
             let isInvalid = false;
 
-            // Check if any date within the range is invalid
+
             invalidDateRanges.forEach(function (range) {
                 let startDate = moment(range.startRentalDate);
                 let endDate = moment(range.endRentalDate);
@@ -572,8 +571,7 @@
 
     });
 
-    let re
-    // 예약 불가 날짜
+
     $('#daterange').on('apply.daterangepicker', function () {
         invalidDateRanges.forEach(function (range) {
             let startDate = moment(range.startRentalDate);
@@ -583,7 +581,7 @@
             if (startDate.isBetween(startRental, endRental) || endDate.isBetween(startRental, endRental) || startRental.isBetween(startDate, endDate) || endRental.isBetween(startDate, endDate)) {
                 alert("예약 불가 날짜가 포함되어있습니다.");
 
-                // Allow the user to adjust the date range
+
                 $('#daterange').data('daterangepicker').show();
             }
         });
@@ -613,10 +611,10 @@
         IMP.request_pay({
             pg: "kakaopay",
             pay_method: "card",
-            merchant_uid: randomNo,   // 주문번호
+            merchant_uid: randomNo,
             name: orderName,
-            amount: amount,  //ticketPrice로 수정해야함
-        }, function (rsp) { // callback
+            amount: amount,
+        }, function (rsp) {
             const result = rsp.success;
             console.log(result);
             if (result == false) {
